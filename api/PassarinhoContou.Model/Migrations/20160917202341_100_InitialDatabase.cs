@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace PassarinhoContou.Model.Migrations
 {
-    public partial class _100_FirstMigration : Migration
+    public partial class _100_InitialDatabase : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -266,11 +266,6 @@ namespace PassarinhoContou.Model.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_MessagePrefixes_PrefixCategoryId",
-                table: "MessagePrefixes",
-                column: "PrefixCategoryId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Messages_FromUserId",
                 table: "Messages",
                 column: "FromUserId");
@@ -289,6 +284,11 @@ namespace PassarinhoContou.Model.Migrations
                 name: "IX_Messages_ToUserId",
                 table: "Messages",
                 column: "ToUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_MessagePrefixes_PrefixCategoryId",
+                table: "MessagePrefixes",
+                column: "PrefixCategoryId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_MessageSuffixes_SuffixCategoryId",

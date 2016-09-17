@@ -1,19 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace PassarinhoContou.Model
 {
-    public partial class SuffixCategories : BaseModel
+    public partial class SuffixCategory : BaseModel
     {
-        public SuffixCategories()
+        public SuffixCategory()
         {
-            MessageSuffixes = new HashSet<MessageSuffixes>();
+            MessageSuffixes = new HashSet<MessageSuffix>();
             SuffixCategoryTranslations = new HashSet<SuffixCategoryTranslations>();
         }
 
         public string Name { get; set; }
         
-        public virtual ICollection<MessageSuffixes> MessageSuffixes { get; set; }
+        public virtual ICollection<MessageSuffix> MessageSuffixes { get; set; }
         public virtual ICollection<SuffixCategoryTranslations> SuffixCategoryTranslations { get; set; }
     }
 }

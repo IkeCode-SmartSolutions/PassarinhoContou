@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace PassarinhoContou.Model
+﻿namespace PassarinhoContou.Model
 {
-    public partial class Messages : BaseModel
+    public partial class Message : BaseModel
     {
         public int FromUserId { get; set; }
         public int ToUserId { get; set; }
@@ -14,8 +11,8 @@ namespace PassarinhoContou.Model
         public int LanguageId { get; set; }
         
         public virtual Users FromUser { get; set; }
-        public virtual MessagePrefixes SelectedPrefix { get; set; }
-        public virtual MessageSuffixes SelectedSuffix { get; set; }
+        public virtual MessagePrefix SelectedPrefix { get; set; }
+        public virtual MessageSuffix SelectedSuffix { get; set; }
         public virtual Users ToUser { get; set; }
     }
 }

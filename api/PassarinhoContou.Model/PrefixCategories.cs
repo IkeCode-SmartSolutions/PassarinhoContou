@@ -1,19 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace PassarinhoContou.Model
 {
-    public partial class PrefixCategories : BaseModel
+    public partial class PrefixCategory : BaseModel
     {
-        public PrefixCategories()
+        public PrefixCategory()
         {
-            MessagePrefixes = new HashSet<MessagePrefixes>();
+            MessagePrefixes = new HashSet<MessagePrefix>();
             PrefixCategoryTranslations = new HashSet<PrefixCategoryTranslations>();
         }
 
         public string Name { get; set; }
 
-        public virtual ICollection<MessagePrefixes> MessagePrefixes { get; set; }
+        public virtual ICollection<MessagePrefix> MessagePrefixes { get; set; }
         public virtual ICollection<PrefixCategoryTranslations> PrefixCategoryTranslations { get; set; }
     }
 }

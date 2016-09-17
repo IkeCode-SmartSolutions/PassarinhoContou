@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace PassarinhoContou.Model
 {
@@ -7,9 +6,9 @@ namespace PassarinhoContou.Model
     {
         public Users()
         {
-            ConnectedDevices = new HashSet<ConnectedDevices>();
-            MessagesFromUser = new HashSet<Messages>();
-            MessagesToUser = new HashSet<Messages>();
+            ConnectedDevices = new HashSet<ConnectedDevice>();
+            MessagesFromUser = new HashSet<Message>();
+            MessagesToUser = new HashSet<Message>();
         }
 
         public string Email { get; set; }
@@ -17,8 +16,8 @@ namespace PassarinhoContou.Model
         public string FullName { get; set; }
         public string PhoneNumber { get; set; }
 
-        public virtual ICollection<ConnectedDevices> ConnectedDevices { get; set; }
-        public virtual ICollection<Messages> MessagesFromUser { get; set; }
-        public virtual ICollection<Messages> MessagesToUser { get; set; }
+        public virtual ICollection<ConnectedDevice> ConnectedDevices { get; set; }
+        public virtual ICollection<Message> MessagesFromUser { get; set; }
+        public virtual ICollection<Message> MessagesToUser { get; set; }
     }
 }

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace PassarinhoContou.Model
+﻿namespace PassarinhoContou.Model
 {
     public partial class PrefixCategoryTranslations : BaseModel
     {
@@ -9,6 +6,6 @@ namespace PassarinhoContou.Model
         public int LanguageId { get; set; }
         public string CategoryText { get; set; }
 
-        public virtual PrefixCategories PrefixCategory { get; set; }
+        public virtual PrefixCategory PrefixCategory { get; set; }
     }
 }

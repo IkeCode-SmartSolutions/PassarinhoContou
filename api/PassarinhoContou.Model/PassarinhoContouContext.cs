@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace PassarinhoContou.Model
@@ -13,7 +12,7 @@ namespace PassarinhoContou.Model
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<ConnectedDevices>(entity =>
+            modelBuilder.Entity<ConnectedDevice>(entity =>
             {
                 entity.Property(e => e.ConfirmationCode).HasColumnType("varchar(500)");
 
@@ -28,7 +27,7 @@ namespace PassarinhoContou.Model
                     .HasConstraintName("FK_ConnectedDevices_Users");
             });
 
-            modelBuilder.Entity<MessagePrefixes>(entity =>
+            modelBuilder.Entity<MessagePrefix>(entity =>
             {
                 entity.Property(e => e.CreationDate).HasColumnType("datetime");
 
@@ -43,7 +42,7 @@ namespace PassarinhoContou.Model
                     .HasConstraintName("FK_MessagePrefixes_PrefixCategories");
             });
 
-            modelBuilder.Entity<MessageSuffixes>(entity =>
+            modelBuilder.Entity<MessageSuffix>(entity =>
             {
                 entity.Property(e => e.CreationDate).HasColumnType("datetime");
 
@@ -58,7 +57,7 @@ namespace PassarinhoContou.Model
                     .HasConstraintName("FK_MessageSuffixes_SuffixCategories");
             });
 
-            modelBuilder.Entity<Messages>(entity =>
+            modelBuilder.Entity<Message>(entity =>
             {
                 entity.Property(e => e.CreationDate).HasColumnType("datetime");
 
@@ -87,7 +86,7 @@ namespace PassarinhoContou.Model
                     .HasConstraintName("FK_Messages_ToUser");
             });
 
-            modelBuilder.Entity<PrefixCategories>(entity =>
+            modelBuilder.Entity<PrefixCategory>(entity =>
             {
                 entity.Property(e => e.CreationDate).HasColumnType("datetime");
 
@@ -113,7 +112,7 @@ namespace PassarinhoContou.Model
                     .HasConstraintName("FK_PrefixCategoryTranslations_PrefixCategories");
             });
 
-            modelBuilder.Entity<PrefixesTranslations>(entity =>
+            modelBuilder.Entity<PrefixTranslation>(entity =>
             {
                 entity.Property(e => e.CreationDate).HasColumnType("datetime");
 
@@ -128,7 +127,7 @@ namespace PassarinhoContou.Model
                     .HasConstraintName("FK_PrefixesTranslations_MessagePrefixes");
             });
 
-            modelBuilder.Entity<SuffixCategories>(entity =>
+            modelBuilder.Entity<SuffixCategory>(entity =>
             {
                 entity.Property(e => e.CreationDate).HasColumnType("datetime");
 
@@ -152,7 +151,7 @@ namespace PassarinhoContou.Model
                     .HasConstraintName("FK_SuffixCategoryTranslations_SuffixCategories");
             });
 
-            modelBuilder.Entity<SuffixesTranslations>(entity =>
+            modelBuilder.Entity<SuffixTranslation>(entity =>
             {
                 entity.Property(e => e.CreationDate).HasColumnType("datetime");
 
@@ -187,16 +186,16 @@ namespace PassarinhoContou.Model
             });
         }
 
-        public virtual DbSet<ConnectedDevices> ConnectedDevices { get; set; }
-        public virtual DbSet<MessagePrefixes> MessagePrefixes { get; set; }
-        public virtual DbSet<MessageSuffixes> MessageSuffixes { get; set; }
-        public virtual DbSet<Messages> Messages { get; set; }
-        public virtual DbSet<PrefixCategories> PrefixCategories { get; set; }
+        public virtual DbSet<ConnectedDevice> ConnectedDevices { get; set; }
+        public virtual DbSet<MessagePrefix> MessagePrefixes { get; set; }
+        public virtual DbSet<MessageSuffix> MessageSuffixes { get; set; }
+        public virtual DbSet<Message> Messages { get; set; }
+        public virtual DbSet<PrefixCategory> PrefixCategories { get; set; }
         public virtual DbSet<PrefixCategoryTranslations> PrefixCategoryTranslations { get; set; }
-        public virtual DbSet<PrefixesTranslations> PrefixesTranslations { get; set; }
-        public virtual DbSet<SuffixCategories> SuffixCategories { get; set; }
+        public virtual DbSet<PrefixTranslation> PrefixesTranslations { get; set; }
+        public virtual DbSet<SuffixCategory> SuffixCategories { get; set; }
         public virtual DbSet<SuffixCategoryTranslations> SuffixCategoryTranslations { get; set; }
-        public virtual DbSet<SuffixesTranslations> SuffixesTranslations { get; set; }
+        public virtual DbSet<SuffixTranslation> SuffixesTranslations { get; set; }
         public virtual DbSet<Users> Users { get; set; }
     }
 }

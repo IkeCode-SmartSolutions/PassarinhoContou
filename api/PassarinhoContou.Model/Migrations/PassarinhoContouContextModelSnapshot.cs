@@ -16,7 +16,7 @@ namespace PassarinhoContou.Model.Migrations
                 .HasAnnotation("ProductVersion", "1.0.1")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("PassarinhoContou.Model.ConnectedDevices", b =>
+            modelBuilder.Entity("PassarinhoContou.Model.ConnectedDevice", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -41,30 +41,7 @@ namespace PassarinhoContou.Model.Migrations
                     b.ToTable("ConnectedDevices");
                 });
 
-            modelBuilder.Entity("PassarinhoContou.Model.MessagePrefixes", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<DateTime>("CreationDate")
-                        .HasColumnType("datetime");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("varchar(100)");
-
-                    b.Property<int>("Owner");
-
-                    b.Property<int>("PrefixCategoryId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PrefixCategoryId");
-
-                    b.ToTable("MessagePrefixes");
-                });
-
-            modelBuilder.Entity("PassarinhoContou.Model.Messages", b =>
+            modelBuilder.Entity("PassarinhoContou.Model.Message", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -101,7 +78,30 @@ namespace PassarinhoContou.Model.Migrations
                     b.ToTable("Messages");
                 });
 
-            modelBuilder.Entity("PassarinhoContou.Model.MessageSuffixes", b =>
+            modelBuilder.Entity("PassarinhoContou.Model.MessagePrefix", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("CreationDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("varchar(100)");
+
+                    b.Property<int>("Owner");
+
+                    b.Property<int>("PrefixCategoryId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PrefixCategoryId");
+
+                    b.ToTable("MessagePrefixes");
+                });
+
+            modelBuilder.Entity("PassarinhoContou.Model.MessageSuffix", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -124,7 +124,7 @@ namespace PassarinhoContou.Model.Migrations
                     b.ToTable("MessageSuffixes");
                 });
 
-            modelBuilder.Entity("PassarinhoContou.Model.PrefixCategories", b =>
+            modelBuilder.Entity("PassarinhoContou.Model.PrefixCategory", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -167,7 +167,7 @@ namespace PassarinhoContou.Model.Migrations
                     b.ToTable("PrefixCategoryTranslations");
                 });
 
-            modelBuilder.Entity("PassarinhoContou.Model.PrefixesTranslations", b =>
+            modelBuilder.Entity("PassarinhoContou.Model.PrefixTranslation", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -192,7 +192,7 @@ namespace PassarinhoContou.Model.Migrations
                     b.ToTable("PrefixesTranslations");
                 });
 
-            modelBuilder.Entity("PassarinhoContou.Model.SuffixCategories", b =>
+            modelBuilder.Entity("PassarinhoContou.Model.SuffixCategory", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -236,7 +236,7 @@ namespace PassarinhoContou.Model.Migrations
                     b.ToTable("SuffixCategoryTranslations");
                 });
 
-            modelBuilder.Entity("PassarinhoContou.Model.SuffixesTranslations", b =>
+            modelBuilder.Entity("PassarinhoContou.Model.SuffixTranslation", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -291,7 +291,7 @@ namespace PassarinhoContou.Model.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("PassarinhoContou.Model.ConnectedDevices", b =>
+            modelBuilder.Entity("PassarinhoContou.Model.ConnectedDevice", b =>
                 {
                     b.HasOne("PassarinhoContou.Model.Users", "User")
                         .WithMany("ConnectedDevices")
@@ -299,27 +299,19 @@ namespace PassarinhoContou.Model.Migrations
                         .HasConstraintName("FK_ConnectedDevices_Users");
                 });
 
-            modelBuilder.Entity("PassarinhoContou.Model.MessagePrefixes", b =>
-                {
-                    b.HasOne("PassarinhoContou.Model.PrefixCategories", "PrefixCategory")
-                        .WithMany("MessagePrefixes")
-                        .HasForeignKey("PrefixCategoryId")
-                        .HasConstraintName("FK_MessagePrefixes_PrefixCategories");
-                });
-
-            modelBuilder.Entity("PassarinhoContou.Model.Messages", b =>
+            modelBuilder.Entity("PassarinhoContou.Model.Message", b =>
                 {
                     b.HasOne("PassarinhoContou.Model.Users", "FromUser")
                         .WithMany("MessagesFromUser")
                         .HasForeignKey("FromUserId")
                         .HasConstraintName("FK_Messages_FromUser");
 
-                    b.HasOne("PassarinhoContou.Model.MessagePrefixes", "SelectedPrefix")
+                    b.HasOne("PassarinhoContou.Model.MessagePrefix", "SelectedPrefix")
                         .WithMany("Messages")
                         .HasForeignKey("SelectedPrefixId")
                         .HasConstraintName("FK_Messages_MessagePrefixes");
 
-                    b.HasOne("PassarinhoContou.Model.MessageSuffixes", "SelectedSuffix")
+                    b.HasOne("PassarinhoContou.Model.MessageSuffix", "SelectedSuffix")
                         .WithMany("Messages")
                         .HasForeignKey("SelectedSuffixId")
                         .HasConstraintName("FK_Messages_MessageSuffixes");
@@ -330,9 +322,17 @@ namespace PassarinhoContou.Model.Migrations
                         .HasConstraintName("FK_Messages_ToUser");
                 });
 
-            modelBuilder.Entity("PassarinhoContou.Model.MessageSuffixes", b =>
+            modelBuilder.Entity("PassarinhoContou.Model.MessagePrefix", b =>
                 {
-                    b.HasOne("PassarinhoContou.Model.SuffixCategories", "SuffixCategory")
+                    b.HasOne("PassarinhoContou.Model.PrefixCategory", "PrefixCategory")
+                        .WithMany("MessagePrefixes")
+                        .HasForeignKey("PrefixCategoryId")
+                        .HasConstraintName("FK_MessagePrefixes_PrefixCategories");
+                });
+
+            modelBuilder.Entity("PassarinhoContou.Model.MessageSuffix", b =>
+                {
+                    b.HasOne("PassarinhoContou.Model.SuffixCategory", "SuffixCategory")
                         .WithMany("MessageSuffixes")
                         .HasForeignKey("SuffixCategoryId")
                         .HasConstraintName("FK_MessageSuffixes_SuffixCategories");
@@ -340,15 +340,15 @@ namespace PassarinhoContou.Model.Migrations
 
             modelBuilder.Entity("PassarinhoContou.Model.PrefixCategoryTranslations", b =>
                 {
-                    b.HasOne("PassarinhoContou.Model.PrefixCategories", "PrefixCategory")
+                    b.HasOne("PassarinhoContou.Model.PrefixCategory", "PrefixCategory")
                         .WithMany("PrefixCategoryTranslations")
                         .HasForeignKey("PrefixCategoryId")
                         .HasConstraintName("FK_PrefixCategoryTranslations_PrefixCategories");
                 });
 
-            modelBuilder.Entity("PassarinhoContou.Model.PrefixesTranslations", b =>
+            modelBuilder.Entity("PassarinhoContou.Model.PrefixTranslation", b =>
                 {
-                    b.HasOne("PassarinhoContou.Model.MessagePrefixes", "Prefix")
+                    b.HasOne("PassarinhoContou.Model.MessagePrefix", "Prefix")
                         .WithMany("PrefixesTranslations")
                         .HasForeignKey("PrefixId")
                         .HasConstraintName("FK_PrefixesTranslations_MessagePrefixes");
@@ -356,15 +356,15 @@ namespace PassarinhoContou.Model.Migrations
 
             modelBuilder.Entity("PassarinhoContou.Model.SuffixCategoryTranslations", b =>
                 {
-                    b.HasOne("PassarinhoContou.Model.SuffixCategories", "PrefixCategory")
+                    b.HasOne("PassarinhoContou.Model.SuffixCategory", "PrefixCategory")
                         .WithMany("SuffixCategoryTranslations")
                         .HasForeignKey("PrefixCategoryId")
                         .HasConstraintName("FK_SuffixCategoryTranslations_SuffixCategories");
                 });
 
-            modelBuilder.Entity("PassarinhoContou.Model.SuffixesTranslations", b =>
+            modelBuilder.Entity("PassarinhoContou.Model.SuffixTranslation", b =>
                 {
-                    b.HasOne("PassarinhoContou.Model.MessageSuffixes", "Suffix")
+                    b.HasOne("PassarinhoContou.Model.MessageSuffix", "Suffix")
                         .WithMany("SuffixesTranslations")
                         .HasForeignKey("SuffixId")
                         .HasConstraintName("FK_SuffixesTranslations_MessageSuffixes");
