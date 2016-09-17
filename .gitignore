@@ -8,3 +8,13 @@ plugins/
 *.swp
 .DS_Store
 Thumbs.db
+
+[Bb]in/
+[Oo]bj/
+*.lock.json
+[Ll]ib/
+*.min.js
+*.min.css
+*.suo
+*.xproj.user
+.vs/
