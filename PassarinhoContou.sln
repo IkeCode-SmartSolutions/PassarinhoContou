@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "PassarinhoContou.Api", "PassarinhoContou.Api\PassarinhoContou.Api.xproj", "{2FBF6548-EDC4-42FC-BFC8-5374434FE6B0}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Api", "Api\Api.xproj", "{2FBF6548-EDC4-42FC-BFC8-5374434FE6B0}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "PassarinhoContou.Model", "PassarinhoContou.Model\PassarinhoContou.Model.xproj", "{CF895B77-65DA-42DB-964B-44A24527B689}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Model", "Model\Model.xproj", "{CF895B77-65DA-42DB-964B-44A24527B689}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
