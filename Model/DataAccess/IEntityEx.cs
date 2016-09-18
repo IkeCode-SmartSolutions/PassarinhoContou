@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace PassarinhoContou.Model
@@ -9,11 +11,15 @@ namespace PassarinhoContou.Model
 
         Task CreateAsync(T obj);
 
+        T Find(Expression<Func<T, bool>> predicate);
+
         T FindById(int id);
 
         Task<T> FindByIdAsync(int id);
 
-        IQueryable<T> FindAll();
+        IQueryable<T> GetAll();
+
+        IQueryable<T> FindAll(Expression<Func<T, bool>> predicate);
 
         void Update(T obj);
 

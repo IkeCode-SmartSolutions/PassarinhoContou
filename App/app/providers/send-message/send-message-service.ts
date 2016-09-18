@@ -40,7 +40,7 @@ export class SendMessageService {
         var message = new Message({
           MessagePrefix: this.MessagePrefix,
           MessageSuffix: this.MessageSuffix,
-          SelectedPrefixId: this.MessagePrefix.Id,
+          SelectedPrefixId: this.MessagePrefix.id,
           SelectedSuffixId: this.MessageSuffix.Id,
           FromUser: this.FromUser,
           ToUser: new User({FullName: this.Contact.name}),

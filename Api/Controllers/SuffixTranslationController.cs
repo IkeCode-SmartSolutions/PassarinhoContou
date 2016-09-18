@@ -14,7 +14,7 @@ namespace PassarinhoContouApi.Controllers
         [HttpGet]
         public IQueryable<SuffixTranslation> Get()
         {
-            return _dal.FindAll();
+            return _dal.GetAll();
         }
 
         [HttpGet("{id}")]
@@ -99,7 +99,7 @@ namespace PassarinhoContouApi.Controllers
 
         private bool SuffixesTranslationExists(int id)
         {
-            return _dal.FindAll().Count(e => e.Id == id) > 0;
+            return _dal.GetAll().Count(e => e.Id == id) > 0;
         }
     }
 }

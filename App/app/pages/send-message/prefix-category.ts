@@ -16,15 +16,18 @@ export class PrefixCategoryPage {
 
   constructor(
     public navCtrl: NavController,
-    navParams: NavParams,
-    prefixCategoryService: PrefixCategoryService,
+    private navParams: NavParams,
+    private prefixCategoryService: PrefixCategoryService,
     private sendMessageService: SendMessageService) {
-    this.prefixCategories = prefixCategoryService.getAll();
-  }
+    
+    prefixCategoryService
+      .getAll()
+      .subscribe(res => this.prefixCategories = res.json());
+}
 
   prefixCategoryTapped(event, prefixCategory) {
     this.sendMessageService.PrefixCategory = prefixCategory;
-    console.log('sendMessageService.PrefixCategory.Name', this.sendMessageService.PrefixCategory.Name);
+    console.log('sendMessageService.PrefixCategory.name', this.sendMessageService.PrefixCategory.name);
     this.navCtrl.push(MessagePrefixPage);
   }
 }

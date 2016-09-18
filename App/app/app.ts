@@ -36,7 +36,7 @@ export class PassarinhoContouApp implements OnInit {
   @ViewChild(Nav) nav: Nav;
 
   ngOnInit() {
-    console.log('app onInit');
+    //console.log('app onInit');
   }
 
   rootPage: any = HomePage;
@@ -138,5 +138,4 @@ ionicBootstrap(PassarinhoContouApp, [
   MessageSuffixService,
   SendMessageService,
   TicketService
-]
-);
+]);

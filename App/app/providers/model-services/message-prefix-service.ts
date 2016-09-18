@@ -1,63 +1,73 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
-import 'rxjs/add/operator/map';
+import { Http, Response, URLSearchParams } from '@angular/http';
+import 'rxjs/Rx';
+import { Observable } from 'rxjs/Rx';
 
 import { MessagePrefix } from '../../models/message-prefix';
+import { BaseService } from './base-service';
 
 @Injectable()
-export class MessagePrefixService {
+export class MessagePrefixService extends BaseService {
 
-  constructor(private http: Http) {
-
+  constructor(public http: Http) {
+    super(http);
+    this.BaseUrl += "/MessagePrefix/";
   }
 
   _allMessagePrefixes: Array<MessagePrefix> = new Array<MessagePrefix>(
     new MessagePrefix({
-      Id: 1,
-      Name: 'Não querendo ser chato, mas gostaria de te avisar que',
-      PrefixCategoryId: 3
+      id: 1,
+      name: 'Não querendo ser chato, mas gostaria de te avisar que',
+      prefixCategoryId: 3
     }),
     new MessagePrefix({
-      Id: 2,
-      Name: 'Venho por meio desta, oferecer uma dica amigável',
-      PrefixCategoryId: 2
+      id: 2,
+      name: 'Venho por meio desta, oferecer uma dica amigável',
+      prefixCategoryId: 2
     }),
     new MessagePrefix({
-      Id: 3,
-      Name: 'Amigão, sinto lhe informar que',
-      PrefixCategoryId: 1
+      id: 3,
+      name: 'Amigão, sinto lhe informar que',
+      prefixCategoryId: 1
     })
     , new MessagePrefix({
-      Id: 4,
-      Name: 'É chato falar mas',
-      PrefixCategoryId: 1
+      id: 4,
+      name: 'É chato falar mas',
+      prefixCategoryId: 1
     })
   );
 
-  public get(id: number): MessagePrefix {
-    let result = undefined;
+  public get(id: number):Observable<Response> {
+    return this.http.get(this.BaseUrl);
 
-    this._allMessagePrefixes.forEach(item => {
-      if (item.Id === id) {
-        result = item;
-        return;
-      }
-    });
+    //let result = undefined;
 
-    return result;
+    // this._allMessagePrefixes.forEach(item => {
+    //   if (item.id === id) {
+    //     result = item;
+    //     return;
+    //   }
+    // });
+
+    //return result;
   }
 
-  public getByCategory(prefixCategoryId: number): Array<MessagePrefix> {
-    let result = new Array<MessagePrefix>();
+  public getByCategory(prefixCategoryId: number): Observable<Response> {
+    let params = new URLSearchParams();
+    params.set('categoryId', prefixCategoryId.toString());
 
-    this._allMessagePrefixes.forEach(item => {
-      if (item.PrefixCategoryId === prefixCategoryId) {
-        result.push(item);
-        // console.log('messagePreffix added', item.Id);
-      }
-    });
+    return this.http.get(this.BaseUrl + prefixCategoryId);
 
-    return result;
+    // let result = new Array<MessagePrefix>();
+
+    // this._allMessagePrefixes.forEach(item => {
+    //   if (item.prefixCategoryId === prefixCategoryId) {
+    //     result.push(item);
+    //     // console.log('messagePreffix added', item.Id);
+    //   }
+    // });
+
+    // return result;
   }
 }
 

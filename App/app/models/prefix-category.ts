@@ -1,25 +1,25 @@
 import {MessagePrefix} from './message-prefix';
 
 export interface IPrefixCategory {
-    Id?: number;
-    Name?: string;
-    CreationDate?: Date;
+    id?: number;
+    name?: string;
+    creationDate?: Date;
 
-    MessagePrefixes?: Array<MessagePrefix>;
+    messagePrefixes?: Array<MessagePrefix>;
 }
 
 export class PrefixCategory {
-    Id: number;
-    Name: string;
-    CreationDate: Date;
+    id: number;
+    name: string;
+    creationDate: Date;
 
-    MessagePrefixes: Array<MessagePrefix>;
+    messagePrefixes: Array<MessagePrefix>;
 
     constructor(obj?: IPrefixCategory) {
-        this.Id = obj && obj.Id ? obj.Id : 0;
-        this.Name = obj && obj.Name ? obj.Name : '';
-        this.CreationDate = obj && obj.CreationDate ? obj.CreationDate : new Date();
+        this.id = obj && obj.id ? obj.id : 0;
+        this.name = obj && obj.name ? obj.name : '';
+        this.creationDate = obj && obj.creationDate ? obj.creationDate : new Date();
 
-        this.MessagePrefixes = obj && obj.MessagePrefixes ? obj.MessagePrefixes : null;
+        this.messagePrefixes = obj && obj.messagePrefixes ? obj.messagePrefixes : null;
     }
 }

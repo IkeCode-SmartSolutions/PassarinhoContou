@@ -29,10 +29,10 @@ export class MessageService {
       SelectedPrefixId: 1,
       SelectedSuffixId: 1,
       MessageType: 1,
-      CreationDate: new Date(2016, 6 + 1, 10, 10, 15, 54),
+      CreationDate: new Date(2016, 6 + 1, 10, 10, 15, 54)
       // LanguageId: 1,
-      MessagePrefix: this.messagePrefixService.get(1),
-      MessageSuffix: this.messageSuffixService.get(1)
+      // MessagePrefix: this.messagePrefixService.get(1),
+      // MessageSuffix: this.messageSuffixService.get(1)
     }));
 
     this._mock.push(new Message({
@@ -45,10 +45,10 @@ export class MessageService {
       SelectedPrefixId: 2,
       SelectedSuffixId: 2,
       MessageType: 1,
-      CreationDate: new Date(2016, 7 + 1, 23, 5, 5, 20),
+      CreationDate: new Date(2016, 7 + 1, 23, 5, 5, 20)
       // LanguageId: 1,
-      MessagePrefix: this.messagePrefixService.get(2),
-      MessageSuffix: this.messageSuffixService.get(2)
+      // MessagePrefix: this.messagePrefixService.get(2),
+      // MessageSuffix: this.messageSuffixService.get(2)
     }));
 
   }

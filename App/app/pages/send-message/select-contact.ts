@@ -15,32 +15,32 @@ export class SelectContactPage {
   constructor(public navCtrl: NavController, navParams: NavParams, private sendMessageService: SendMessageService) {
     this.contacts = [];
 
-      Contacts.find(['*'], { filter: '', multiple: true, hasPhoneNumber: true }).then((contacts) => {
-        console.log('contacts.length', contacts.length);
+    // Contacts.find(['*'], { filter: '', multiple: true, hasPhoneNumber: true }).then((contacts) => {
+    //   console.log('contacts.length', contacts.length);
 
-        contacts.forEach(i => {
+    //   contacts.forEach(i => {
 
-          this.contacts.push({
-            name: i.displayName,
-            phoneNumber: i.phoneNumbers[0].value,
-            icon: 'person'
-          });
+    //     this.contacts.push({
+    //       name: i.displayName,
+    //       phoneNumber: i.phoneNumbers[0].value,
+    //       icon: 'person'
+    //     });
 
-        });
+    //   });
 
+    // });
+    if (this.contacts.length == 0) {
+      this.contacts.push({
+        name: 'Contato para WEB',
+        phoneNumber: '11 99999999',
+        icon: 'person'
       });
-
-      // this.contacts.push({
-      //   name: 'Contato para WEB',
-      //   phoneNumber: '11 99999999',
-      //   icon: 'person'
-      // });
-      
+    }
   }
 
   contactTapped(event, contact) {
     this.sendMessageService.Contact = contact;
-    console.log('sendMessageService.Contact.name', this.sendMessageService.Contact.name);
+    console.log('sendMessageService.Contact.name ->', this.sendMessageService.Contact.name);
     this.navCtrl.push(PrefixCategoryPage);
   }
 }

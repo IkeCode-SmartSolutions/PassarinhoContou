@@ -2,31 +2,31 @@ import {Message} from './message';
 import {PrefixCategory} from './prefix-category'
 
 export interface IMessagePrefix {
-    Id?: number;
-    Name?: string;
-    CreationDate?: Date;
-    PrefixCategoryId?: number;
+    id?: number;
+    name?: string;
+    creationDate?: Date;
+    prefixCategoryId?: number;
 
-    Messages?: Array<Message>;
-    PrefixCategory?: PrefixCategory;
+    messages?: Array<Message>;
+    prefixCategory?: PrefixCategory;
 }
 
 export class MessagePrefix {
-    Id: number = 0;
-    Name: string;
-    CreationDate: Date;
-    PrefixCategoryId: number;
+    id: number = 0;
+    name: string;
+    creationDate: Date;
+    prefixCategoryId: number;
 
-    Messages: Array<Message>;
-    PrefixCategory: PrefixCategory;
+    messages: Array<Message>;
+    prefixCategory: PrefixCategory;
 
     constructor(obj?: IMessagePrefix) {
-        this.Id = obj && obj.Id ? obj.Id : 0;
-        this.Name = obj && obj.Name ? obj.Name : '';
-        this.CreationDate = obj && obj.CreationDate ? obj.CreationDate : new Date();
-        this.PrefixCategoryId = obj && obj.PrefixCategoryId ? obj.PrefixCategoryId : null;
+        this.id = obj && obj.id ? obj.id : 0;
+        this.name = obj && obj.name ? obj.name : '';
+        this.creationDate = obj && obj.creationDate ? obj.creationDate : new Date();
+        this.prefixCategoryId = obj && obj.prefixCategoryId ? obj.prefixCategoryId : null;
 
-        this.Messages = obj && obj.Messages ? obj.Messages : null;
-        this.PrefixCategory = obj && obj.PrefixCategory ? obj.PrefixCategory : null;
+        this.messages = obj && obj.messages ? obj.messages : null;
+        this.prefixCategory = obj && obj.prefixCategory ? obj.prefixCategory : null;
     }
 }

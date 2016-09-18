@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.Extensions.Configuration;
 
 namespace PassarinhoContou.Model
 {
@@ -7,7 +8,7 @@ namespace PassarinhoContou.Model
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=localhost;Database=PassarinhoContouNew;User=sa;Password=iwannarock");
+            optionsBuilder.UseSqlServer(@"Server=localhost;Database=PassarinhoContou;User=sa;Password=iwannarock");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

@@ -7,20 +7,20 @@ using System.Net;
 namespace PassarinhoContouApi.Controllers
 {
     [Route("api/[controller]")]
-    public class MessagePrefixesController : Controller
+    public class MessagePrefixController : Controller
     {
         private readonly EntityEx<MessagePrefix> _dal = new EntityEx<MessagePrefix>();
 
         [HttpGet]
         public IQueryable<MessagePrefix> Get()
         {
-            return _dal.FindAll();
+            return _dal.GetAll();
         }
 
-        [HttpGet("{id}")]
-        public IActionResult Get(int id)
+        [HttpGet("{categoryId}")]
+        public IActionResult Get(int categoryId)
         {
-            var messagePrefix = _dal.FindById(id);
+            var messagePrefix = _dal.FindAll(i => i.PrefixCategoryId == categoryId);
             if (messagePrefix == null)
             {
                 return NotFound();
@@ -70,7 +70,7 @@ namespace PassarinhoContouApi.Controllers
             }
 
             _dal.Create(messagePrefix);
-            
+
             return CreatedAtRoute("DefaultApi", new { id = messagePrefix.Id }, messagePrefix);
         }
 
@@ -99,7 +99,7 @@ namespace PassarinhoContouApi.Controllers
 
         private bool MessagePrefixExists(int id)
         {
-            return _dal.FindAll().Count(e => e.Id == id) > 0;
+            return _dal.GetAll().Count(e => e.Id == id) > 0;
         }
     }
 }

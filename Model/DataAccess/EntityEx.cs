@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace PassarinhoContou.Model
 {
@@ -18,6 +19,16 @@ namespace PassarinhoContou.Model
 
         #endregion
 
+        public EntityEx()
+        {
+
+        }
+
+        public EntityEx(PassarinhoContouContext context)
+        {
+            this._context = context;
+        }
+
         public void Create(T obj)
         {
             DataContext.Set<T>().Add(obj);
@@ -30,6 +41,11 @@ namespace PassarinhoContou.Model
             await DataContext.SaveChangesAsync();
         }
 
+        public T Find(Expression<Func<T, bool>> predicate)
+        {
+            return DataContext.Set<T>().FirstOrDefault(predicate);
+        }
+
         public T FindById(int id)
         {
             return DataContext.Set<T>().FirstOrDefault(i => i.Id == id);
@@ -39,10 +55,15 @@ namespace PassarinhoContou.Model
         {
             return await DataContext.Set<T>().FirstOrDefaultAsync(i => i.Id == id);
         }
-
-        public IQueryable<T> FindAll()
+        
+        public IQueryable<T> GetAll()
         {
             return DataContext.Set<T>();
+        }
+
+        public IQueryable<T> FindAll(Expression<Func<T, bool>> predicate)
+        {
+            return DataContext.Set<T>().Where(predicate);
         }
 
         public void Update(T obj)
