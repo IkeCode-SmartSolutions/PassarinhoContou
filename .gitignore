@@ -18,4 +18,4 @@ Thumbs.db
 *.suo
 *.xproj.user
 .vs/
-www/build
+**/www/[bB]uild/
