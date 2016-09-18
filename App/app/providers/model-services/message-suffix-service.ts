@@ -1,35 +1,39 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
-import 'rxjs/add/operator/map';
+import { Http, Response, URLSearchParams } from '@angular/http';
+import 'rxjs/Rx';
+import { Observable } from 'rxjs/Rx';
+
+import { BaseService } from './base-service';
 
 import { MessageSuffix } from '../../models/message-suffix';
 
 @Injectable()
-export class MessageSuffixService {
+export class MessageSuffixService extends BaseService {
 
-  constructor(private http: Http) {
-
+  constructor(public http: Http) {
+    super(http);
+    this.BaseUrl += "/MessageSuffix/";
   }
   _allMessageSuffixes: Array<MessageSuffix> = new Array<MessageSuffix>(
     new MessageSuffix({
-      Id: 1,
-      Name: 'Não gostamos quando voce faz piadas sobre judeus',
-      SuffixCategoryId: 3
+      id: 1,
+      name: 'Não gostamos quando voce faz piadas sobre judeus',
+      suffixCategoryId: 3
     }),
     new MessageSuffix({
-      Id: 2,
-      Name: 'Voce poderia dar, ao menos, bom dia as pessoas',
-      SuffixCategoryId: 3
+      id: 2,
+      name: 'Voce poderia dar, ao menos, bom dia as pessoas',
+      suffixCategoryId: 3
     }),
     new MessageSuffix({
-      Id: 3,
-      Name: 'Voce tem mau halito',
-      SuffixCategoryId: 2
+      id: 3,
+      name: 'Voce tem mau halito',
+      suffixCategoryId: 2
     })
     , new MessageSuffix({
-      Id: 4,
-      Name: 'voce tem chulé, nao tire o sapato perto das pessoas',
-      SuffixCategoryId: 1
+      id: 4,
+      name: 'voce tem chulé, nao tire o sapato perto das pessoas',
+      suffixCategoryId: 1
     })
   );
 
@@ -37,7 +41,7 @@ export class MessageSuffixService {
     let result = new MessageSuffix();
 
     this._allMessageSuffixes.forEach(item => {
-      if (item.Id === id) {
+      if (item.id === id) {
         result = item;
         return;
       }
@@ -46,16 +50,21 @@ export class MessageSuffixService {
     return result;
   }
 
-  public getByCategory(suffixCategoryId: number): Array<MessageSuffix> {
-    let result = new Array<MessageSuffix>();
+  public getByCategory(suffixCategoryId: number): Observable<Response> {
+    let params = new URLSearchParams();
+    params.set('categoryId', suffixCategoryId.toString());
 
-    this._allMessageSuffixes.forEach(item => {
-      if (item.SuffixCategoryId === suffixCategoryId) {
-        result.push(item);
-      }
-    });
+    return this.http.get(this.BaseUrl + suffixCategoryId);
 
-    return result;
+    // let result = new Array<MessageSuffix>();
+
+    // this._allMessageSuffixes.forEach(item => {
+    //   if (item.suffixCategoryId === suffixCategoryId) {
+    //     result.push(item);
+    //   }
+    // });
+
+    // return result;
   }
 }
 

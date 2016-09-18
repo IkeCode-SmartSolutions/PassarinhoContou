@@ -19,12 +19,12 @@ export class SuffixCategoryPage {
     navParams: NavParams,
     suffixCategoryService: SuffixCategoryService,
     private sendMessageService: SendMessageService) {
-    this.suffixCategories = suffixCategoryService.getAll();
+    suffixCategoryService.getAll().subscribe(res => this.suffixCategories = res.json());
   }
 
   suffixCategoryTapped(event, suffixCategory) {
     this.sendMessageService.SuffixCategory = suffixCategory;
-    console.log('sendMessageService.SuffixCategory.Name', this.sendMessageService.SuffixCategory.Name);
+    console.log('sendMessageService.SuffixCategory.name', this.sendMessageService.SuffixCategory.name);
     this.navCtrl.push(MessageSuffixPage);
   }
 }

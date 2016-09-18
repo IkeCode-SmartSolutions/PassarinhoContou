@@ -41,7 +41,7 @@ export class SendMessageService {
           MessagePrefix: this.MessagePrefix,
           MessageSuffix: this.MessageSuffix,
           SelectedPrefixId: this.MessagePrefix.id,
-          SelectedSuffixId: this.MessageSuffix.Id,
+          SelectedSuffixId: this.MessageSuffix.id,
           FromUser: this.FromUser,
           ToUser: new User({FullName: this.Contact.name}),
           CreationDate: new Date(Date.now())

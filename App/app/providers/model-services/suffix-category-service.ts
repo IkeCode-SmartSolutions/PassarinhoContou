@@ -1,33 +1,40 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
-import 'rxjs/add/operator/map';
+import { Http, Response, URLSearchParams } from '@angular/http';
+import 'rxjs/Rx';
+import { Observable } from 'rxjs/Rx';
+
+import { BaseService } from './base-service';
 
 import { SuffixCategory } from '../../models/suffix-category';
 
 @Injectable()
-export class SuffixCategoryService {
+export class SuffixCategoryService extends BaseService {
 
-  constructor(private http: Http) {
-
+  constructor(public http: Http) {
+    super(http);
+    this.BaseUrl += "/SuffixCategory/"; 
   }
   
   _allSuffixCategories: Array<SuffixCategory> = new Array<SuffixCategory>(
     new SuffixCategory({
-      Id: 1,
-      Name: 'Pessoal'
+      id: 1,
+      name: 'Pessoal'
     }),
     new SuffixCategory({
-      Id: 2,
-      Name: 'Motivacional'
+      id: 2,
+      name: 'Motivacional'
     }),
     new SuffixCategory({
-      Id: 3,
-      Name: 'Dica'
+      id: 3,
+      name: 'Dica'
     })
   );
 
-  public getAll(): Array<SuffixCategory> {
-    return this._allSuffixCategories;
+  public getAll(): Observable<Response> {
+    console.log('SuffixCategoryService.getAll()');
+    return this.http.get(this.BaseUrl);
+
+    //return this._allSuffixCategories;
   }
 
 }

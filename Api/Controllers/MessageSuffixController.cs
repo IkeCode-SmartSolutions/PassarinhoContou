@@ -7,7 +7,7 @@ using System.Net;
 namespace PassarinhoContouApi.Controllers
 {
     [Route("api/[controller]")]
-    public class MessageSuffixesController : Controller
+    public class MessageSuffixController : Controller
     {
         private readonly EntityEx<MessageSuffix> _dal = new EntityEx<MessageSuffix>();
 
@@ -17,10 +17,10 @@ namespace PassarinhoContouApi.Controllers
             return _dal.GetAll();
         }
 
-        [HttpGet("{id}")]
-        public IActionResult Get(int id)
+        [HttpGet("{categoryId}")]
+        public IActionResult Get(int categoryId)
         {
-            var messageSuffix = _dal.FindById(id);
+            var messageSuffix = _dal.FindAll(i => i.SuffixCategoryId == categoryId);
             if (messageSuffix == null)
             {
                 return NotFound();

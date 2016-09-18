@@ -2,31 +2,31 @@ import {Message} from './message';
 import {SuffixCategory} from './suffix-category'
 
 export interface IMessageSuffix {
-    Id?: number;
-    Name?: string;
-    CreationDate?: Date;
-    SuffixCategoryId?: number;
+    id?: number;
+    name?: string;
+    creationDate?: Date;
+    suffixCategoryId?: number;
 
-    Messages?: Array<Message>;
-    SuffixCategory?: SuffixCategory;
+    messages?: Array<Message>;
+    suffixCategory?: SuffixCategory;
 }
 
 export class MessageSuffix {
-    Id: number;
-    Name: string;
-    CreationDate: Date;
-    SuffixCategoryId: number;
+    id: number;
+    name: string;
+    creationDate: Date;
+    suffixCategoryId: number;
 
-    Messages: Array<Message>;
-    SuffixCategory: SuffixCategory;
+    messages: Array<Message>;
+    suffixCategory: SuffixCategory;
 
     constructor(obj?: IMessageSuffix) {
-        this.Id = obj && obj.Id ? obj.Id : 0;
-        this.Name = obj && obj.Name ? obj.Name : '';
-        this.CreationDate = obj && obj.CreationDate ? obj.CreationDate : new Date();
-        this.SuffixCategoryId = obj && obj.SuffixCategoryId ? obj.SuffixCategoryId : null;
+        this.id = obj && obj.id ? obj.id : 0;
+        this.name = obj && obj.name ? obj.name : '';
+        this.creationDate = obj && obj.creationDate ? obj.creationDate : new Date();
+        this.suffixCategoryId = obj && obj.suffixCategoryId ? obj.suffixCategoryId : null;
 
-        this.Messages = obj && obj.Messages ? obj.Messages : null;
-        this.SuffixCategory = obj && obj.SuffixCategory ? obj.SuffixCategory : null;
+        this.messages = obj && obj.messages ? obj.messages : null;
+        this.suffixCategory = obj && obj.suffixCategory ? obj.suffixCategory : null;
     }
 }

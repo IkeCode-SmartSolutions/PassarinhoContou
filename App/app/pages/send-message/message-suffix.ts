@@ -13,19 +13,19 @@ import { SendMessageService } from '../../providers/send-message/send-message-se
 })
 export class MessageSuffixPage {
   messageSuffixes: Array<MessageSuffix>;
-  suffixCategoryName: string = this.sendMessageService.SuffixCategory.Name;
+  suffixCategoryName: string = this.sendMessageService.SuffixCategory.name;
 
   constructor(
     public navCtrl: NavController,
     navParams: NavParams,
     messageSuffixService: MessageSuffixService,
     private sendMessageService: SendMessageService) {
-    this.messageSuffixes = messageSuffixService.getByCategory(sendMessageService.SuffixCategory.Id);
+    messageSuffixService.getByCategory(sendMessageService.SuffixCategory.id).subscribe(res => this.messageSuffixes = res.json());
   }
 
   messagePrefixTapped(event, messageSuffix) {
     this.sendMessageService.MessageSuffix = messageSuffix;
-    console.log('sendMessageService.MessageSuffix.Name', this.sendMessageService.MessageSuffix.Name);
+    console.log('sendMessageService.MessageSuffix.name', this.sendMessageService.MessageSuffix.name);
     this.navCtrl.push(SummaryPage);
   }
 }
