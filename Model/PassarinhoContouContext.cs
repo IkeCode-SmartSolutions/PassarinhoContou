@@ -8,7 +8,7 @@ namespace PassarinhoContou.Model
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=localhost;Database=PassarinhoContou;User=sa;Password=iwannarock");
+            optionsBuilder.UseSqlServer(@"Server=localhost;Database=PassarinhoContou;User=sql;Password=!@#sql)(*");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
