@@ -13,27 +13,25 @@ export class BasicAuth {
   _storage: Storage;
   _authKey: string = 'isAuthenticated';
   _authKeyUserId: string = 'userId';
-  _authKeyUsername: string = 'username';
 
   constructor(private http: Http, private userService: UserService) {
     this._storage = new Storage(LocalStorage);
   }
 
-  authenticate(username: string, password: string): Promise<boolean> {
-    this.AuthenticatedUser = this.userService.getByNickname(username);
-    console.log('this.AuthenticatedUser', this.AuthenticatedUser ? this.AuthenticatedUser.id : 'not found');
-    var isAuthenticated = false;
-    if (this.AuthenticatedUser) {
-      isAuthenticated = true;
-    }
+  authenticate(username: string, password: string, callback: (isAuthenticated: boolean) => void): void {
+    this.userService.getByNickname(username, user => {
+      this.AuthenticatedUser = user;
 
-    this._storage.set(this._authKeyUserId, this.AuthenticatedUser.id);
-    this._storage.set(this._authKeyUsername, this.AuthenticatedUser.nickName);
+      //console.log('this.AuthenticatedUser', this.AuthenticatedUser ? this.AuthenticatedUser.id : 'not found');
+      var isAuthenticated = false;
+      if (this.AuthenticatedUser) {
+        isAuthenticated = true;
+        this._storage.set(this._authKeyUserId, this.AuthenticatedUser.id);
+      }
 
-    return this._storage.set(this._authKey, isAuthenticated).then<boolean>(() => {
-      return this.isAuthenticated().then<boolean>((authenticated) => {
-        return authenticated;
-      });
+      this._storage.set(this._authKey, isAuthenticated);
+
+      callback(isAuthenticated);
     });
   }
 
@@ -47,10 +45,11 @@ export class BasicAuth {
     return this._storage.get(this._authKey).then<boolean>((value) => {
       // console.log('isAuthenticated()', value);
       var isTrue = value == 'true';
+
       if (isTrue && !this.AuthenticatedUser) {
-        this._storage.get(this._authKeyUserId).then((userId) => {
-          this._storage.get(this._authKeyUsername).then((username) => {
-            this.AuthenticatedUser = new User({ fullName: username, id: userId });
+        this._storage.get(this._authKeyUserId).then((value) => {
+          this.userService.getById(value, (user) => {
+            this.AuthenticatedUser = user;
           });
         });
       }

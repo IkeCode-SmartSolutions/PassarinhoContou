@@ -5,62 +5,60 @@ import 'rxjs/add/operator/map';
 import { User } from '../../models/user';
 import { Message } from '../../models/message';
 
+import { BaseService } from '../model-services/base-service';
+
 @Injectable()
-export class UserService {
+export class UserService extends BaseService {
 
-  private _usersMock: Array<User> = new Array<User>();
-  private _lastId: number = 1;
+  constructor(public http: Http) {
 
-  constructor(private http: Http) {
-    this._usersMock.push(new User({
-      id: 1,
-      fullName: 'Leandro Barral',
-      email: 'leandro.barral@yep.net.br',
-      nickName: 'Barral',
-      phoneNumber: '11988856996',
-      registerDate: new Date(),
-      messagesFrom: new Array<Message>(),
-      messagesTo: new Array<Message>(),
-    }));
+    super(http);
+    this.BaseUrl += "User/";
+
   }
 
-  public getAll(): Array<User> {
-    return this._usersMock;
+  public getById(id: number, callback: (user: User) => void): void {
+    this.http.get(this.BaseUrl + "ById/" + id).map<User>(data => {
+      //console.log('map data.json()', data.json());
+      return data.json();
+    }).subscribe(
+      data => {
+        //console.log('api ONLINE data', data);
+        callback(data);
+      },
+      error => {
+        console.log('api user.getById error', error.status);
+      });
   }
 
-  public getById(id: number): User {
-    var result = undefined;
-
-    this._usersMock.forEach((user, index) => {
-      if (user.id === id) {
-        result = user;
-        return;
-      }
-    });
-
-    return result;
+  public getByNickname(nickname: string, callback: (user: User) => void): void {
+    this.http.get(this.BaseUrl + "ByNickname/" + nickname).map<User>(data => {
+      //console.log('map data.json()', data.json());
+      return data.json();
+    }).subscribe(
+      data => {
+        //console.log('api ONLINE data', data);
+        callback(data);
+      },
+      error => {
+        console.log('api user.getByNickname error', error.status);
+        if (error.status == 404) {
+          callback(null);
+        }
+      });
   }
 
-  public getByNickname(nickname: string): User {
-    var result = undefined;
-
-    //console.log('getByNickname this._usersMock.length', this._usersMock.length);
-
-    this._usersMock.forEach((user, index) => {
-      // console.log('getByNickname user.NickName', user.NickName);
-      // console.log('getByNickname nickname', nickname);
-      if (user.nickName === nickname) {
-        result = user;
-        return;
-      }
-    });
-
-    return result;
-  }
-
-  public add(user: any){
-    user.Id = ++this._lastId;
-    this._usersMock.push(new User(user));
-    //console.log('add this._usersMock.length', this._usersMock.length);
+  public add(user: any, callback: (data) => void): void {
+    this.http.post(this.BaseUrl + "Add", user).map(data => {
+      //console.log('map data.json()', data.json());
+      return data.json();
+    }).subscribe(
+      data => {
+        //console.log('api ONLINE data', data);
+        callback(data);
+      },
+      error => {
+        console.log('api user.add error', error.status);
+      });
   }
 }

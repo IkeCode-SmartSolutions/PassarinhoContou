@@ -6,12 +6,13 @@ using System.Net;
 
 namespace PassarinhoContouApi.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     public class UserController : Controller
     {
         private readonly EntityEx<User> _dal = new EntityEx<User>();
 
         [HttpGet]
+        [ActionName("All")]
         public IQueryable<User> Get()
         {
             return _dal.GetAll();
@@ -19,6 +20,7 @@ namespace PassarinhoContouApi.Controllers
 
 
         [HttpGet("{id}")]
+        [ActionName("ById")]
         public IActionResult Get(int id)
         {
             var user = _dal.FindById(id);
@@ -30,7 +32,21 @@ namespace PassarinhoContouApi.Controllers
             return Ok(user);
         }
 
+        [HttpGet("{nickname}")]
+        [ActionName("ByNickname")]
+        public IActionResult Get(string nickname)
+        {
+            var user = _dal.Find(i => i.NickName == nickname);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(user);
+        }
+
         [HttpPut("{id}")]
+        [ActionName("Edit")]
         public IActionResult Put(int id, User user)
         {
             if (!ModelState.IsValid)
@@ -63,6 +79,7 @@ namespace PassarinhoContouApi.Controllers
         }
 
         [HttpPost]
+        [ActionName("Add")]
         public IActionResult Post(User user)
         {
             if (!ModelState.IsValid)
@@ -76,6 +93,7 @@ namespace PassarinhoContouApi.Controllers
         }
 
         [HttpDelete("{id}")]
+        [ActionName("Delete")]
         public IActionResult Delete(int id)
         {
             var user = _dal.FindById(id);

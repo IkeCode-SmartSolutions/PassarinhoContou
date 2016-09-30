@@ -82,17 +82,17 @@ namespace PassarinhoContou.Model
 
         public T Find(Expression<Func<T, bool>> predicate)
         {
-            return DataContext.Set<T>().FirstOrDefault(predicate);
+            return DataContext.Set<T>().SingleOrDefault(predicate);
         }
 
         public T FindById(int id)
         {
-            return DataContext.Set<T>().FirstOrDefault(i => i.Id == id);
+            return DataContext.Set<T>().SingleOrDefault(i => i.Id == id);
         }
 
         public async Task<T> FindByIdAsync(int id)
         {
-            return await DataContext.Set<T>().FirstOrDefaultAsync(i => i.Id == id);
+            return await DataContext.Set<T>().SingleOrDefaultAsync(i => i.Id == id);
         }
         
         public IQueryable<T> GetAll()

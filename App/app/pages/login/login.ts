@@ -23,7 +23,7 @@ export class LoginPage {
   signin(): void {
     //console.log('login model', this.model);
     if (this.model.username.length > 0 && this.model.password.length > 0) {
-      this.basicAuth.authenticate(this.model.username, this.model.password).then((isAuthenticated) => {
+      this.basicAuth.authenticate(this.model.username, this.model.password, (isAuthenticated) => {
         if (isAuthenticated) {
           this.navCtrl.setRoot(PassarinhoContouApp);
         } else {

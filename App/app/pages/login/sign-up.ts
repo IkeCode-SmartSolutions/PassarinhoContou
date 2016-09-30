@@ -19,8 +19,10 @@ export class SignUpPage {
   }
 
   register(): void {
-    this.userService.add(this.user);
-    console.log('register user.NickName', this.user.nickName);
-    this.navCtrl.pop();
+    console.log('register user.nickName', this.user.nickName);
+    
+    this.userService.add(this.user, data => {
+      this.navCtrl.pop();
+    });
   }
 }
