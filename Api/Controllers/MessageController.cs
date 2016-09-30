@@ -1,35 +1,65 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using PassarinhoContou.Model;
 using System.Linq;
 using System.Net;
 
 namespace PassarinhoContouApi.Controllers
 {
-    [Route("api/[controller]")]
-    public class MessagesController : Controller
+    [Route("api/[controller]/[action]")]
+    public class MessageController : Controller
     {
         private readonly EntityEx<Message> _dal = new EntityEx<Message>();
-
-        [HttpGet]
-        public IQueryable<Message> Get()
+        
+        [HttpGet("{id}")]
+        [ActionName("To")]
+        public IActionResult GetTo(int id)
         {
-            return _dal.GetAll();
+            var messages = _dal
+                            .FindAll(i => i.ToUserId == id)
+                            .Include(i => i.FromUser)
+                            .Include(i => i.SelectedSuffix)
+                            .Include(i => i.SelectedPrefix).ToList();
+            if (messages == null)
+            {
+                return NotFound();
+            }
+            
+            if (messages.Count == 0)
+            {
+                return NoContent();
+            }
+
+            return Ok(messages);
         }
 
         [HttpGet("{id}")]
-        public IActionResult Get(int id)
+        [ActionName("From")]
+        public IActionResult GetFrom(int id)
         {
-            var message = _dal.FindById(id);
-            if (message == null)
+            var messages = _dal
+                            .FindAll(i => i.FromUserId == id)
+                            .Include(i => i.ToUser)
+                            .Include(i => i.SelectedSuffix)
+                            .Include(i => i.SelectedPrefix).ToList()
+                            ;
+
+            if (messages == null)
             {
                 return NotFound();
             }
 
-            return Ok(message);
+            if (messages.Count == 0)
+            {
+                return NoContent();
+            }
+            
+            return Ok(messages);
         }
 
         [HttpPut("{id}")]
+        [ActionName("Edit")]
         public IActionResult Put(int id, [FromBody]Message message)
         {
             if (!ModelState.IsValid)
@@ -62,6 +92,7 @@ namespace PassarinhoContouApi.Controllers
         }
 
         [HttpPost]
+        [ActionName("Add")]
         public IActionResult Post([FromBody]Message message)
         {
             if (!ModelState.IsValid)
@@ -71,10 +102,11 @@ namespace PassarinhoContouApi.Controllers
 
             _dal.Create(message);
 
-            return CreatedAtRoute("DefaultApi", new { id = message.Id }, message);
+            return Ok(new { id = message.Id });
         }
 
         [HttpDelete("{id}")]
+        [ActionName("Delete")]
         public IActionResult Delete(int id)
         {
             var message = _dal.FindById(id);

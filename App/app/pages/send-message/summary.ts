@@ -26,6 +26,8 @@ export class SummaryPage implements OnDestroy {
 
     this.fromResend = navParams.get('fromResend');
     console.log('summary fromResend', this.fromResend);
+
+    this.sendMessageService.PendingSend = true;
   }
 
   ngOnDestroy() {
@@ -36,7 +38,7 @@ export class SummaryPage implements OnDestroy {
     console.log("summary sendMessage() this.basicAuth.AuthenticatedUser", this.basicAuth.AuthenticatedUser);
     this.sendMessageService.FromUser = this.basicAuth.AuthenticatedUser;
     this.sendMessageService.send(
-      () => {
+      (data) => {
         console.log('summary success');
         this.navCtrl.setRoot(HomePage);
       },

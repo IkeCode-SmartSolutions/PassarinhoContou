@@ -13,8 +13,10 @@ import { User } from '../../models/user'
 import { TicketService } from '../../providers/ticket-service/ticket-service';
 import { MessageService } from '../../providers/model-services/message-service';
 
+import { BaseService } from '../model-services/base-service';
+
 @Injectable()
-export class SendMessageService {
+export class SendMessageService extends BaseService {
   public Contact: any;
   public FromUser: User;
   public PrefixCategory: PrefixCategory;
@@ -23,14 +25,20 @@ export class SendMessageService {
   public MessageSuffix: MessageSuffix;
   public PendingSend: boolean;
 
-  constructor(private http: Http,
+  constructor(public http: Http,
     private ticketService: TicketService,
     private events: Events,
     private messageService: MessageService) {
+
+    super(http);
+
+    this.BaseUrl += "Message/";
+
     this.initialize();
+
   }
 
-  send(successCallback?: Function, errorCallback?: Function): void {
+  send(successCallback?: (data: any) => void, errorCallback?: Function): void {
     console.log('send-message-service send');
     this.events.publish('message:send');
     this.ticketService.consume(
@@ -38,18 +46,23 @@ export class SendMessageService {
         this.PendingSend = false;
 
         var message = new Message({
-          MessagePrefix: this.MessagePrefix,
-          MessageSuffix: this.MessageSuffix,
-          SelectedPrefixId: this.MessagePrefix.id,
-          SelectedSuffixId: this.MessageSuffix.id,
-          FromUser: this.FromUser,
-          ToUser: new User({FullName: this.Contact.name}),
-          CreationDate: new Date(Date.now())
+          messagePrefix: this.MessagePrefix,
+          messageSuffix: this.MessageSuffix,
+          selectedPrefixId: this.MessagePrefix.id,
+          selectedSuffixId: this.MessageSuffix.id,
+          fromUser: this.FromUser,
+          toUser: new User({ fullName: this.Contact.name }),
+          creationDate: new Date(Date.now())
         });
-        this.messageService.add(message);
 
-        if (successCallback)
-          successCallback();
+        //TODO fix it!
+        message.id = 0;
+        message.fromUserId = 1;
+        message.fromUser = null;
+        message.toUserId = 2;
+        message.toUser = null;
+
+        this.messageService.add(message, successCallback);
       },
       () => {
         this.PendingSend = true;

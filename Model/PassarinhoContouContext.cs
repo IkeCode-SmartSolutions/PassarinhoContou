@@ -8,7 +8,12 @@ namespace PassarinhoContou.Model
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=localhost;Database=PassarinhoContou;User=sql;Password=!@#sql)(*");
+#if DEBUG 
+            optionsBuilder.UseSqlServer(@"Server=localhost;Database=PassarinhoContou;User=sa;Password=iwannarock");
+#endif
+#if !DEBUG
+            optionsBuilder.UseSqlServer(@"Server=passarinhocontou.ikecode.com.br;Database=PassarinhoContou;User=sql;Password=!@#sql)(*");
+#endif
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -167,7 +172,7 @@ namespace PassarinhoContou.Model
                     .HasConstraintName("FK_SuffixesTranslations_MessageSuffixes");
             });
 
-            modelBuilder.Entity<Users>(entity =>
+            modelBuilder.Entity<User>(entity =>
             {
                 entity.Property(e => e.Email)
                     .IsRequired()
@@ -197,6 +202,6 @@ namespace PassarinhoContou.Model
         public virtual DbSet<SuffixCategory> SuffixCategories { get; set; }
         public virtual DbSet<SuffixCategoryTranslations> SuffixCategoryTranslations { get; set; }
         public virtual DbSet<SuffixTranslation> SuffixesTranslations { get; set; }
-        public virtual DbSet<Users> Users { get; set; }
+        public virtual DbSet<User> Users { get; set; }
     }
 }

@@ -20,9 +20,19 @@ export class MessageListPage {
     private messageService: MessageService) {
     // If we navigated to this page, we will have an item available as a nav param
     this.listType = navParams.get('listType');
-    //let source = <Array<Message>>navParams.get('source');
 
     this.messages = [];
-    this.messages = this.messageService.getMessagesFromLoggedUser();
+
+    if (this.listType == "Enviadas") {
+      this.messageService.getMessagesFromLoggedUser(data => {
+        //console.log('data', data);
+        this.messages = data;
+      });
+    } else {
+      this.messageService.getMessagesToLoggedUser(data => {
+        //console.log('data', data);
+        this.messages = data;
+      });
+    }
   }
 }

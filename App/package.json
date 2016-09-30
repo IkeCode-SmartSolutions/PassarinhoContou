@@ -28,8 +28,8 @@
     "tslint-ionic-rules": "0.0.4",
     "run-sequence": "1.1.5"
   },
-  "name": "passarinhocontou",
-  "description": "PassarinhoContou: An Ionic project",
+  "name": "tokup",
+  "description": "TokUP: An Ionic project",
   "cordovaPlugins": [
     "cordova-plugin-device",
     "cordova-plugin-console",

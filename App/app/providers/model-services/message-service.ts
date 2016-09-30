@@ -8,95 +8,65 @@ import { BasicAuth } from '../basic-auth/basic-auth';
 import { MessagePrefixService } from './message-prefix-service';
 import { MessageSuffixService } from './message-suffix-service';
 
+import { BaseService } from '../model-services/base-service';
+
 @Injectable()
-export class MessageService {
-
-  private _mock: Array<Message> = new Array<Message>();
-  private _lastId: number = 2;
-
+export class MessageService extends BaseService {
   constructor(
-    private http: Http,
+    public http: Http,
     private basicAuth: BasicAuth,
     private messagePrefixService: MessagePrefixService,
     private messageSuffixService: MessageSuffixService) {
-    this._mock.push(new Message({
-      Id: 1,
-      FromUserId: 1,
-      FromUser: new User({ FullName: 'Amigo da Agenda #1' }),
-      ToUserId: 1,
-      ToUser: new User({ FullName: 'Mock Fulano #1' }),
-      Status: 1,
-      SelectedPrefixId: 1,
-      SelectedSuffixId: 1,
-      MessageType: 1,
-      CreationDate: new Date(2016, 6 + 1, 10, 10, 15, 54)
-      // LanguageId: 1,
-      // MessagePrefix: this.messagePrefixService.get(1),
-      // MessageSuffix: this.messageSuffixService.get(1)
-    }));
 
-    this._mock.push(new Message({
-      Id: 2,
-      FromUserId: 1,
-      FromUser: new User({ FullName: 'Amigo da Agenda #2' }),
-      ToUserId: 1,
-      ToUser: new User({ FullName: 'Mock Fulano #1' }),
-      Status: 1,
-      SelectedPrefixId: 2,
-      SelectedSuffixId: 2,
-      MessageType: 1,
-      CreationDate: new Date(2016, 7 + 1, 23, 5, 5, 20)
-      // LanguageId: 1,
-      // MessagePrefix: this.messagePrefixService.get(2),
-      // MessageSuffix: this.messageSuffixService.get(2)
-    }));
+    super(http);
+    this.BaseUrl += "Message/";
 
   }
 
-  public getMessagesFrom(userId: number): Array<Message> {
-    var result = undefined;
-
-    this._mock.forEach((message, index) => {
-      if (message.FromUserId === userId) {
-        result = message;
-        return;
-      }
-    });
-
-    return result;
+  private getMessages(fromTo: string, userId: number, callback: (data: Message[]) => void): void {
+    this.http.get(this.BaseUrl + fromTo + "/" + userId).map<Array<Message>>(data => {
+      //console.log('map data.json()', data.json());
+      return data.json();
+    }).subscribe(
+      data => {
+        //console.log('api data', data);
+        callback(data);
+      },
+      error => {
+        console.log('api error', error.json().currentTarget.status);
+      });
   }
 
-  public getMessagesFromLoggedUser(): Array<Message> {
-    var result = undefined;
-
-    // this._mock.forEach((message, index) => {
-    //   if (message.FromUserId === this.basicAuth.AuthenticatedUser.Id) {
-    //     result = message;
-    //     return;
-    //   }
-    // });
-    result = this._mock;
-
-    return result;
+  public getMessagesFrom(userId: number, callback: (data: Message[]) => void): void {
+    this.getMessages("From", userId, callback);
   }
 
-  public getMessagesTo(userId: number): Array<Message> {
-    var result = undefined;
-
-    // this._mock.forEach((message, index) => {
-    //   if (message.ToUserId === userId) {
-    //     result = message;
-    //     return;
-    //   }
-    // });
-    result = this._mock;
-
-    return result;
+  public getMessagesFromLoggedUser(callback: (data: Message[]) => void): void {
+    //console.log('auth user id', this.basicAuth.AuthenticatedUser.id);
+    //TODO dps que fizer o login colocar id certo aqui
+    this.getMessagesFrom(1, callback);
   }
 
-  public add(message: IMessage) {
-    message.Id = ++this._lastId;
-    this._mock.push(new Message(message));
+  public getMessagesTo(userId: number, callback: (data: Message[]) => void): void {
+    this.getMessages("To", userId, callback);
+  }
+
+  public getMessagesToLoggedUser(callback: (data: Message[]) => void): void {
+    //console.log('auth user id', this.basicAuth.AuthenticatedUser.id);
+    //TODO dps que fizer o login colocar id certo aqui
+    this.getMessagesTo(1, callback);
+  }
+
+  public add(message: IMessage, callback?: (data: any) => void): void {
+    this.http.post(this.BaseUrl + "Add", message).map(data => data.json()).subscribe(
+      data => {
+        console.log('Message POST OK data', data);
+        if (callback)
+          callback(data);
+      },
+      error => {
+        console.log('Message POST ERROR', error.json());
+      });
   }
 }
 

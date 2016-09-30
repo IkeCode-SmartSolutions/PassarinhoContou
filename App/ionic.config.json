@@ -1,6 +1,12 @@
 {
-  "name": "PassarinhoContou",
+  "name": "TokUP",
   "app_id": "",
   "v2": true,
-  "typescript": true
+  "typescript": true,
+  "proxies": [
+    {
+      "path": "/api",
+      "proxyUrl": "http://local.passarinhocontou.com.br:7000/api/" //http://passarinhocontou.ikecode.com.br/api/
+    }  
+  ]
 }

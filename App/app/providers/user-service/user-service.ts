@@ -13,14 +13,14 @@ export class UserService {
 
   constructor(private http: Http) {
     this._usersMock.push(new User({
-      Id: 1,
-      FullName: 'Leandro Barral',
-      Email: 'leandro.barral@yep.net.br',
-      NickName: 'Barral',
-      PhoneNumber: '11988856996',
-      RegisterDate: new Date(),
-      MessagesFrom: new Array<Message>(),
-      MessagesTo: new Array<Message>(),
+      id: 1,
+      fullName: 'Leandro Barral',
+      email: 'leandro.barral@yep.net.br',
+      nickName: 'Barral',
+      phoneNumber: '11988856996',
+      registerDate: new Date(),
+      messagesFrom: new Array<Message>(),
+      messagesTo: new Array<Message>(),
     }));
   }
 
@@ -32,7 +32,7 @@ export class UserService {
     var result = undefined;
 
     this._usersMock.forEach((user, index) => {
-      if (user.Id === id) {
+      if (user.id === id) {
         result = user;
         return;
       }
@@ -49,7 +49,7 @@ export class UserService {
     this._usersMock.forEach((user, index) => {
       // console.log('getByNickname user.NickName', user.NickName);
       // console.log('getByNickname nickname', nickname);
-      if (user.NickName === nickname) {
+      if (user.nickName === nickname) {
         result = user;
         return;
       }

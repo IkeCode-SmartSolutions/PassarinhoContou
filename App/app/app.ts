@@ -41,7 +41,7 @@ export class PassarinhoContouApp implements OnInit {
 
   rootPage: any = HomePage;
 
-  pages: Array<{ title: string, icon: string, component: any, params?: any }>;
+  public pages: Array<{ title: string, icon: string, component: any, params?: any }>;
 
   showFooter: boolean = true;
 
@@ -54,33 +54,36 @@ export class PassarinhoContouApp implements OnInit {
     public popoverController: PopoverController,
     public events: Events) {
 
+    this.pages = [
+      { title: 'Enviar Mensagem', icon: 'send', component: SelectContactPage },
+      {
+        title: 'Mensagens Enviadas', icon: 'list-box', component: MessageListPage, params: {
+          //'source': this.messageService.getMessagesFromLoggedUser(),
+          'listType': 'Enviadas'
+        }
+      },
+      {
+        title: 'Mensagens Recebidas', icon: 'list-box', component: MessageListPage, params: {
+          //'source': this.messageService.getMessagesTo(this.basicAuth.AuthenticatedUser.Id),
+          'listType': 'Recebidas'
+        }
+      }
+    ];
+    //console.log('this.pages', this.pages);
+
     this.basicAuth.isAuthenticated().then((isAuthenticated) => {
       //console.log('app ctor this.basicAuth.isAuthenticated()', isAuthenticated);
       if (!isAuthenticated) {
         this.showFooter = false;
         this.rootPage = LoginPage;
       } else {
-        //console.log(this.basicAuth.AuthenticatedUser);
-        this.pages = [
-          { title: 'Enviar Mensagem', icon: 'send', component: SelectContactPage },
-          {
-            title: 'Mensagens Enviadas', icon: 'list-box', component: MessageListPage, params: {
-              //'source': this.messageService.getMessagesFromLoggedUser(),
-              'listType': 'Enviadas'
-            }
-          },
-          {
-            title: 'Mensagens Recebidas', icon: 'list-box', component: MessageListPage, params: {
-              //'source': this.messageService.getMessagesTo(this.basicAuth.AuthenticatedUser.Id),
-              'listType': 'Recebidas'
-            }
-          }
-        ];
-
         this.showFooter = true;
         this.rootPage = HomePage;
 
+        //console.log(this.basicAuth.AuthenticatedUser);
+
         this.initializeApp();
+        //ole.log('this.pages on authenticated', this.pages);
       }
     });
 

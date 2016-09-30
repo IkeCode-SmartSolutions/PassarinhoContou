@@ -21,14 +21,14 @@ export class BasicAuth {
 
   authenticate(username: string, password: string): Promise<boolean> {
     this.AuthenticatedUser = this.userService.getByNickname(username);
-    console.log('this.AuthenticatedUser', this.AuthenticatedUser ? this.AuthenticatedUser.Id : 'not found');
+    console.log('this.AuthenticatedUser', this.AuthenticatedUser ? this.AuthenticatedUser.id : 'not found');
     var isAuthenticated = false;
     if (this.AuthenticatedUser) {
       isAuthenticated = true;
     }
 
-    this._storage.set(this._authKeyUserId, this.AuthenticatedUser.Id);
-    this._storage.set(this._authKeyUsername, this.AuthenticatedUser.NickName);
+    this._storage.set(this._authKeyUserId, this.AuthenticatedUser.id);
+    this._storage.set(this._authKeyUsername, this.AuthenticatedUser.nickName);
 
     return this._storage.set(this._authKey, isAuthenticated).then<boolean>(() => {
       return this.isAuthenticated().then<boolean>((authenticated) => {
@@ -50,7 +50,7 @@ export class BasicAuth {
       if (isTrue && !this.AuthenticatedUser) {
         this._storage.get(this._authKeyUserId).then((userId) => {
           this._storage.get(this._authKeyUsername).then((username) => {
-            this.AuthenticatedUser = new User({ FullName: username, Id: userId });
+            this.AuthenticatedUser = new User({ fullName: username, id: userId });
           });
         });
       }

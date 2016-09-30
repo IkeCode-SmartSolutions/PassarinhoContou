@@ -19,11 +19,17 @@ export class PrefixCategoryPage {
     private navParams: NavParams,
     private prefixCategoryService: PrefixCategoryService,
     private sendMessageService: SendMessageService) {
-    
+
+    // prefixCategoryService
+    //   .getAll()
+    //   .subscribe(res => this.prefixCategories = res.json());
+
     prefixCategoryService
-      .getAll()
-      .subscribe(res => this.prefixCategories = res.json());
-}
+      .getAll((data) => {
+        //console.log('callback data', data);
+        this.prefixCategories = data;
+      });
+  }
 
   prefixCategoryTapped(event, prefixCategory) {
     this.sendMessageService.PrefixCategory = prefixCategory;

@@ -2,10 +2,46 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.Extensions.DependencyInjection;
 using System.Linq.Expressions;
+using Microsoft.Extensions.Logging;
+using System.IO;
 
 namespace PassarinhoContou.Model
 {
+    public class EFLoggerProvider : ILoggerProvider
+    {
+        public ILogger CreateLogger(string categoryName)
+        {
+            return new EFLogger();
+        }
+
+        public void Dispose()
+        {
+            // N/A
+        }
+
+        private class EFLogger : ILogger
+        {
+            public IDisposable BeginScope<TState>(TState state)
+            {
+                return null;
+            }
+
+            public bool IsEnabled(LogLevel logLevel)
+            {
+                return true;
+            }
+            
+            public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter)
+            {
+                File.AppendAllText(@".\EF.LOG", formatter(state, exception));
+                Console.WriteLine(formatter(state, exception));
+            }
+        }
+    }
+
     public class EntityEx<T> : IEntityEx<T>, IDisposable where T : BaseModel
     {
         #region .: Context :.
@@ -27,6 +63,9 @@ namespace PassarinhoContou.Model
         public EntityEx(PassarinhoContouContext context)
         {
             this._context = context;
+            var serviceProvider = context.GetInfrastructure<IServiceProvider>();
+            var loggerFactory = serviceProvider.GetService<ILoggerFactory>();
+            loggerFactory.AddProvider(new EFLoggerProvider());
         }
 
         public void Create(T obj)
@@ -63,7 +102,8 @@ namespace PassarinhoContou.Model
 
         public IQueryable<T> FindAll(Expression<Func<T, bool>> predicate)
         {
-            return DataContext.Set<T>().Where(predicate);
+            var ctx = DataContext.Set<T>().Where(predicate);
+            return ctx;
         }
 
         public void Update(T obj)

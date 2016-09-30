@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using PassarinhoContou.Model;
 using System.Linq;
 using System.Net;
@@ -6,94 +7,100 @@ using System.Net;
 namespace PassarinhoContouApi.Controllers
 {
     [Route("api/[controller]")]
-    public class UsersController : Controller
+    public class UserController : Controller
     {
-        //private readonly EntityEx<User> _dal = new EntityEx<User>();
+        private readonly EntityEx<User> _dal = new EntityEx<User>();
 
-        //public IQueryable<User> Get()
-        //{
-        //    return _dal.FindAll();
-        //}
+        [HttpGet]
+        public IQueryable<User> Get()
+        {
+            return _dal.GetAll();
+        }
 
-        //public IActionResult Get(int id)
-        //{
-        //    var user = _dal.FindById(id);
-        //    if (user == null)
-        //    {
-        //        return NotFound();
-        //    }
 
-        //    return Ok(user);
-        //}
+        [HttpGet("{id}")]
+        public IActionResult Get(int id)
+        {
+            var user = _dal.FindById(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
 
-        //public IActionResult Put(int id, User user)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
+            return Ok(user);
+        }
 
-        //    if (id != user.Id)
-        //    {
-        //        return BadRequest();
-        //    }
+        [HttpPut("{id}")]
+        public IActionResult Put(int id, User user)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
-        //    try
-        //    {
-        //        _dal.Update(user);
-        //    }
-        //    catch (DbUpdateConcurrencyException)
-        //    {
-        //        if (!UserExists(id))
-        //        {
-        //            return NotFound();
-        //        }
-        //        else
-        //        {
-        //            throw;
-        //        }
-        //    }
+            if (id != user.Id)
+            {
+                return BadRequest();
+            }
 
-        //    return StatusCode((int)HttpStatusCode.NoContent);
-        //}
+            try
+            {
+                _dal.Update(user);
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!UserExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
 
-        //public IActionResult Post(User user)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
+            return StatusCode((int)HttpStatusCode.NoContent);
+        }
 
-        //    _dal.Create(user);
+        [HttpPost]
+        public IActionResult Post(User user)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
-        //    return CreatedAtRoute("DefaultApi", new { id = user.Id }, user);
-        //}
+            _dal.Create(user);
 
-        //public IActionResult Delete(int id)
-        //{
-        //    var user = _dal.FindById(id);
-        //    if (user == null)
-        //    {
-        //        return NotFound();
-        //    }
+            return CreatedAtRoute("DefaultApi", new { id = user.Id }, user);
+        }
 
-        //    _dal.Remove(user);
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            var user = _dal.FindById(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
 
-        //    return Ok(user);
-        //}
+            _dal.Remove(user);
 
-        //protected override void Dispose(bool disposing)
-        //{
-        //    if (disposing)
-        //    {
-        //        _dal.Dispose();
-        //    }
-        //    base.Dispose(disposing);
-        //}
+            return Ok(user);
+        }
 
-        //private bool UserExists(int id)
-        //{
-        //    return _dal.FindAll().Count(e => e.Id == id) > 0;
-        //}
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                _dal.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        private bool UserExists(int id)
+        {
+            return _dal.GetAll().Count(e => e.Id == id) > 0;
+        }
     }
 }

@@ -4,52 +4,52 @@ import { MessagePrefix } from './message-prefix'
 import { MessageSuffix } from './message-suffix'
 
 export interface IMessage {
-    Id?: number;
-    FromUserId?: number;
-    ToUserId?: number;
-    Status?: number;
-    SelectedPrefixId?: number;
-    SelectedSuffixId?: number;
-    MessageType?: number;
-    LanguageId?: number;
-    CreationDate?: Date;
+    id?: number;
+    fromUserId?: number;
+    toUserId?: number;
+    status?: number;
+    selectedPrefixId?: number;
+    selectedSuffixId?: number;
+    messageType?: number;
+    languageId?: number;
+    creationDate?: Date;
 
-    MessagePrefix?: MessagePrefix;
-    MessageSuffix?: MessageSuffix;
-    FromUser?: User;
-    ToUser?: User;
+    messagePrefix?: MessagePrefix;
+    messageSuffix?: MessageSuffix;
+    fromUser?: User;
+    toUser?: User;
 }
 
 export class Message {
-    Id: number;
-    FromUserId: number;
-    ToUserId: number;
-    Status: number;
-    SelectedPrefixId: number;
-    SelectedSuffixId: number;
-    MessageType: number;
-    LanguageId: number;
-    CreationDate: Date;
+    id: number;
+    fromUserId: number;
+    toUserId: number;
+    status: number;
+    selectedPrefixId: number;
+    selectedSuffixId: number;
+    messageType: number;
+    languageId: number;
+    creationDate: Date;
 
-    MessagePrefix: MessagePrefix;
-    MessageSuffix: MessageSuffix;
-    FromUser: User;
-    ToUser: User;
+    messagePrefix: MessagePrefix;
+    messageSuffix: MessageSuffix;
+    fromUser: User;
+    toUser: User;
 
     constructor(message?: IMessage) {
-        this.Id = message && message.Id || 0;
-        this.FromUserId = message && message.FromUserId || 0;
-        this.ToUserId = message && message.ToUserId || 0;
-        this.Status = message && message.Status || 0;
-        this.SelectedPrefixId = message && message.SelectedPrefixId || 0;
-        this.SelectedSuffixId = message && message.SelectedSuffixId || 0;
-        this.MessageType = message && message.MessageType || 0;
-        this.LanguageId = message && message.LanguageId || 0;
-        this.CreationDate = message && message.CreationDate || new Date();
+        this.id = message && message.id || 0;
+        this.fromUserId = message && message.fromUserId || 0;
+        this.toUserId = message && message.toUserId || 0;
+        this.status = message && message.status || 0;
+        this.selectedPrefixId = message && message.selectedPrefixId || 0;
+        this.selectedSuffixId = message && message.selectedSuffixId || 0;
+        this.messageType = message && message.messageType || 0;
+        this.languageId = message && message.languageId || 0;
+        this.creationDate = message && message.creationDate || new Date(Date.now());
 
-        this.MessagePrefix = message && message.MessagePrefix || null;
-        this.MessageSuffix = message && message.MessageSuffix || null;
-        this.FromUser = message && message.FromUser || null;
-        this.ToUser = message && message.ToUser || null;
+        this.messagePrefix = message && message.messagePrefix || null;
+        this.messageSuffix = message && message.messageSuffix || null;
+        this.fromUser = message && message.fromUser || null;
+        this.toUser = message && message.toUser || null;
     }
 }

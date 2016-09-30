@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PassarinhoContou.Model
 {
-    public partial class Users : BaseModel
+    public partial class User : BaseModel
     {
-        public Users()
+        public User()
         {
             ConnectedDevices = new HashSet<ConnectedDevice>();
             MessagesFromUser = new HashSet<Message>();

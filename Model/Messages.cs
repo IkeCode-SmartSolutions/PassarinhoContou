@@ -10,9 +10,9 @@
         public int MessageType { get; set; }
         public int LanguageId { get; set; }
         
-        public virtual Users FromUser { get; set; }
+        public virtual User FromUser { get; set; }
         public virtual MessagePrefix SelectedPrefix { get; set; }
         public virtual MessageSuffix SelectedSuffix { get; set; }
-        public virtual Users ToUser { get; set; }
+        public virtual User ToUser { get; set; }
     }
 }

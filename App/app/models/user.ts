@@ -1,37 +1,37 @@
 import {Message} from './message';
 
 export interface IUser {
-    Id?: number;
-    Email?: string;
-    NickName?: string;
-    FullName?: string;
-    PhoneNumber?: string;
-    RegisterDate?: Date;
+    id?: number;
+    email?: string;
+    nickName?: string;
+    fullName?: string;
+    phoneNumber?: string;
+    registerDate?: Date;
     //ConnectedDevices?: Array<ConnectedDevice>;
-    MessagesFrom?: Array<Message>;
-    MessagesTo?: Array<Message>;
+    messagesFrom?: Array<Message>;
+    messagesTo?: Array<Message>;
 }
 
 export class User {
-    Id: number;
-    Email: string;
-    NickName: string;
-    FullName: string;
-    PhoneNumber: string;
-    RegisterDate: Date;
-    //ConnectedDevices: Array<ConnectedDevice>;
-    MessagesFrom: Array<Message>;
-    MessagesTo: Array<Message>;
+    id: number;
+    email: string;
+    nickName: string;
+    fullName: string;
+    phoneNumber: string;
+    registerDate: Date;
+    //connectedDevices: Array<ConnectedDevice>;
+    messagesFrom: Array<Message>;
+    messagesTo: Array<Message>;
 
     constructor(user?: IUser) {
-        this.Id = user && user.Id ? user.Id : 0;
-        this.Email = user && user.Email ? user.Email : '';
-        this.NickName = user && user.NickName ? user.NickName : '';
-        this.FullName = user && user.FullName ? user.FullName : '';
-        this.PhoneNumber = user && user.PhoneNumber ? user.PhoneNumber : '';
-        this.RegisterDate = user && user.RegisterDate ? user.RegisterDate : new Date();
-        //this.ConnectedDevices = user && user.ConnectedDevices || null;
-        this.MessagesFrom = user && user.MessagesFrom ? user.MessagesFrom : null;
-        this.MessagesTo = user && user.MessagesTo ? user.MessagesTo : null;
+        this.id = user && user.id ? user.id : 0;
+        this.email = user && user.email ? user.email : '';
+        this.nickName = user && user.nickName ? user.nickName : '';
+        this.fullName = user && user.fullName ? user.fullName : '';
+        this.phoneNumber = user && user.phoneNumber ? user.phoneNumber : '';
+        this.registerDate = user && user.registerDate ? user.registerDate : new Date(Date.now());
+        //this.connectedDevices = user && user.connectedDevices || null;
+        this.messagesFrom = user && user.messagesFrom ? user.messagesFrom : null;
+        this.messagesTo = user && user.messagesTo ? user.messagesTo : null;
     }
 }

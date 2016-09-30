@@ -10,11 +10,11 @@
 <ion-content>
   <ion-list text-wrap>
     <button ion-item *ngFor="let item of messages" text-wrap>
-      <h3 *ngIf="listType == 'Enviadas'">Para: {{item.ToUser.FullName}}</h3>
-      <h3 *ngIf="listType == 'Recebidas'">De: {{item.FromUser.FullName}}</h3>
-      <h4 text-wrap>{{item.MessagePrefix.Name}}</h4>
-      <h4 text-wrap>{{item.MessageSuffix.Name}}</h4>
-      <label>{{item.CreationDate | date:"dd/MM/yyyy HH:mm:ss"}}</label>
+      <h3 *ngIf="listType == 'Enviadas'">Para: {{item.toUser.fullName}}</h3>
+      <h3 *ngIf="listType == 'Recebidas'">De: {{item.fromUser.fullName}}</h3>
+      <label>{{item.selectedPrefix.name}}</label>
+      <label>{{item.selectedSuffix.name}}</label>
+      <h3>às {{item.creationDate | date:"dd/MM/yyyy HH:mm:ss"}}</h3>
     </button>
     <ion-item>
     </ion-item>

@@ -20,7 +20,7 @@ export class SignUpPage {
 
   register(): void {
     this.userService.add(this.user);
-    console.log('register user.NickName', this.user.NickName);
+    console.log('register user.NickName', this.user.nickName);
     this.navCtrl.pop();
   }
 }
