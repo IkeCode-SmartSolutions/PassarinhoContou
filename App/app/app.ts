@@ -72,7 +72,7 @@ export class PassarinhoContouApp implements OnInit {
     //console.log('this.pages', this.pages);
 
     this.basicAuth.isAuthenticated().then((isAuthenticated) => {
-      //console.log('app ctor this.basicAuth.isAuthenticated()', isAuthenticated);
+      console.log('app ctor this.basicAuth.isAuthenticated()', isAuthenticated);
       if (!isAuthenticated) {
         this.showFooter = false;
         this.rootPage = LoginPage;

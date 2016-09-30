@@ -6,7 +6,7 @@
   "proxies": [
     {
       "path": "/api",
-      "proxyUrl": "http://local.passarinhocontou.com.br:7000/api/" //http://passarinhocontou.ikecode.com.br/api/
+      "proxyUrl": "http://passarinhocontou.ikecode.com.br/api/"
     }  
   ]
 }
