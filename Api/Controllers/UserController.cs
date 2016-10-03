@@ -89,7 +89,7 @@ namespace PassarinhoContouApi.Controllers
 
             _dal.Create(user);
 
-            return CreatedAtRoute("DefaultApi", new { id = user.Id }, user);
+            return Ok(new { id = user.Id });
         }
 
         [HttpDelete("{id}")]

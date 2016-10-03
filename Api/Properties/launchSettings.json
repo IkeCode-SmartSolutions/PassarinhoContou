@@ -3,7 +3,7 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://local.passarinhocontou.com.br:7000/",
+      "applicationUrl": "http://local.passarinhocontou.ikecode.com.br:7000/",
       "sslPort": 0
     }
   },

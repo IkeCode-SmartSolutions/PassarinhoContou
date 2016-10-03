@@ -71,7 +71,7 @@ namespace PassarinhoContouApi.Controllers
 
             _dal.Create(connectedDevice);
 
-            return CreatedAtRoute("DefaultApi", new { id = connectedDevice.Id }, connectedDevice);
+            return Ok(new { id = connectedDevice.Id });
         }
 
         [HttpDelete("{id}")]
