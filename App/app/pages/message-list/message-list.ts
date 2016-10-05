@@ -18,7 +18,7 @@ export class MessageListPage {
     public navCtrl: NavController,
     navParams: NavParams,
     private messageService: MessageService) {
-    // If we navigated to this page, we will have an item available as a nav param
+      
     this.listType = navParams.get('listType');
 
     this.messages = [];
