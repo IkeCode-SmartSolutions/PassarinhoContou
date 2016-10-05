@@ -15,9 +15,9 @@
 
     <ion-item text-wrap ion-item *ngFor="let contact of contacts" (click)="contactTapped($event, contact)">
       <ion-avatar item-left>
-        <ion-icon [name]="contact.icon"></ion-icon>
+        <ion-icon [name]="person"></ion-icon>
       </ion-avatar>
-      <h2>{{contact.name}}</h2>
+      <h2>{{contact.fullName}}</h2>
       <p>{{contact.phoneNumber}}</p>
     </ion-item>
   </ion-list>

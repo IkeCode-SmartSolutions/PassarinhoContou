@@ -18,12 +18,12 @@ export class SignUpPage {
     private userService: UserService,
     private platform: Platform) {
 
-      if (this.platform.is('cordova')) {
-        Sim.getSimInfo().then(val => {
-          console.log(val);
-          console.log(val.mnc);
-        });
-      }
+      // if (this.platform.is('cordova')) {
+      //   Sim.getSimInfo().then(val => {
+      //     console.log(val);
+      //     console.log(val.mnc);
+      //   });
+      // }
       
   }
 

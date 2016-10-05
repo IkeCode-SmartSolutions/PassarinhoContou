@@ -17,7 +17,7 @@ import { BaseService } from '../model-services/base-service';
 
 @Injectable()
 export class SendMessageService extends BaseService {
-  public Contact: any;
+  public Contact: User;
   public FromUser: User;
   public PrefixCategory: PrefixCategory;
   public SuffixCategory: SuffixCategory;
@@ -39,7 +39,7 @@ export class SendMessageService extends BaseService {
   }
 
   send(successCallback?: (data: any) => void, errorCallback?: Function): void {
-    console.log('send-message-service send');
+    //console.log('send-message-service send');
     this.events.publish('message:send');
     this.ticketService.consume(
       () => {
@@ -50,17 +50,12 @@ export class SendMessageService extends BaseService {
           messageSuffix: this.MessageSuffix,
           selectedPrefixId: this.MessagePrefix.id,
           selectedSuffixId: this.MessageSuffix.id,
-          fromUser: this.FromUser,
-          toUser: new User({ fullName: this.Contact.name }),
+          //fromUser: this.FromUser,
+          fromUserId: this.FromUser.id,
+          //toUser: this.Contact,
+          toUserId: this.Contact.id,
           creationDate: new Date(Date.now())
         });
-
-        //TODO fix it!
-        message.id = 0;
-        message.fromUserId = 1;
-        message.fromUser = null;
-        message.toUserId = 2;
-        message.toUser = null;
 
         this.messageService.add(message, successCallback);
       },
@@ -81,7 +76,7 @@ export class SendMessageService extends BaseService {
   }
 
   private initialize() {
-    this.Contact = { name: 'mock' };
+    this.Contact = new User();
     this.PrefixCategory = new PrefixCategory();
     this.SuffixCategory = new SuffixCategory();
     this.MessagePrefix = new MessagePrefix();

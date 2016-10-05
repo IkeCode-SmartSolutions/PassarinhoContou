@@ -71,7 +71,7 @@ namespace PassarinhoContouApi.Controllers
 
             _dal.Create(SuffixCategory);
 
-            return CreatedAtRoute("DefaultApi", new { id = SuffixCategory.Id }, SuffixCategory);
+            return Ok(new { id = SuffixCategory.Id });
         }
 
         [HttpDelete("{id}")]

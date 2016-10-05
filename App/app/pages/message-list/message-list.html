@@ -8,7 +8,7 @@
 </ion-header>
 
 <ion-content>
-  <ion-list text-wrap>
+  <ion-list text-wrap *ngIf="messages.length > 0">
     <button ion-item *ngFor="let item of messages" text-wrap>
       <h3 *ngIf="listType == 'Enviadas'">Para: {{item.toUser.fullName}}</h3>
       <h3 *ngIf="listType == 'Recebidas'">De: {{item.fromUser.fullName}}</h3>
@@ -19,4 +19,6 @@
     <ion-item>
     </ion-item>
   </ion-list>
+
+  <h3 text-wrap *ngIf="messages.length == 0">Nenhuma mensagem aqui... Ainda! =)</h3>
 </ion-content>

@@ -43,8 +43,7 @@ export class MessageService extends BaseService {
 
   public getMessagesFromLoggedUser(callback: (data: Message[]) => void): void {
     //console.log('auth user id', this.basicAuth.AuthenticatedUser.id);
-    //TODO dps que fizer o login colocar id certo aqui
-    this.getMessagesFrom(1, callback);
+    this.getMessagesFrom(this.basicAuth.AuthenticatedUser.id, callback);
   }
 
   public getMessagesTo(userId: number, callback: (data: Message[]) => void): void {
@@ -53,8 +52,7 @@ export class MessageService extends BaseService {
 
   public getMessagesToLoggedUser(callback: (data: Message[]) => void): void {
     //console.log('auth user id', this.basicAuth.AuthenticatedUser.id);
-    //TODO dps que fizer o login colocar id certo aqui
-    this.getMessagesTo(1, callback);
+    this.getMessagesTo(this.basicAuth.AuthenticatedUser.id, callback);
   }
 
   public add(message: IMessage, callback?: (data: any) => void): void {

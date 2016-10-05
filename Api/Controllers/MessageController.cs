@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using PassarinhoContou.Model;
+using System;
 using System.Linq;
 using System.Net;
 
@@ -99,7 +100,8 @@ namespace PassarinhoContouApi.Controllers
             {
                 return BadRequest(ModelState);
             }
-
+            
+            message.CreationDate = DateTime.UtcNow;
             _dal.Create(message);
 
             return Ok(new { id = message.Id });

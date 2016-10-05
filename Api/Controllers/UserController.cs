@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PassarinhoContou.Model;
+using System;
 using System.Linq;
 using System.Net;
 
@@ -47,7 +48,7 @@ namespace PassarinhoContouApi.Controllers
 
         [HttpPut("{id}")]
         [ActionName("Edit")]
-        public IActionResult Put(int id, User user)
+        public IActionResult Put(int id, [FromBody]User user)
         {
             if (!ModelState.IsValid)
             {
@@ -80,13 +81,14 @@ namespace PassarinhoContouApi.Controllers
 
         [HttpPost]
         [ActionName("Add")]
-        public IActionResult Post(User user)
+        public IActionResult Post([FromBody]User user)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
+            user.CreationDate = DateTime.UtcNow;
             _dal.Create(user);
 
             return Ok(new { id = user.Id });

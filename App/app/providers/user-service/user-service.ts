@@ -17,6 +17,20 @@ export class UserService extends BaseService {
 
   }
 
+  public getAll(callback: (users: User[]) => void): void {
+    this.http.get(this.BaseUrl + "All").map<User[]>(data => {
+      //console.log('map data.json()', data.json());
+      return data.json();
+    }).subscribe(
+      data => {
+        console.log('api user.getAll data', data);
+        callback(data);
+      },
+      error => {
+        console.log('api user.getAll error', error.status);
+      });
+  }
+
   public getById(id: number, callback: (user: User) => void): void {
     this.http.get(this.BaseUrl + "ById/" + id).map<User>(data => {
       //console.log('map data.json()', data.json());

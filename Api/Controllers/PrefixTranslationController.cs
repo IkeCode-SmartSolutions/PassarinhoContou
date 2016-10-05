@@ -71,7 +71,7 @@ namespace PassarinhoContouApi.Controllers
 
             _dal.Create(prefixesTranslation);
 
-            return CreatedAtRoute("DefaultApi", new { id = prefixesTranslation.Id }, prefixesTranslation);
+            return Ok(new { id = prefixesTranslation.Id });
         }
 
         [HttpDelete("{id}")]
