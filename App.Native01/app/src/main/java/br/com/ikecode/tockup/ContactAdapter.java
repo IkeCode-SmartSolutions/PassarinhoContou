@@ -6,23 +6,29 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
+import java.util.List;
 
 /**
- * Created by leand on 04/12/2016.
+ * Created by Leandro Barral on 04/12/2016.
  */
 
 public class ContactAdapter extends ArrayAdapter<Contact> {
     Context context;
     int layoutResourceId;
-    Contact data[] = null;
+    List<Contact> data = null;
 
-    public ContactAdapter(Context context, int layoutResourceId, Contact[] data) {
+    public ContactAdapter(Context context, int layoutResourceId, List<Contact> data) {
         super(context, layoutResourceId, data);
         this.layoutResourceId = layoutResourceId;
         this.context = context;
         this.data = data;
+    }
+
+    public void Update(List<Contact> data){
+        this.data.clear();
+        this.data.addAll(data);
+        this.notifyDataSetChanged();
     }
 
     @Override
@@ -46,7 +52,7 @@ public class ContactAdapter extends ArrayAdapter<Contact> {
             holder = (ContactHolder)row.getTag();
         }
 
-        Contact contact = data[position];
+        Contact contact = (Contact)data.toArray()[position];
         holder.txtFullName.setText(contact.fullName);
         holder.txtPhoneNumber.setText(contact.phoneNumber);
 
