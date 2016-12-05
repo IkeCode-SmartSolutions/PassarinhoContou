@@ -5,7 +5,7 @@ package br.com.ikecode.tockup.models;
  * Intellectual Property of "IkeCode {SmartSolutions}"
  */
 
-public class Message {
+public class Message extends BaseModel {
     public int fromUserId;
     public int toUserId;
     public int status;

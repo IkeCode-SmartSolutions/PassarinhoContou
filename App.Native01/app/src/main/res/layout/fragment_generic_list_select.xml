@@ -6,11 +6,11 @@
     tools:context="br.com.ikecode.tockup.SendMessage.SelectPrefixCategoryFragment">
 
     <TextView
-        android:id="@+id/txtPrefixHeader"
+        android:id="@+id/txtGenericListHeader"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:padding="6dp"
-        android:text="Selecione a Categoria do Prefixo"
+        android:text="Titulo Generico"
         android:textColor="#21201C"
         android:textSize="19dp" />
 

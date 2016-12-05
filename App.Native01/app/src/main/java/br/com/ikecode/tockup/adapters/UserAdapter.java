@@ -1,4 +1,4 @@
-package br.com.ikecode.tockup;
+package br.com.ikecode.tockup.adapters;
 
 import android.app.Activity;
 import android.content.Context;
@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import java.util.List;
+
+import br.com.ikecode.tockup.R;
 import br.com.ikecode.tockup.models.User;
 
 /**

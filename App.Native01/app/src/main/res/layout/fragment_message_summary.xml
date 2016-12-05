@@ -1,0 +1,73 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="br.com.ikecode.tockup.SendMessage.MessageSummaryFragment">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:text="Resumo da Mensagem"
+            android:textAlignment="center"
+            android:textSize="26dp"
+            android:textStyle="bold" />
+
+        <TableLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <TableRow>
+
+                <TextView
+                    android:width="60dp"
+                    android:text="Para:"
+                    android:textSize="18dp" />
+
+                <TableLayout>
+
+                    <TableRow>
+
+                        <TextView
+                            android:id="@+id/txtSummaryTo"
+                            android:text="Fulano da Silva"
+                            android:textSize="18dp" />
+                    </TableRow>
+                </TableLayout>
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:layout_span="2"
+                    android:text="Mensagem"
+                    android:textSize="18dp" />
+            </TableRow>
+        </TableLayout>
+
+        <TextView
+            android:id="@+id/txtSummaryMessage"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:text="Olá fulano, Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos, e vem sendo utilizado desde o século XVI"
+            android:textSize="16dp" />
+
+        <Button
+            android:id="@+id/btnSummarySend"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="center_horizontal"
+            android:drawableRight="@drawable/ic_menu_send"
+            android:text="Enviar"></Button>
+    </LinearLayout>
+
+</FrameLayout>

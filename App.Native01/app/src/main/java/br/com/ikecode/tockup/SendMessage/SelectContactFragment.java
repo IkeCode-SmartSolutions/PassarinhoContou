@@ -1,4 +1,4 @@
-package br.com.ikecode.tockup;
+package br.com.ikecode.tockup.SendMessage;
 
 
 import android.os.Bundle;
@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
@@ -22,7 +23,9 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.ikecode.tockup.SendMessage.SelectPrefixCategoryFragment;
+import br.com.ikecode.tockup.MainActivity;
+import br.com.ikecode.tockup.R;
+import br.com.ikecode.tockup.adapters.UserAdapter;
 import br.com.ikecode.tockup.apiclient.TockUpApiClient;
 import br.com.ikecode.tockup.models.User;
 import cz.msebera.android.httpclient.Header;
@@ -51,7 +54,6 @@ public class SelectContactFragment extends Fragment {
      * @param param1 Parameter 1.
      * @return A new instance of fragment SelectContactFragment.
      */
-    // TODO: Rename and change types and number of parameters
     public static SelectContactFragment newInstance(String param1) {
         SelectContactFragment fragment = new SelectContactFragment();
         Bundle args = new Bundle();
@@ -82,11 +84,15 @@ public class SelectContactFragment extends Fragment {
 
         final UserAdapter adapter = new UserAdapter(getContext(), R.layout.listview_item_row, this.FilteredUsers);
 
+        final MainActivity activity = (MainActivity)getActivity();
+
         listView = (ListView) selectContactFragment.findViewById(R.id.listView);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 User selected = (User)listView.getItemAtPosition(position);
+
+                activity.message.toUser = selected;
 
                 SelectPrefixCategoryFragment fragment = new SelectPrefixCategoryFragment();
                 FragmentManager fm = getFragmentManager();
@@ -97,7 +103,7 @@ public class SelectContactFragment extends Fragment {
             }
         });
 
-        View header = getActivity().getLayoutInflater().inflate(R.layout.listview_header_row, null);
+        View header = activity.getLayoutInflater().inflate(R.layout.listview_header_row, null);
         listView.addHeaderView(header);
 
         listView.setAdapter(adapter);
@@ -106,7 +112,9 @@ public class SelectContactFragment extends Fragment {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray usersResponse) {
                 // Pull out the first event on the public timeline
-                Gson gson = new Gson();
+                GsonBuilder builder = TockUpApiClient.GetGsonBuilder();
+
+                Gson gson = builder.create();
                 Type listType = new TypeToken<List<User>>(){}.getType();
                 List<User> users = gson.fromJson(usersResponse.toString(), listType);
                 _originalUsers = users;

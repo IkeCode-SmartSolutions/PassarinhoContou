@@ -16,8 +16,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import br.com.ikecode.tockup.SendMessage.SelectContactFragment;
+import br.com.ikecode.tockup.models.Message;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    public Message message = new Message();
 
     ActionBarDrawerToggle toggle;
     @Override

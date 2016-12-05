@@ -17,10 +17,6 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParseException;
 import com.google.gson.reflect.TypeToken;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
@@ -28,25 +24,20 @@ import org.json.JSONArray;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
+import br.com.ikecode.tockup.MainActivity;
 import br.com.ikecode.tockup.R;
 import br.com.ikecode.tockup.adapters.GenericAdapter;
-import br.com.ikecode.tockup.adapters.ImprovedDateTypeAdapter;
 import br.com.ikecode.tockup.apiclient.TockUpApiClient;
-import br.com.ikecode.tockup.models.*;
+import br.com.ikecode.tockup.models.MessageSuffix;
 import cz.msebera.android.httpclient.Header;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * to handle interaction events.
- * Use the {@link SelectPrefixCategoryFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class SelectPrefixCategoryFragment extends Fragment {
-    public SelectPrefixCategoryFragment() {
+public class SelectMessageSuffixFragment extends Fragment {
+    public static final String ARG_SUFFIX_CATEGORY_ID = "SuffixCategoryId";
+    private int suffixCategoryId;
+
+    public SelectMessageSuffixFragment() {
         // Required empty public constructor
     }
 
@@ -54,35 +45,35 @@ public class SelectPrefixCategoryFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
+            suffixCategoryId = getArguments().getInt(ARG_SUFFIX_CATEGORY_ID);
         }
     }
 
     private ListView listView;
-    private List<PrefixCategory> _original;
-    public List<PrefixCategory> Filtered;
+    private List<MessageSuffix> _original;
+    public List<MessageSuffix> Filtered;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_generic_list_select, container, false);
         TextView title = (TextView)view.findViewById(R.id.txtGenericListHeader);
-        title.setText("Selecione a categoria do prefixo");
+        title.setText("Selecione o prefixo da mensagem");
 
         this.Filtered = new ArrayList<>();
 
-        final GenericAdapter<PrefixCategory> adapter = new GenericAdapter<>(getContext(), this.Filtered);
+        final GenericAdapter<MessageSuffix> adapter = new GenericAdapter<>(getContext(), this.Filtered);
+
+        final MainActivity activity = (MainActivity)getActivity();
 
         listView = (ListView) view.findViewById(R.id.prefixListView);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                PrefixCategory selected = (PrefixCategory)listView.getItemAtPosition(position);
+                MessageSuffix selected = (MessageSuffix)listView.getItemAtPosition(position);
+                activity.message.selectedSuffix = selected;
 
-                SelectMessagePrefixFragment fragment = new SelectMessagePrefixFragment();
-                Bundle args = new Bundle();
-                args.putInt(SelectMessagePrefixFragment.ARG_PREFIX_CATEGORY_ID, selected.id);
-                fragment.setArguments(args);
-
+                MessageSummaryFragment fragment = new MessageSummaryFragment();
                 FragmentManager fm = getFragmentManager();
                 final FragmentTransaction ft = fm.beginTransaction();
                 ft.replace(R.id.frame_container, fragment);
@@ -91,26 +82,29 @@ public class SelectPrefixCategoryFragment extends Fragment {
             }
         });
 
-        View header = getActivity().getLayoutInflater().inflate(R.layout.listview_header_row, null);
+        View header = activity.getLayoutInflater().inflate(R.layout.listview_header_row, null);
         listView.addHeaderView(header);
 
         listView.setAdapter(adapter);
 
-        TockUpApiClient.get("prefixcategory/", null, new JsonHttpResponseHandler(){
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
-                // Pull out the first event on the public timeline
-                GsonBuilder builder = TockUpApiClient.GetGsonBuilder();
+        if(this.suffixCategoryId > 0) {
+            TockUpApiClient.get("messagesuffix/" + this.suffixCategoryId, null, new JsonHttpResponseHandler() {
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
+                    // Pull out the first event on the public timeline
+                    GsonBuilder builder = TockUpApiClient.GetGsonBuilder();
 
-                Gson gson = builder.create();
-                Type listType = new TypeToken<List<PrefixCategory>>(){}.getType();
-                List<PrefixCategory> objList = gson.fromJson(response.toString(), listType);
-                _original = objList;
-                adapter.Update(objList);
-            }
-        });
+                    Gson gson = builder.create();
+                    Type listType = new TypeToken<List<MessageSuffix>>() {
+                    }.getType();
+                    List<MessageSuffix> objList = gson.fromJson(response.toString(), listType);
+                    _original = objList;
+                    adapter.Update(objList);
+                }
+            });
+        }
 
-        EditText txtContactFilter = (EditText) header.findViewById(R.id.txtContactFilter);
+        final EditText txtContactFilter = (EditText) header.findViewById(R.id.txtContactFilter);
         txtContactFilter.setHint("pesquise por nome");
         txtContactFilter.addTextChangedListener(new TextWatcher() {
             @Override
@@ -123,10 +117,14 @@ public class SelectPrefixCategoryFragment extends Fragment {
             public void afterTextChanged(Editable editable) {
                 String text = editable.toString();
                 if (text.length() > 1) {
+                    String[] words = text.split(" ");
+                    if(words.length > 0) {
+
+                    }
                     Filtered = new ArrayList<>();
 
                     for (int i = 0; i < _original.toArray().length; i++) {
-                        PrefixCategory obj = (PrefixCategory) _original.toArray()[i];
+                        MessageSuffix obj = (MessageSuffix) _original.toArray()[i];
                         if (obj.name.toLowerCase().contains(text.toLowerCase())) {
                             Filtered.add(obj);
                         }
@@ -136,6 +134,7 @@ public class SelectPrefixCategoryFragment extends Fragment {
                 }
 
                 adapter.Update(Filtered);
+                txtContactFilter.requestFocus();
             }
         });
 
