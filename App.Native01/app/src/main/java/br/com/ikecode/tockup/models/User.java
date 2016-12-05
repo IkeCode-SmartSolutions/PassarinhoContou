@@ -1,15 +1,15 @@
-package br.com.ikecode.tockup;
+package br.com.ikecode.tockup.models;
 
 /**
  * Created by Leandro Barral on 04/12/2016.
  */
 
-public class Contact {
+public class User {
     public int id;
     public String fullName;
     public String phoneNumber;
 
-    public Contact(String fullName, String phoneNumber) {
+    public User(String fullName, String phoneNumber) {
         super();
 
         this.fullName = fullName;

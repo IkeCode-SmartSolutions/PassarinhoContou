@@ -8,5 +8,5 @@
             android:id="@+id/txtContactFilter"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:hint="pesquise por nome ou telefone" />
+            android:hint="pesquisar" />
 </LinearLayout>

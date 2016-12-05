@@ -1,19 +1,38 @@
 package br.com.ikecode.tockup.SendMessage;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.EditText;
+import android.widget.ListView;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.loopj.android.http.JsonHttpResponseHandler;
+
+import org.json.JSONArray;
+
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
 
 import br.com.ikecode.tockup.R;
+import br.com.ikecode.tockup.adapters.GenericAdapter;
+import br.com.ikecode.tockup.apiclient.TockUpApiClient;
+import br.com.ikecode.tockup.models.*;
+import cz.msebera.android.httpclient.Header;
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link SelectPrefixCategoryFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
  * Use the {@link SelectPrefixCategoryFragment#newInstance} factory method to
  * create an instance of this fragment.
@@ -59,11 +78,82 @@ public class SelectPrefixCategoryFragment extends Fragment {
         }
     }
 
+    private ListView listView;
+    private List<PrefixCategory> _original;
+    public List<PrefixCategory> Filtered;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_select_prefix_category, container, false);
+
+        this.Filtered = new ArrayList<>();
+
+        final GenericAdapter<PrefixCategory> adapter = new GenericAdapter<>(getContext(), this.Filtered);
+
+        listView = (ListView) view.findViewById(R.id.prefixListView);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                PrefixCategory selected = (PrefixCategory)listView.getItemAtPosition(position);
+
+                SelectPrefixCategoryFragment fragment = new SelectPrefixCategoryFragment();
+                FragmentManager fm = getFragmentManager();
+                final FragmentTransaction ft = fm.beginTransaction();
+                ft.replace(R.id.frame_container, fragment);
+                ft.addToBackStack(null);
+                ft.commit();
+            }
+        });
+
+        View header = getActivity().getLayoutInflater().inflate(R.layout.listview_header_row, null);
+        listView.addHeaderView(header);
+
+        listView.setAdapter(adapter);
+
+        TockUpApiClient.get("prefixcategory/", null, new JsonHttpResponseHandler(){
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
+                // Pull out the first event on the public timeline
+                Gson gson = new Gson();
+                Type listType = new TypeToken<List<PrefixCategory>>(){}.getType();
+                List<PrefixCategory> objList = gson.fromJson(response.toString(), listType);
+                _original = objList;
+                adapter.Update(objList);
+            }
+        });
+
+        EditText txtContactFilter = (EditText) header.findViewById(R.id.txtContactFilter);
+        txtContactFilter.setHint("pesquise por nome");
+        txtContactFilter.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                String text = editable.toString();
+                if (text.length() > 1) {
+                    Filtered = new ArrayList<>();
+
+                    for (int i = 0; i < _original.toArray().length; i++) {
+                        PrefixCategory obj = (PrefixCategory) _original.toArray()[i];
+                        if (obj.name.toLowerCase().contains(text.toLowerCase())) {
+                            Filtered.add(obj);
+                        }
+                    }
+                } else {
+                    Filtered = _original;
+                }
+
+                adapter.Update(Filtered);
+            }
+        });
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_select_prefix_category, container, false);
+        return view;
     }
 
     @Override

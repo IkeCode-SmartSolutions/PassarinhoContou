@@ -8,24 +8,25 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import java.util.List;
+import br.com.ikecode.tockup.models.User;
 
 /**
  * Created by Leandro Barral on 04/12/2016.
  */
 
-public class ContactAdapter extends ArrayAdapter<Contact> {
+public class UserAdapter extends ArrayAdapter<User> {
     Context context;
     int layoutResourceId;
-    List<Contact> data = null;
+    List<User> data = null;
 
-    public ContactAdapter(Context context, int layoutResourceId, List<Contact> data) {
+    public UserAdapter(Context context, int layoutResourceId, List<User> data) {
         super(context, layoutResourceId, data);
         this.layoutResourceId = layoutResourceId;
         this.context = context;
         this.data = data;
     }
 
-    public void Update(List<Contact> data){
+    public void Update(List<User> data){
         this.data.clear();
         this.data.addAll(data);
         this.notifyDataSetChanged();
@@ -52,7 +53,7 @@ public class ContactAdapter extends ArrayAdapter<Contact> {
             holder = (ContactHolder)row.getTag();
         }
 
-        Contact contact = (Contact)data.toArray()[position];
+        User contact = (User)data.toArray()[position];
         holder.txtFullName.setText(contact.fullName);
         holder.txtPhoneNumber.setText(contact.phoneNumber);
 

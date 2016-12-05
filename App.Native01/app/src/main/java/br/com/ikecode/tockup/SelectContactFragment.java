@@ -5,8 +5,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.ActionBar;
-import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -18,7 +16,6 @@ import android.widget.ListView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
 import java.lang.reflect.Type;
@@ -27,6 +24,7 @@ import java.util.List;
 
 import br.com.ikecode.tockup.SendMessage.SelectPrefixCategoryFragment;
 import br.com.ikecode.tockup.apiclient.TockUpApiClient;
+import br.com.ikecode.tockup.models.User;
 import cz.msebera.android.httpclient.Header;
 
 import org.json.*;
@@ -72,30 +70,29 @@ public class SelectContactFragment extends Fragment {
         }
     }
 
-    private List<Contact> _originalContacts;
-    public List<Contact> FilteredContacts;
+    private List<User> _originalUsers;
+    public List<User> FilteredUsers;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View selectContactFragment = inflater.inflate(R.layout.fragment_select_contact, container, false);
 
-        this.FilteredContacts = new ArrayList<>();
+        this.FilteredUsers = new ArrayList<>();
 
-        final ContactAdapter adapter = new ContactAdapter(getContext(), R.layout.listview_item_row, this.FilteredContacts);
+        final UserAdapter adapter = new UserAdapter(getContext(), R.layout.listview_item_row, this.FilteredUsers);
 
         listView = (ListView) selectContactFragment.findViewById(R.id.listView);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Contact listItem = (Contact)listView.getItemAtPosition(position);
+                User selected = (User)listView.getItemAtPosition(position);
 
                 SelectPrefixCategoryFragment fragment = new SelectPrefixCategoryFragment();
                 FragmentManager fm = getFragmentManager();
                 final FragmentTransaction ft = fm.beginTransaction();
                 ft.replace(R.id.frame_container, fragment);
                 ft.addToBackStack(null);
-                ActionBar ab = ((MainActivity)getActivity()).getSupportActionBar();
                 ft.commit();
             }
         });
@@ -107,17 +104,18 @@ public class SelectContactFragment extends Fragment {
 
         TockUpApiClient.get("user/all", null, new JsonHttpResponseHandler(){
             @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONArray users) {
+            public void onSuccess(int statusCode, Header[] headers, JSONArray usersResponse) {
                 // Pull out the first event on the public timeline
                 Gson gson = new Gson();
-                Type listType = new TypeToken<List<Contact>>(){}.getType();
-                List<Contact> contacts = gson.fromJson(users.toString(), listType);
-                _originalContacts = contacts;
-                adapter.Update(_originalContacts);
+                Type listType = new TypeToken<List<User>>(){}.getType();
+                List<User> users = gson.fromJson(usersResponse.toString(), listType);
+                _originalUsers = users;
+                adapter.Update(_originalUsers);
             }
         });
 
         EditText txtContactFilter = (EditText) header.findViewById(R.id.txtContactFilter);
+        txtContactFilter.setHint("pesquise por nome ou telefone");
         txtContactFilter.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
@@ -129,20 +127,20 @@ public class SelectContactFragment extends Fragment {
             public void afterTextChanged(Editable editable) {
                 String text = editable.toString();
                 if (text.length() > 1) {
-                    FilteredContacts = new ArrayList<>();
+                    FilteredUsers = new ArrayList<>();
 
-                    for (int i = 0; i < _originalContacts.toArray().length; i++) {
-                        Contact obj = (Contact)_originalContacts.toArray()[i];
+                    for (int i = 0; i < _originalUsers.toArray().length; i++) {
+                        User obj = (User) _originalUsers.toArray()[i];
                         if (obj.fullName.toLowerCase().contains(text.toLowerCase())
                                 || obj.phoneNumber.toLowerCase().contains(text.toLowerCase())) {
-                            FilteredContacts.add(obj);
+                            FilteredUsers.add(obj);
                         }
                     }
                 } else {
-                    FilteredContacts = _originalContacts;
+                    FilteredUsers = _originalUsers;
                 }
 
-                adapter.Update(FilteredContacts);
+                adapter.Update(FilteredUsers);
             }
         });
 
