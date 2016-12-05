@@ -12,7 +12,7 @@ namespace PassarinhoContouApi.Controllers
     public class MessageController : Controller
     {
         private readonly EntityEx<Message> _dal = new EntityEx<Message>();
-        
+
         [HttpGet("{id}")]
         [ActionName("To")]
         public IActionResult GetTo(int id)
@@ -26,7 +26,7 @@ namespace PassarinhoContouApi.Controllers
             {
                 return NotFound();
             }
-            
+
             if (messages.Count == 0)
             {
                 return NoContent();
@@ -55,7 +55,7 @@ namespace PassarinhoContouApi.Controllers
             {
                 return NoContent();
             }
-            
+
             return Ok(messages);
         }
 
@@ -100,7 +100,7 @@ namespace PassarinhoContouApi.Controllers
             {
                 return BadRequest(ModelState);
             }
-            
+
             message.CreationDate = DateTime.UtcNow;
             _dal.Create(message);
 

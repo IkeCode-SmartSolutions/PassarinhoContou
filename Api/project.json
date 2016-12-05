@@ -15,7 +15,8 @@
     "Microsoft.EntityFrameworkCore": "1.0.1",
     "Microsoft.EntityFrameworkCore.SqlServer": "1.0.1",
     "Model": "1.0.0-*",
-    "Microsoft.AspNetCore.Cors": "1.0.0"
+    "Microsoft.AspNetCore.Cors": "1.0.0",
+    "Microsoft.AspNetCore.Diagnostics": "1.0.0"
   },
 
   "tools": {

@@ -70,12 +70,14 @@ namespace PassarinhoContou.Model
 
         public void Create(T obj)
         {
+            obj.CreationDate = DateTime.UtcNow;
             DataContext.Set<T>().Add(obj);
             DataContext.SaveChanges();
         }
 
         public async Task CreateAsync(T obj)
         {
+            obj.CreationDate = DateTime.UtcNow;
             DataContext.Set<T>().Add(obj);
             await DataContext.SaveChangesAsync();
         }

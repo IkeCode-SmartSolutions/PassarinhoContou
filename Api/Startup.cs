@@ -53,6 +53,10 @@ namespace PassarinhoContou.Api
                                         .AllowAnyMethod()
                                         .AllowAnyHeader());
 
+            //app.UseStatusCodePages();
+            //app.UseExceptionHandler();
+            app.UseDeveloperExceptionPage();
+
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug(LogLevel.Debug);
 
