@@ -16,7 +16,7 @@ import cz.msebera.android.httpclient.entity.ContentType;
 import cz.msebera.android.httpclient.entity.StringEntity;
 
 public class TockUpApiClient {
-    private static final String BASE_URL = "http://passarinhocontou.ikecode.com.br/api/";
+    private static final String BASE_URL = "http://tockup.ikecode.com.br/api/";
 
     public static GsonBuilder GetGsonBuilder(){
         GsonBuilder builder = new GsonBuilder();

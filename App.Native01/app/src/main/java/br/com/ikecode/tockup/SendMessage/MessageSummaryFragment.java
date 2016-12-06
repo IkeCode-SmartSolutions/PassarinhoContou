@@ -61,42 +61,7 @@ public class MessageSummaryFragment extends Fragment {
         btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                GsonBuilder builder = TockUpApiClient.GetGsonBuilder();
-
-                Gson gson = builder.create();
-
-                activity.message.fromUserId = activity.message.fromUser.id > 0 ? activity.message.fromUser.id : 1;
-                activity.message.fromUser = null;
-                activity.message.toUserId = activity.message.toUser.id;
-                activity.message.toUser = null;
-                activity.message.selectedPrefixId = activity.message.selectedPrefix.id;
-                activity.message.selectedPrefix = null;
-                activity.message.selectedSuffixId = activity.message.selectedSuffix.id;
-                activity.message.selectedSuffix = null;
-
-                String serialized = gson.toJson(activity.message);
-
-                TockUpApiClient.post(getContext(), "message/Add", serialized, new JsonHttpResponseHandler() {
-                    @Override
-                    public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                        String a = responseString;
-                    }
-
-                    @Override
-                    public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject responseObj) {
-                        JSONObject a = responseObj;
-                    }
-
-                    @Override
-                    public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                        GsonBuilder builder = TockUpApiClient.GetGsonBuilder();
-
-                        Gson gson = builder.create();
-                        Type listType = new TypeToken<BaseModel>() {
-                        }.getType();
-                        BaseModel obj = gson.fromJson(response.toString(), listType);
-                    }
-                });
+                activity.SendMessage();
             }
         });
 
