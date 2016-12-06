@@ -59,7 +59,7 @@ public class SelectSuffixCategoryFragment extends Fragment {
 
         final GenericAdapter<SuffixCategory> adapter = new GenericAdapter<>(getContext(), this.Filtered);
 
-        listView = (ListView) view.findViewById(R.id.prefixListView);
+        listView = (ListView) view.findViewById(R.id.genericListView);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -78,7 +78,7 @@ public class SelectSuffixCategoryFragment extends Fragment {
             }
         });
 
-        View header = getActivity().getLayoutInflater().inflate(R.layout.listview_header_row, null);
+        View header = getActivity().getLayoutInflater().inflate(R.layout.listview_search_header, null);
         listView.addHeaderView(header);
 
         listView.setAdapter(adapter);
@@ -97,7 +97,7 @@ public class SelectSuffixCategoryFragment extends Fragment {
             }
         });
 
-        EditText txtContactFilter = (EditText) header.findViewById(R.id.txtContactFilter);
+        EditText txtContactFilter = (EditText) header.findViewById(R.id.txtListViewSearchHeader);
         txtContactFilter.setHint("pesquise por nome");
         txtContactFilter.addTextChangedListener(new TextWatcher() {
             @Override

@@ -37,14 +37,14 @@ public class UserAdapter extends ArrayAdapter<User> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View row = convertView;
-        ContactHolder holder = null;
+        UserHolder holder = null;
 
         if(row == null)
         {
             LayoutInflater inflater = ((Activity)context).getLayoutInflater();
             row = inflater.inflate(layoutResourceId, parent, false);
 
-            holder = new ContactHolder();
+            holder = new UserHolder();
             holder.txtFullName = (TextView) row.findViewById(R.id.txtFullName);
             holder.txtPhoneNumber = (TextView)row.findViewById(R.id.txtPhoneNumber);
 
@@ -52,17 +52,17 @@ public class UserAdapter extends ArrayAdapter<User> {
         }
         else
         {
-            holder = (ContactHolder)row.getTag();
+            holder = (UserHolder)row.getTag();
         }
 
-        User contact = (User)data.toArray()[position];
-        holder.txtFullName.setText(contact.fullName);
-        holder.txtPhoneNumber.setText(contact.phoneNumber);
+        User user = (User)data.toArray()[position];
+        holder.txtFullName.setText(user.fullName);
+        holder.txtPhoneNumber.setText(user.phoneNumber);
 
         return row;
     }
 
-    static class ContactHolder
+    static class UserHolder
     {
         TextView txtFullName;
         TextView txtPhoneNumber;

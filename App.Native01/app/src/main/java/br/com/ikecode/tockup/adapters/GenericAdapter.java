@@ -2,6 +2,7 @@ package br.com.ikecode.tockup.adapters;
 
 import android.app.Activity;
 import android.content.Context;
+import android.support.annotation.Nullable;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -29,14 +30,14 @@ public class GenericAdapter<T extends BaseModel> extends ArrayAdapter<T> {
     int layoutResourceId;
     List<T> data = null;
 
-    public GenericAdapter(Context context, int layoutResourceId, List<T> data) {
+    public GenericAdapter(Context context, int layoutResourceId, @Nullable List<T> data) {
         super(context, layoutResourceId, data);
         this.layoutResourceId = layoutResourceId;
         this.context = context;
         this.data = data;
     }
 
-    public GenericAdapter(Context context, List<T> data) {
+    public GenericAdapter(Context context, @Nullable List<T> data) {
         this(context, R.layout.generic_listview_item_row, data);
     }
 

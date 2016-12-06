@@ -25,7 +25,10 @@ import org.json.JSONObject;
 
 import java.lang.reflect.Type;
 
+import br.com.ikecode.tockup.ListMessage.MessageListFragment;
+import br.com.ikecode.tockup.ListMessage.MessageListType;
 import br.com.ikecode.tockup.SendMessage.SelectContactFragment;
+import br.com.ikecode.tockup.SendMessage.SelectMessagePrefixFragment;
 import br.com.ikecode.tockup.apiclient.TockUpApiClient;
 import br.com.ikecode.tockup.models.BaseModel;
 import br.com.ikecode.tockup.models.Message;
@@ -157,19 +160,25 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         Fragment fragment = null;
+
+        Bundle args = new Bundle();
+
         if (id == R.id.nav_home) {
             fragment = new HomeFragment();
         } else if (id == R.id.nav_about) {
             fragment = new AboutFragment();
         } else if (id == R.id.nav_received) {
-            //fragment = new SelectContactFragment();
+            fragment = new MessageListFragment();
+            args.putSerializable(MessageListFragment.ARG_MESSAGE_LIST_TYPE, MessageListType.Received);
         } else if (id == R.id.nav_sent) {
-            //fragment = new SelectContactFragment();
+            fragment = new MessageListFragment();
+            args.putSerializable(MessageListFragment.ARG_MESSAGE_LIST_TYPE, MessageListType.Sent);
         } else if (id == R.id.nav_send) {
             fragment = new SelectContactFragment();
         }
 
         if (fragment != null) {
+            fragment.setArguments(args);
             ChangeFragment(fragment);
         }
 

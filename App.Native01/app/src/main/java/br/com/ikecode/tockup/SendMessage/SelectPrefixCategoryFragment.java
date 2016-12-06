@@ -17,10 +17,6 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParseException;
 import com.google.gson.reflect.TypeToken;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
@@ -28,12 +24,10 @@ import org.json.JSONArray;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import br.com.ikecode.tockup.R;
 import br.com.ikecode.tockup.adapters.GenericAdapter;
-import br.com.ikecode.tockup.adapters.ImprovedDateTypeAdapter;
 import br.com.ikecode.tockup.apiclient.TockUpApiClient;
 import br.com.ikecode.tockup.models.*;
 import cz.msebera.android.httpclient.Header;
@@ -72,7 +66,7 @@ public class SelectPrefixCategoryFragment extends Fragment {
 
         final GenericAdapter<PrefixCategory> adapter = new GenericAdapter<>(getContext(), this.Filtered);
 
-        listView = (ListView) view.findViewById(R.id.prefixListView);
+        listView = (ListView) view.findViewById(R.id.genericListView);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -91,7 +85,7 @@ public class SelectPrefixCategoryFragment extends Fragment {
             }
         });
 
-        View header = getActivity().getLayoutInflater().inflate(R.layout.listview_header_row, null);
+        View header = getActivity().getLayoutInflater().inflate(R.layout.listview_search_header, null);
         listView.addHeaderView(header);
 
         listView.setAdapter(adapter);
@@ -110,7 +104,7 @@ public class SelectPrefixCategoryFragment extends Fragment {
             }
         });
 
-        EditText txtContactFilter = (EditText) header.findViewById(R.id.txtContactFilter);
+        EditText txtContactFilter = (EditText) header.findViewById(R.id.txtListViewSearchHeader);
         txtContactFilter.setHint("pesquise por nome");
         txtContactFilter.addTextChangedListener(new TextWatcher() {
             @Override

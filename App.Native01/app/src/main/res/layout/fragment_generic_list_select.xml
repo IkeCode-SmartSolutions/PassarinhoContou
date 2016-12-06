@@ -15,7 +15,7 @@
         android:textSize="19dp" />
 
     <ListView
-        android:id="@+id/prefixListView"
+        android:id="@+id/genericListView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

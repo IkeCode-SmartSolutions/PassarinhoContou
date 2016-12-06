@@ -103,7 +103,7 @@ public class SelectContactFragment extends Fragment {
             }
         });
 
-        View header = activity.getLayoutInflater().inflate(R.layout.listview_header_row, null);
+        View header = activity.getLayoutInflater().inflate(R.layout.listview_search_header, null);
         listView.addHeaderView(header);
 
         listView.setAdapter(adapter);
@@ -122,7 +122,7 @@ public class SelectContactFragment extends Fragment {
             }
         });
 
-        EditText txtContactFilter = (EditText) header.findViewById(R.id.txtContactFilter);
+        EditText txtContactFilter = (EditText) header.findViewById(R.id.txtListViewSearchHeader);
         txtContactFilter.setHint("pesquise por nome ou telefone");
         txtContactFilter.addTextChangedListener(new TextWatcher() {
             @Override
