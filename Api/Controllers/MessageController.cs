@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
+using PassarinhoContou.Api.Model;
 using PassarinhoContou.Model;
 using System;
 using System.Linq;
@@ -15,48 +16,64 @@ namespace PassarinhoContouApi.Controllers
 
         [HttpGet("{id}")]
         [ActionName("To")]
-        public IActionResult GetTo(int id)
+        public IActionResult GetTo(int id, int offset = 0, int limit = 15)
         {
             var messages = _dal
-                            .FindAll(i => i.ToUserId == id)
+                            .FindAll(i => i.ToUserId == id);
+
+            var totalCount = messages.Count();
+
+            if (totalCount == 0)
+            {
+                return NoContent();
+            }
+
+            messages = messages
                             .Include(i => i.FromUser)
                             .Include(i => i.SelectedSuffix)
-                            .Include(i => i.SelectedPrefix).ToList();
+                            .Include(i => i.SelectedPrefix)
+                            .Skip(offset)
+                            .Take(limit);
+
             if (messages == null)
             {
                 return NotFound();
             }
 
-            if (messages.Count == 0)
-            {
-                return NoContent();
-            }
+            var result = new ApiResponseList<Message>(messages, offset, limit, totalCount);
 
-            return Ok(messages);
+            return Ok(result);
         }
 
         [HttpGet("{id}")]
         [ActionName("From")]
-        public IActionResult GetFrom(int id)
+        public IActionResult GetFrom(int id, int offset = 0, int limit = 15)
         {
             var messages = _dal
-                            .FindAll(i => i.FromUserId == id)
+                            .FindAll(i => i.FromUserId == id);
+
+            var totalCount = messages.Count();
+
+            if (totalCount == 0)
+            {
+                return NoContent();
+            }
+
+            messages = messages
                             .Include(i => i.ToUser)
                             .Include(i => i.SelectedSuffix)
-                            .Include(i => i.SelectedPrefix).ToList()
-                            ;
+                            .Include(i => i.SelectedPrefix)
+                            .Skip(offset)
+                            .Take(limit);
 
             if (messages == null)
             {
                 return NotFound();
             }
 
-            if (messages.Count == 0)
-            {
-                return NoContent();
-            }
+            var result = new ApiResponseList<Message>(messages, offset, limit, totalCount);
 
-            return Ok(messages);
+            return Ok(result);
         }
 
         [HttpPut("{id}")]
