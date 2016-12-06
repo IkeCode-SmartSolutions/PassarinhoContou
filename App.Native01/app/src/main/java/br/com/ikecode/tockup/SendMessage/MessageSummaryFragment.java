@@ -61,7 +61,7 @@ public class MessageSummaryFragment extends Fragment {
         btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                activity.SendMessage();
+                activity.SendMessage(view);
             }
         });
 

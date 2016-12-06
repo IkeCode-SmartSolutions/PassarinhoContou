@@ -38,12 +38,12 @@ public class MainActivity extends AppCompatActivity
 
     ActionBarDrawerToggle toggle;
 
-    public void SendMessage(){
+    public void SendMessage(final View view) {
         GsonBuilder builder = TockUpApiClient.GetGsonBuilder();
 
         Gson gson = builder.create();
 
-        message.fromUserId = message.fromUser.id > 0 ? message.fromUser.id : 1;
+        message.fromUserId = message.fromUser != null && message.fromUser.id > 0 ? message.fromUser.id : 1;
         message.fromUser = null;
         message.toUserId = message.toUser.id;
         message.toUser = null;
@@ -73,6 +73,13 @@ public class MainActivity extends AppCompatActivity
                 Type listType = new TypeToken<BaseModel>() {
                 }.getType();
                 BaseModel obj = gson.fromJson(response.toString(), listType);
+
+                if(obj.id > 0){
+                    ChangeFragment(new HomeFragment());
+
+                    Snackbar.make(view, "Mensagem enviada com sucesso!", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+                }
             }
         });
     }
@@ -88,7 +95,7 @@ public class MainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "TODO: Abrir barra do footer", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
