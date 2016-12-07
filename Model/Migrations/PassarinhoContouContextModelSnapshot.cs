@@ -266,6 +266,8 @@ namespace PassarinhoContou.Model.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("Cpf");
+
                     b.Property<DateTime>("CreationDate")
                         .HasColumnType("datetime");
 

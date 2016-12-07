@@ -9,5 +9,6 @@ public class User extends BaseModel {
     public String phoneNumber;
     public String email;
     public String nickName;
+    public String cpf;
     public UserLogin login;
 }

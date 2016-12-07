@@ -3,8 +3,6 @@ package br.com.ikecode.tockup.Login;
 
 import android.app.DialogFragment;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,8 +19,10 @@ import org.json.JSONObject;
 import java.lang.reflect.Type;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.InputMismatchException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-import br.com.ikecode.tockup.HomeFragment;
 import br.com.ikecode.tockup.LoginActivity;
 import br.com.ikecode.tockup.PrefUtils;
 import br.com.ikecode.tockup.R;
@@ -54,6 +54,7 @@ public class SignUpFragment extends DialogFragment {
     EditText txtSignupEmail;
     EditText txtSignupNickname;
     EditText txtSignupPhoneNumber;
+    EditText txtSignupCpf;
     EditText txtSignupPassword;
     EditText txtSignupPassword2;
     Button btnSignupNext;
@@ -73,6 +74,7 @@ public class SignUpFragment extends DialogFragment {
         txtSignupEmail = (EditText) view.findViewById(R.id.txtSignupEmail);
         txtSignupNickname = (EditText) view.findViewById(R.id.txtSignupNickname);
         txtSignupPhoneNumber = (EditText) view.findViewById(R.id.txtSignupPhoneNumber);
+        txtSignupCpf = (EditText) view.findViewById(R.id.txtSignupCpf);
         txtSignupPassword = (EditText) view.findViewById(R.id.txtSignupPassword);
         txtSignupPassword2 = (EditText) view.findViewById(R.id.txtSignupPassword2);
         btnSignupNext = (Button) view.findViewById(R.id.btnSignupNext);
@@ -91,6 +93,9 @@ public class SignUpFragment extends DialogFragment {
         MaskEditTextChangedListener maskTEL = new MaskEditTextChangedListener("(##) #####-####", txtSignupPhoneNumber);
         txtSignupPhoneNumber.addTextChangedListener(maskTEL);
 
+        MaskEditTextChangedListener maskCPF = new MaskEditTextChangedListener("###.###.###-##", txtSignupCpf);
+        txtSignupCpf.addTextChangedListener(maskCPF);
+
         return view;
     }
 
@@ -106,6 +111,7 @@ public class SignUpFragment extends DialogFragment {
         user.email = txtSignupEmail.getText().toString();
         user.fullName = txtFullName.getText().toString();
         user.nickName = txtSignupNickname.getText().toString();
+        user.cpf = extractNumbersFromString(txtSignupCpf.getText().toString());
         user.phoneNumber = txtSignupPhoneNumber.getText().toString();
         UserLogin login = new UserLogin();
         login.creationDate = creationDate;
@@ -149,7 +155,7 @@ public class SignUpFragment extends DialogFragment {
                 BaseModel obj = gson.fromJson(response.toString(), listType);
 
                 if (obj.id > 0) {
-                    user.id=obj.id;
+                    user.id = obj.id;
 
                     String serialized = gson.toJson(user);
                     PrefUtils.saveToPrefs(activity.getBaseContext(), PrefUtils.PREFS_LOGGED_USER_KEY, serialized);
@@ -160,10 +166,10 @@ public class SignUpFragment extends DialogFragment {
         });
     }
 
+    String requiredMsg = "Esse campo é obrigatório";
+
     private boolean formIsValid() {
         boolean result = true;
-
-        String requiredMsg = "Esse campo é obrigatório";
 
         if (txtFullName.getText().toString().length() == 0) {
             txtFullName.setError(requiredMsg);
@@ -185,6 +191,8 @@ public class SignUpFragment extends DialogFragment {
             return false;
         }
 
+        result = validateCPF(txtSignupCpf.getText().toString());
+
         if (txtSignupPassword.getText().length() == 0 || txtSignupPassword2.getText().toString().length() == 0) {
             txtSignupPassword.setError(requiredMsg);
             txtSignupPassword2.setError(requiredMsg);
@@ -197,5 +205,74 @@ public class SignUpFragment extends DialogFragment {
         }
 
         return result;
+    }
+
+    public String extractNumbersFromString(String str){
+        return str.replaceAll("\\D+","");
+    }
+
+    public boolean validateCPF(String CPF) {
+        CPF = extractNumbersFromString(CPF);
+        // considera-se erro CPF's formados por uma sequencia de numeros iguais
+        if (CPF.equals("00000000000") || CPF.equals("11111111111") ||
+                CPF.equals("22222222222") || CPF.equals("33333333333") ||
+                CPF.equals("44444444444") || CPF.equals("55555555555") ||
+                CPF.equals("66666666666") || CPF.equals("77777777777") ||
+                CPF.equals("88888888888") || CPF.equals("99999999999")) {
+            txtSignupCpf.setError("CPF não permitido");
+            return (false);
+        }
+
+        if(CPF.length() != 11){
+            txtSignupCpf.setError(requiredMsg);
+            return (false);
+        }
+
+        char dig10, dig11;
+        int sm, i, r, num, peso;
+
+        // "try" - protege o codigo para eventuais erros de conversao de tipo (int)
+        try {
+            // Calculo do 1o. Digito Verificador
+            sm = 0;
+            peso = 10;
+            for (i = 0; i < 9; i++) {
+                // converte o i-esimo caractere do CPF em um numero:
+                // por exemplo, transforma o caractere '0' no inteiro 0
+                // (48 eh a posicao de '0' na tabela ASCII)
+                num = (int) (CPF.charAt(i) - 48);
+                sm = sm + (num * peso);
+                peso = peso - 1;
+            }
+
+            r = 11 - (sm % 11);
+            if ((r == 10) || (r == 11))
+                dig10 = '0';
+            else dig10 = (char) (r + 48); // converte no respectivo caractere numerico
+
+            // Calculo do 2o. Digito Verificador
+            sm = 0;
+            peso = 11;
+            for (i = 0; i < 10; i++) {
+                num = (int) (CPF.charAt(i) - 48);
+                sm = sm + (num * peso);
+                peso = peso - 1;
+            }
+
+            r = 11 - (sm % 11);
+            if ((r == 10) || (r == 11))
+                dig11 = '0';
+            else dig11 = (char) (r + 48);
+
+            // Verifica se os digitos calculados conferem com os digitos informados.
+            if ((dig10 == CPF.charAt(9)) && (dig11 == CPF.charAt(10)))
+                return (true);
+            else {
+                txtSignupCpf.setError("CPF inválido");
+                return (false);
+            }
+        } catch (InputMismatchException erro) {
+            return (false);
+        }
     }
 }
