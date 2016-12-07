@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_home"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:title="Inicio" />
+
+    <item
+        android:checkableBehavior="single"
+        android:title="Mensagem">
+        <menu>
+            <item
+                android:id="@+id/nav_send"
+                android:icon="@drawable/ic_menu_send"
+                android:title="Enviar" />
+            <item
+                android:id="@+id/nav_received"
+                android:icon="@drawable/ic_msg_received_24dp"
+                android:title="Recebidas" />
+            <item
+                android:id="@+id/nav_sent"
+                android:icon="@drawable/ic_sent_black_24dp"
+                android:title="Enviadas" />
+        </menu>
+    </item>
+
+    <item
+        android:checkableBehavior="single"
+        android:title="Outros">
+        <menu>
+            <!--<item-->
+                <!--android:id="@+id/nav_manage"-->
+                <!--android:icon="@drawable/ic_menu_manage"-->
+                <!--android:title="Configurações" />-->
+            <item
+                android:id="@+id/nav_about"
+                android:icon="@drawable/ic_smile_black_24dp"
+                android:title="Sobre" />
+
+            <item
+                android:id="@+id/nav_signout"
+                android:icon="@drawable/ic_signout_black_24dp"
+                android:title="Sair" />
+        </menu>
+    </item>
+
+</menu>
