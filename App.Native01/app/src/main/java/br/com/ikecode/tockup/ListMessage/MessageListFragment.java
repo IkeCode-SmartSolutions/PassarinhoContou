@@ -27,6 +27,7 @@ import br.com.ikecode.tockup.adapters.MessageListAdapter;
 import br.com.ikecode.tockup.apiclient.ApiResponseList;
 import br.com.ikecode.tockup.apiclient.TockUpApiClient;
 import br.com.ikecode.tockup.models.Message;
+import br.com.ikecode.tockup.models.User;
 import cz.msebera.android.httpclient.Header;
 
 /**
@@ -81,8 +82,9 @@ public class MessageListFragment extends Fragment {
     }
 
     private void getMessages(final String route, final int offset, final int limit, final boolean firstRequest) {
-        //TODO: pegar id do usuario logado
-        int id = 1;
+        User user = ((MainActivity)getActivity()).GetUserFromStorage();
+
+        int id = user.id;
 
         final MainActivity activity = (MainActivity) getActivity();
 

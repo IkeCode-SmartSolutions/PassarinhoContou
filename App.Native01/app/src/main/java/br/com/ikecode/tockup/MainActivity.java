@@ -144,14 +144,8 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        String userSerialized = PrefUtils.getFromPrefs(getBaseContext(), PrefUtils.PREFS_LOGGED_USER_KEY, null);
-        if (userSerialized != null) {
-            GsonBuilder builder = TockUpApiClient.GetGsonBuilder();
-
-            Gson gson = builder.create();
-            Type listType = new TypeToken<User>() {
-            }.getType();
-            User user = gson.fromJson(userSerialized, listType);
+        User user = GetUserFromStorage();
+        if (user != null) {
 
             NavigationView navView = (NavigationView)findViewById(R.id.nav_view);
             View navHeaderMain = (View) navView.getHeaderView(0);
@@ -164,6 +158,22 @@ public class MainActivity extends AppCompatActivity
 
         HomeFragment homeFragment = new HomeFragment();
         ChangeFragment(homeFragment);
+    }
+
+    public User GetUserFromStorage(){
+        User result = null;
+        String userSerialized = PrefUtils.getFromPrefs(getBaseContext(), PrefUtils.PREFS_LOGGED_USER_KEY, null);
+        if (userSerialized != null) {
+            GsonBuilder builder = TockUpApiClient.GetGsonBuilder();
+
+            Gson gson = builder.create();
+            Type listType = new TypeToken<User>() {
+            }.getType();
+            User user = gson.fromJson(userSerialized, listType);
+            result = user;
+        }
+
+        return result;
     }
 
     public void ToggleProgressBar(final boolean show) {
