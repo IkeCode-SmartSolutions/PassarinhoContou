@@ -1,0 +1,65 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="br.com.ikecode.tockup.Login.SignUpFragment">
+
+    <ProgressBar
+        android:id="@+id/signup_progressbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|center_vertical"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <EditText
+            android:id="@+id/txtSignupFullname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="nome completo" />
+
+        <EditText
+            android:id="@+id/txtSignupPhoneNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="celular" />
+
+        <EditText
+            android:id="@+id/txtSignupEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="email" />
+
+        <EditText
+            android:id="@+id/txtSignupNickname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="apelido" />
+
+        <EditText
+            android:id="@+id/txtSignupPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:hint="senha" />
+
+        <EditText
+            android:id="@+id/txtSignupPassword2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:hint="confirme a senha" />
+
+        <Button
+            android:id="@+id/btnSignupNext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Proximo"/>
+    </LinearLayout>
+
+</FrameLayout>

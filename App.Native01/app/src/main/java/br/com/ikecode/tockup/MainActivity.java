@@ -2,18 +2,14 @@ package br.com.ikecode.tockup;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
-import android.content.Context;
+import android.app.DialogFragment;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.text.TextUtils;
-import android.util.AttributeSet;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -21,7 +17,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
@@ -38,12 +33,11 @@ import java.lang.reflect.Type;
 
 import br.com.ikecode.tockup.ListMessage.MessageListFragment;
 import br.com.ikecode.tockup.ListMessage.MessageListType;
+import br.com.ikecode.tockup.Login.SignUpFragment;
 import br.com.ikecode.tockup.SendMessage.SelectContactFragment;
-import br.com.ikecode.tockup.SendMessage.SelectMessagePrefixFragment;
 import br.com.ikecode.tockup.apiclient.TockUpApiClient;
 import br.com.ikecode.tockup.models.BaseModel;
 import br.com.ikecode.tockup.models.Message;
-import br.com.ikecode.tockup.models.PrefixCategory;
 import br.com.ikecode.tockup.models.User;
 import cz.msebera.android.httpclient.Header;
 
@@ -139,7 +133,6 @@ public class MainActivity extends AppCompatActivity
                 R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
-        //toggle.setDrawerIndicatorEnabled(false);
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -208,6 +201,20 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
+    void showDialog() {
+
+        android.app.FragmentTransaction ft = getFragmentManager().beginTransaction();
+        android.app.Fragment prev = getFragmentManager().findFragmentByTag("dialog");
+        if (prev != null) {
+            ft.remove(prev);
+        }
+        ft.addToBackStack(null);
+
+        // Create and show the dialog.
+        DialogFragment newFragment = new SignUpFragment();
+        newFragment.show(ft, "dialog");
+    }
+
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -251,7 +258,8 @@ public class MainActivity extends AppCompatActivity
         Bundle args = new Bundle();
 
         if (id == R.id.nav_home) {
-            fragment = new HomeFragment();
+            //fragment = new HomeFragment();
+            showDialog();
         } else if (id == R.id.nav_about) {
             fragment = new AboutFragment();
         } else if (id == R.id.nav_received) {

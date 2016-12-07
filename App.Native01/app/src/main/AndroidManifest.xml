@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="br.com.ikecode.tockup">
 
     <!-- To access Google+ APIs: -->
@@ -14,18 +15,19 @@
         android:name="android.support.multidex.MultiDexApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_logo_vertical"
-        android:label="@string/app_name"
+        tools:replace="android:label"
+        android:label="@string/tockup"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name"
+            android:label="@string/tockup"
             android:theme="@style/AppTheme.NoActionBar">
 
         </activity>
         <activity
             android:name=".LoginActivity"
-            android:label="@string/app_name">
+            android:label="@string/tockup">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
