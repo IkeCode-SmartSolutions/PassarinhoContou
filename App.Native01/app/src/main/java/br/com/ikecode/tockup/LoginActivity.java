@@ -6,6 +6,7 @@ import android.annotation.TargetApi;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.content.Context;
 import android.content.CursorLoader;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.Loader;
 import android.content.pm.PackageManager;
@@ -16,6 +17,7 @@ import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.AttributeSet;
@@ -28,6 +30,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -93,7 +96,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         mProgressView = findViewById(R.id.login_progress);
 
         String loggedUser = PrefUtils.getFromPrefs(getBaseContext(), PrefUtils.PREFS_LOGGED_USER_KEY, null);
-        if(loggedUser != null){
+        if (loggedUser != null) {
             goToMainActivity();
         }
     }
@@ -199,6 +202,23 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 @Override
                 public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
                     super.onFailure(statusCode, headers, throwable, errorResponse);
+
+                    String message = "Erro desconhecido.";
+                    try {
+                        message = errorResponse.getString("message");
+                    } catch (Exception ex) {
+
+                    } finally {
+                        Snackbar.make(mLoginFormView, message, Snackbar.LENGTH_INDEFINITE)
+                                .setAction("LoginError", null).show();
+                    }
+                }
+
+                @Override
+                public void onFinish() {
+                    super.onFinish();
+
+                    showProgress(false);
                 }
 
                 @Override
@@ -213,11 +233,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, JSONObject apiResponse) {
-//                        GsonBuilder builder = TockUpApiClient.GetGsonBuilder();
-//
-//                        Gson gson = builder.create();
-//                        Type listType = new TypeToken<User>(){}.getType();
-//                        User user = gson.fromJson(apiResponse.toString(), listType);
                     PrefUtils.saveToPrefs(getBaseContext(), PrefUtils.PREFS_LOGGED_USER_KEY, apiResponse.toString());
 
                     goToMainActivity();

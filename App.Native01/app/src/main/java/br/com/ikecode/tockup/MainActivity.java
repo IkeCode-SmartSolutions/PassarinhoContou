@@ -2,6 +2,7 @@ package br.com.ikecode.tockup;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.text.TextUtils;
+import android.util.AttributeSet;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -69,6 +71,20 @@ public class MainActivity extends AppCompatActivity
         String serialized = gson.toJson(message);
 
         TockUpApiClient.post(this, "message/Add", serialized, new JsonHttpResponseHandler() {
+            @Override
+            public void onStart() {
+                super.onStart();
+
+                ToggleProgressBar(true);
+            }
+
+            @Override
+            public void onFinish() {
+                super.onFinish();
+
+                ToggleProgressBar(false);
+            }
+
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                 String a = responseString;
@@ -128,14 +144,6 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        HomeFragment homeFragment = new HomeFragment();
-        ChangeFragment(homeFragment);
-    }
-
-    @Override
-    protected void onPostCreate(@Nullable Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
-
         String userSerialized = PrefUtils.getFromPrefs(getBaseContext(), PrefUtils.PREFS_LOGGED_USER_KEY, null);
         if (userSerialized != null) {
             GsonBuilder builder = TockUpApiClient.GetGsonBuilder();
@@ -145,13 +153,17 @@ public class MainActivity extends AppCompatActivity
             }.getType();
             User user = gson.fromJson(userSerialized, listType);
 
-//            View navHeaderMain = (View) findViewById(R.id.layout_nav_header_main);
-//            TextView txtNavHeaderUserFullName = (TextView) navHeaderMain.findViewById(R.id.txtNavHeaderUserFullName);
-//            TextView txtNavHeaderUserEmail = (TextView) navHeaderMain.findViewById(R.id.txtNavHeaderUserEmail);
-//
-//            txtNavHeaderUserFullName.setText(user.fullName);
-//            txtNavHeaderUserEmail.setText(user.email);
+            NavigationView navView = (NavigationView)findViewById(R.id.nav_view);
+            View navHeaderMain = (View) navView.getHeaderView(0);
+            TextView txtNavHeaderUserFullName = (TextView) navHeaderMain.findViewById(R.id.txtNavHeaderUserFullName);
+            TextView txtNavHeaderUserEmail = (TextView) navHeaderMain.findViewById(R.id.txtNavHeaderUserEmail);
+
+            txtNavHeaderUserFullName.setText(user.fullName);
+            txtNavHeaderUserEmail.setText(user.email);
         }
+
+        HomeFragment homeFragment = new HomeFragment();
+        ChangeFragment(homeFragment);
     }
 
     public void ToggleProgressBar(final boolean show) {

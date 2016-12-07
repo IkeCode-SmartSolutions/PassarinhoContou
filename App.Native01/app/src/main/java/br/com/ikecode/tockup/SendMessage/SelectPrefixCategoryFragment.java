@@ -26,6 +26,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.com.ikecode.tockup.MainActivity;
 import br.com.ikecode.tockup.R;
 import br.com.ikecode.tockup.adapters.GenericAdapter;
 import br.com.ikecode.tockup.apiclient.TockUpApiClient;
@@ -90,6 +91,8 @@ public class SelectPrefixCategoryFragment extends Fragment {
 
         listView.setAdapter(adapter);
 
+        final MainActivity activity = (MainActivity) getActivity();
+        activity.ToggleProgressBar(true);
         TockUpApiClient.get("prefixcategory/", null, new JsonHttpResponseHandler(){
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
@@ -101,6 +104,8 @@ public class SelectPrefixCategoryFragment extends Fragment {
                 List<PrefixCategory> objList = gson.fromJson(response.toString(), listType);
                 _original = objList;
                 adapter.Update(objList);
+
+                activity.ToggleProgressBar(false);
             }
         });
 

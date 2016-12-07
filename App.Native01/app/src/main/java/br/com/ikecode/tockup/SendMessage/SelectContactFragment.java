@@ -119,9 +119,9 @@ public class SelectContactFragment extends Fragment {
                 Type listType = new TypeToken<List<User>>(){}.getType();
                 List<User> users = gson.fromJson(usersResponse.toString(), listType);
                 _originalUsers = users;
-                adapter.Update(_originalUsers);
 
-                activity.ToggleProgressBar(true);
+                activity.ToggleProgressBar(false);
+                adapter.Update(_originalUsers);
             }
         });
 

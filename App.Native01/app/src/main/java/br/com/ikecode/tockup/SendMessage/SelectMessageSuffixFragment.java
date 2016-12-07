@@ -88,6 +88,7 @@ public class SelectMessageSuffixFragment extends Fragment {
         listView.setAdapter(adapter);
 
         if(this.suffixCategoryId > 0) {
+            activity.ToggleProgressBar(true);
             TockUpApiClient.get("messagesuffix/" + this.suffixCategoryId, null, new JsonHttpResponseHandler() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
@@ -99,6 +100,7 @@ public class SelectMessageSuffixFragment extends Fragment {
                     }.getType();
                     List<MessageSuffix> objList = gson.fromJson(response.toString(), listType);
                     _original = objList;
+                    activity.ToggleProgressBar(false);
                     adapter.Update(objList);
                 }
             });

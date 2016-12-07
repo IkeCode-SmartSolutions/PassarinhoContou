@@ -21,6 +21,7 @@ import org.json.JSONObject;
 import java.lang.reflect.Type;
 import java.util.List;
 
+import br.com.ikecode.tockup.MainActivity;
 import br.com.ikecode.tockup.R;
 import br.com.ikecode.tockup.adapters.MessageListAdapter;
 import br.com.ikecode.tockup.apiclient.ApiResponseList;
@@ -83,11 +84,27 @@ public class MessageListFragment extends Fragment {
         //TODO: pegar id do usuario logado
         int id = 1;
 
+        final MainActivity activity = (MainActivity) getActivity();
+
         RequestParams params = new RequestParams();
         params.put("offset", offset);
         params.put("limit", limit);
 
         TockUpApiClient.get(String.format("message/%1s/%2d", route, id), params, new JsonHttpResponseHandler() {
+            @Override
+            public void onStart() {
+                super.onStart();
+
+                activity.ToggleProgressBar(true);
+            }
+
+            @Override
+            public void onFinish() {
+                super.onFinish();
+
+                activity.ToggleProgressBar(false);
+            }
+
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 GsonBuilder builder = TockUpApiClient.GetGsonBuilder();

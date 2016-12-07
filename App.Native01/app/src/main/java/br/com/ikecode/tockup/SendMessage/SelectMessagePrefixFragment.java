@@ -88,6 +88,8 @@ public class SelectMessagePrefixFragment extends Fragment {
         listView.setAdapter(adapter);
 
         if(this.prefixCategoryId > 0) {
+            activity.ToggleProgressBar(true);
+
             TockUpApiClient.get("messageprefix/" + this.prefixCategoryId, null, new JsonHttpResponseHandler() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
@@ -99,6 +101,7 @@ public class SelectMessagePrefixFragment extends Fragment {
                     }.getType();
                     List<MessagePrefix> objList = gson.fromJson(response.toString(), listType);
                     _original = objList;
+                    activity.ToggleProgressBar(false);
                     adapter.Update(objList);
                 }
             });
