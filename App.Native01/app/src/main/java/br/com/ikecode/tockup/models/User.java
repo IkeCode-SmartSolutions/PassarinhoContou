@@ -7,11 +7,6 @@ package br.com.ikecode.tockup.models;
 public class User extends BaseModel {
     public String fullName;
     public String phoneNumber;
-
-    public User(String fullName, String phoneNumber) {
-        super();
-
-        this.fullName = fullName;
-        this.phoneNumber = phoneNumber;
-    }
+    public String email;
+    public String nickName;
 }

@@ -28,10 +28,10 @@
         android:checkableBehavior="single"
         android:title="Outros">
         <menu>
-            <item
-                android:id="@+id/nav_manage"
-                android:icon="@drawable/ic_menu_manage"
-                android:title="Configurações" />
+            <!--<item-->
+                <!--android:id="@+id/nav_manage"-->
+                <!--android:icon="@drawable/ic_menu_manage"-->
+                <!--android:title="Configurações" />-->
             <item
                 android:id="@+id/nav_about"
                 android:icon="@drawable/ic_smile_black_24dp"

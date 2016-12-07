@@ -1,11 +1,17 @@
 package br.com.ikecode.tockup;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.text.TextUtils;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -15,6 +21,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.FrameLayout;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -32,6 +41,8 @@ import br.com.ikecode.tockup.SendMessage.SelectMessagePrefixFragment;
 import br.com.ikecode.tockup.apiclient.TockUpApiClient;
 import br.com.ikecode.tockup.models.BaseModel;
 import br.com.ikecode.tockup.models.Message;
+import br.com.ikecode.tockup.models.PrefixCategory;
+import br.com.ikecode.tockup.models.User;
 import cz.msebera.android.httpclient.Header;
 
 public class MainActivity extends AppCompatActivity
@@ -77,7 +88,7 @@ public class MainActivity extends AppCompatActivity
                 }.getType();
                 BaseModel obj = gson.fromJson(response.toString(), listType);
 
-                if(obj.id > 0){
+                if (obj.id > 0) {
                     ChangeFragment(new HomeFragment());
 
                     Snackbar.make(view, "Mensagem enviada com sucesso!", Snackbar.LENGTH_LONG)
@@ -94,14 +105,14 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "TODO: Abrir barra do footer", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Snackbar.make(view, "TODO: Abrir barra do footer", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
+//            }
+//        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         toggle = new ActionBarDrawerToggle(
@@ -122,6 +133,60 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
+    protected void onPostCreate(@Nullable Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+
+        String userSerialized = PrefUtils.getFromPrefs(getBaseContext(), PrefUtils.PREFS_LOGGED_USER_KEY, null);
+        if (userSerialized != null) {
+            GsonBuilder builder = TockUpApiClient.GetGsonBuilder();
+
+            Gson gson = builder.create();
+            Type listType = new TypeToken<User>() {
+            }.getType();
+            User user = gson.fromJson(userSerialized, listType);
+
+//            View navHeaderMain = (View) findViewById(R.id.layout_nav_header_main);
+//            TextView txtNavHeaderUserFullName = (TextView) navHeaderMain.findViewById(R.id.txtNavHeaderUserFullName);
+//            TextView txtNavHeaderUserEmail = (TextView) navHeaderMain.findViewById(R.id.txtNavHeaderUserEmail);
+//
+//            txtNavHeaderUserFullName.setText(user.fullName);
+//            txtNavHeaderUserEmail.setText(user.email);
+        }
+    }
+
+    public void ToggleProgressBar(final boolean show) {
+        final FrameLayout mainView = (FrameLayout) findViewById(R.id.frame_container);
+        final ProgressBar progressView = (ProgressBar) findViewById(R.id.main_progress);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
+            int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
+
+            mainView.setVisibility(show ? View.GONE : View.VISIBLE);
+            mainView.animate().setDuration(shortAnimTime).alpha(
+                    show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    mainView.setVisibility(show ? View.GONE : View.VISIBLE);
+                }
+            });
+
+            progressView.setVisibility(show ? View.VISIBLE : View.GONE);
+            progressView.animate().setDuration(shortAnimTime).alpha(
+                    show ? 1 : 0).setListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    progressView.setVisibility(show ? View.VISIBLE : View.GONE);
+                }
+            });
+        } else {
+            // The ViewPropertyAnimator APIs are not available, so simply show
+            // and hide the relevant UI components.
+            progressView.setVisibility(show ? View.VISIBLE : View.GONE);
+            mainView.setVisibility(show ? View.GONE : View.VISIBLE);
+        }
+    }
+
+    @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
@@ -131,12 +196,12 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        // Inflate the menu; this adds items to the action bar if it is present.
+//        getMenuInflater().inflate(R.menu.main, menu);
+//        return true;
+//    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -175,6 +240,12 @@ public class MainActivity extends AppCompatActivity
             args.putSerializable(MessageListFragment.ARG_MESSAGE_LIST_TYPE, MessageListType.Sent);
         } else if (id == R.id.nav_send) {
             fragment = new SelectContactFragment();
+        } else if (id == R.id.nav_signout) {
+            PrefUtils.saveToPrefs(getBaseContext(), PrefUtils.PREFS_LOGGED_USER_KEY, null);
+            Intent i = new Intent(getApplicationContext(), LoginActivity.class);
+            startActivity(i);
+
+            finish();
         }
 
         if (fragment != null) {

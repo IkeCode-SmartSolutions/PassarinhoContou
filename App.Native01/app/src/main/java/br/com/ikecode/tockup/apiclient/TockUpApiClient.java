@@ -11,6 +11,7 @@ import com.loopj.android.http.*;
 
 import java.util.Date;
 
+import br.com.ikecode.tockup.MainActivity;
 import br.com.ikecode.tockup.adapters.ImprovedDateTypeAdapter;
 import cz.msebera.android.httpclient.entity.ContentType;
 import cz.msebera.android.httpclient.entity.StringEntity;
@@ -36,11 +37,6 @@ public class TockUpApiClient {
 
     public static void get(String url, RequestParams params, AsyncHttpResponseHandler responseHandler) {
         client.get(getAbsoluteUrl(url), params, responseHandler);
-    }
-
-    public static void post(String url, RequestParams params, AsyncHttpResponseHandler responseHandler) {
-        client.addHeader("Content-Type", "application/json");
-        client.post(getAbsoluteUrl(url), params, responseHandler);
     }
 
     public static void post(Context context, String url, String serializedObj, AsyncHttpResponseHandler responseHandler) {

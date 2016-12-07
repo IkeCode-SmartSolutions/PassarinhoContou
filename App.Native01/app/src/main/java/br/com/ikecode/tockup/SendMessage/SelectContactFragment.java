@@ -108,6 +108,7 @@ public class SelectContactFragment extends Fragment {
 
         listView.setAdapter(adapter);
 
+        activity.ToggleProgressBar(true);
         TockUpApiClient.get("user/all", null, new JsonHttpResponseHandler(){
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray usersResponse) {
@@ -119,6 +120,8 @@ public class SelectContactFragment extends Fragment {
                 List<User> users = gson.fromJson(usersResponse.toString(), listType);
                 _originalUsers = users;
                 adapter.Update(_originalUsers);
+
+                activity.ToggleProgressBar(true);
             }
         });
 
