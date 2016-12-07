@@ -84,7 +84,8 @@ namespace PassarinhoContou.Model
 
         public T Find(Expression<Func<T, bool>> predicate)
         {
-            return DataContext.Set<T>().SingleOrDefault(predicate);
+            return DataContext.Set<T>()
+                .SingleOrDefault(predicate);
         }
 
         public T FindById(int id)

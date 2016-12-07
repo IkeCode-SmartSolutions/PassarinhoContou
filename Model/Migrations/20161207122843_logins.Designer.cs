@@ -8,9 +8,10 @@ using PassarinhoContou.Model;
 namespace PassarinhoContou.Model.Migrations
 {
     [DbContext(typeof(PassarinhoContouContext))]
-    partial class PassarinhoContouContextModelSnapshot : ModelSnapshot
+    [Migration("20161207122843_logins")]
+    partial class logins
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.1")
@@ -306,8 +307,7 @@ namespace PassarinhoContou.Model.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId")
-                        .IsUnique();
+                    b.HasIndex("UserId");
 
                     b.ToTable("UserLogins");
                 });
@@ -394,8 +394,8 @@ namespace PassarinhoContou.Model.Migrations
             modelBuilder.Entity("PassarinhoContou.Model.UserLogin", b =>
                 {
                     b.HasOne("PassarinhoContou.Model.User", "User")
-                        .WithOne("Login")
-                        .HasForeignKey("PassarinhoContou.Model.UserLogin", "UserId")
+                        .WithMany()
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
         }

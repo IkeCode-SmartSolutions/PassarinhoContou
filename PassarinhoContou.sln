@@ -7,8 +7,6 @@ Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Api", "Api\Api.xproj", "{2F
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Model", "Model\Model.xproj", "{CF895B77-65DA-42DB-964B-44A24527B689}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Site", "Site\Site.xproj", "{C52BCBD8-BED5-4267-8CF3-8A382D49AE9D}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DOCS", "DOCS", "{DEE90676-C20C-4131-B34B-D3A42E1F7033}"
 	ProjectSection(SolutionItems) = preProject
 		README.md = README.md
@@ -28,10 +26,6 @@ Global
 		{CF895B77-65DA-42DB-964B-44A24527B689}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CF895B77-65DA-42DB-964B-44A24527B689}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CF895B77-65DA-42DB-964B-44A24527B689}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C52BCBD8-BED5-4267-8CF3-8A382D49AE9D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C52BCBD8-BED5-4267-8CF3-8A382D49AE9D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C52BCBD8-BED5-4267-8CF3-8A382D49AE9D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C52BCBD8-BED5-4267-8CF3-8A382D49AE9D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -12,7 +12,7 @@ namespace PassarinhoContou.Model
             optionsBuilder.UseSqlServer(@"Server=localhost;Database=PassarinhoContou;User=sa;Password=iwannarock");
 #endif
 #if !DEBUG
-            optionsBuilder.UseSqlServer(@"Server=passarinhocontou.ikecode.com.br;Database=PassarinhoContou;User=sql;Password=!@#sql)(*");
+            optionsBuilder.UseSqlServer(@"Server=tockup.ikecode.com.br;Database=PassarinhoContou;User=tockup;Password=iwannarock");
 #endif
         }
 
@@ -203,5 +203,6 @@ namespace PassarinhoContou.Model
         public virtual DbSet<SuffixCategoryTranslations> SuffixCategoryTranslations { get; set; }
         public virtual DbSet<SuffixTranslation> SuffixesTranslations { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<UserLogin> UserLogins { get; set; }
     }
 }

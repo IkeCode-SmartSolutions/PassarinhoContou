@@ -8,9 +8,10 @@ using PassarinhoContou.Model;
 namespace PassarinhoContou.Model.Migrations
 {
     [DbContext(typeof(PassarinhoContouContext))]
-    partial class PassarinhoContouContextModelSnapshot : ModelSnapshot
+    [Migration("20161207125006_logins_to_user")]
+    partial class logins_to_user
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.1")

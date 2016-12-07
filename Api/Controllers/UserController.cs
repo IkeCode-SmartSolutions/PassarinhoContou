@@ -51,10 +51,10 @@ namespace PassarinhoContouApi.Controllers
         [ActionName("BasicLogin")]
         public IActionResult Get(string email, string password)
         {
-            var user = _dal.Find(i => i.Email == email);
+            var user = _dal.Find(i => i.Email == email && i.Login.Password == password);
             if (user == null)
             {
-                return NotFound(new ApiResponseMessage("Email inválido"));
+                return NotFound(new ApiResponseMessage("Email e/ou Senha inválidos"));
             }
 
             return Ok(user);

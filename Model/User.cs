@@ -20,5 +20,7 @@ namespace PassarinhoContou.Model
         public virtual ICollection<ConnectedDevice> ConnectedDevices { get; set; }
         public virtual ICollection<Message> MessagesFromUser { get; set; }
         public virtual ICollection<Message> MessagesToUser { get; set; }
+
+        public virtual UserLogin Login { get; set; }
     }
 }
