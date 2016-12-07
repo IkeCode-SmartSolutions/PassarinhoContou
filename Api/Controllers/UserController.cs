@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using PassarinhoContou.Api.Model;
 using PassarinhoContou.Model;
 using System;
 using System.Linq;
@@ -41,6 +42,19 @@ namespace PassarinhoContouApi.Controllers
             if (user == null)
             {
                 return NotFound();
+            }
+
+            return Ok(user);
+        }
+
+        [HttpGet]
+        [ActionName("BasicLogin")]
+        public IActionResult Get(string email, string password)
+        {
+            var user = _dal.Find(i => i.Email == email);
+            if (user == null)
+            {
+                return NotFound(new ApiResponseMessage("Email inválido"));
             }
 
             return Ok(user);
