@@ -1,101 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6543d559-477d-4eb6-a2f8-229e08090d7d" name="Default" comment="" />
+    <list default="true" id="589fe33a-706f-4a7e-af6e-3288a8cc98dd" name="Default" comment="" />
     <ignored path="app.iws" />
     <ignored path=".idea/workspace.xml" />
-    <ignored path="$PROJECT_DIR$/build/intermediates/assets/" />
-    <ignored path="$PROJECT_DIR$/build/intermediates/blame/" />
-    <ignored path="$PROJECT_DIR$/build/intermediates/builds/" />
-    <ignored path="$PROJECT_DIR$/build/intermediates/classes/" />
-    <ignored path="$PROJECT_DIR$/build/intermediates/dependency-cache/" />
-    <ignored path="$PROJECT_DIR$/build/intermediates/exploded-aar/com.android.support.test.espresso/espresso-core/2.2.2/jars/" />
-    <ignored path="$PROJECT_DIR$/build/intermediates/exploded-aar/com.android.support.test.espresso/espresso-idling-resource/2.2.2/jars/" />
-    <ignored path="$PROJECT_DIR$/build/intermediates/exploded-aar/com.android.support.test/exposed-instrumentation-api-publish/0.5/jars/" />
-    <ignored path="$PROJECT_DIR$/build/intermediates/exploded-aar/com.android.support.test/rules/0.5/jars/" />
-    <ignored path="$PROJECT_DIR$/build/intermediates/exploded-aar/com.android.support.test/runner/0.5/jars/" />
-    <ignored path="$PROJECT_DIR$/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/25.0.1/jars/" />
-    <ignored path="$PROJECT_DIR$/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.0.1/jars/" />
-    <ignored path="$PROJECT_DIR$/build/intermediates/exploded-aar/com.android.support/design/25.0.1/jars/" />
-    <ignored path="$PROJECT_DIR$/build/intermediates/exploded-aar/com.android.support/mediarouter-v7/24.0.0/jars/" />
-    <ignored path="$PROJECT_DIR$/build/intermediates/exploded-aar/com.android.support/palette-v7/24.0.0/jars/" />
-    <ignored path="$PROJECT_DIR$/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/25.0.1/jars/" />
-    <ignored path="$PROJECT_DIR$/build/intermediates/exploded-aar/com.android.support/support-compat/25.0.1/jars/" />
-    <ignored path="$PROJECT_DIR$/build/intermediates/exploded-aar/com.android.support/support-core-ui/25.0.1/jars/" />
-    <ignored path="$PROJECT_DIR$/build/intermediates/exploded-aar/com.android.support/support-core-utils/25.0.1/jars/" />
-    <ignored path="$PROJECT_DIR$/build/intermediates/exploded-aar/com.android.support/support-fragment/25.0.1/jars/" />
-    <ignored path="$PROJECT_DIR$/build/intermediates/exploded-aar/com.android.support/support-media-compat/25.0.1/jars/" />
-    <ignored path="$PROJECT_DIR$/build/intermediates/exploded-aar/com.android.support/support-v4/25.0.1/jars/" />
-    <ignored path="$PROJECT_DIR$/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/25.0.1/jars/" />
-    <ignored path="$PROJECT_DIR$/build/intermediates/exploded-aar/com.android.support/transition/25.0.1/jars/" />
-    <ignored path="$PROJECT_DIR$/build/intermediates/exploded-aar/com.github.bluejamesbond/textjustify-android/2.1.6/jars/" />
-    <ignored path="$PROJECT_DIR$/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads-lite/10.0.1/jars/" />
-    <ignored path="$PROJECT_DIR$/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads/10.0.1/jars/" />
-    <ignored path="$PROJECT_DIR$/build/intermediates/exploded-aar/com.google.android.gms/play-services-analytics-impl/10.0.1/jars/" />
-    <ignored path="$PROJECT_DIR$/build/intermediates/exploded-aar/com.google.android.gms/play-services-analytics/10.0.1/jars/" />
-    <ignored path="$PROJECT_DIR$/build/intermediates/exploded-aar/com.google.android.gms/play-services-appinvite/10.0.1/jars/" />
-    <ignored path="$PROJECT_DIR$/build/intermediates/exploded-aar/com.google.android.gms/play-services-auth-base/10.0.1/jars/" />
-    <ignored path="$PROJECT_DIR$/build/intermediates/exploded-aar/com.google.android.gms/play-services-auth/10.0.1/jars/" />
-    <ignored path="$PROJECT_DIR$/build/intermediates/exploded-aar/com.google.android.gms/play-services-awareness/10.0.1/jars/" />
-    <ignored path="$PROJECT_DIR$/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/10.0.1/jars/" />
-    <ignored path="$PROJECT_DIR$/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/10.0.1/jars/" />
-    <ignored path="$PROJECT_DIR$/build/intermediates/exploded-aar/com.google.android.gms/play-services-cast-framework/10.0.1/jars/" />
-    <ignored path="$PROJECT_DIR$/build/intermediates/exploded-aar/com.google.android.gms/play-services-cast/10.0.1/jars/" />
-    <ignored path="$PROJECT_DIR$/build/intermediates/exploded-aar/com.google.android.gms/play-services-clearcut/10.0.1/jars/" />
-    <ignored path="$PROJECT_DIR$/build/intermediates/exploded-aar/com.google.android.gms/play-services-drive/10.0.1/jars/" />
-    <ignored path="$PROJECT_DIR$/build/intermediates/exploded-aar/com.google.android.gms/play-services-fitness/10.0.1/jars/" />
-    <ignored path="$PROJECT_DIR$/build/intermediates/exploded-aar/com.google.android.gms/play-services-games/10.0.1/jars/" />
-    <ignored path="$PROJECT_DIR$/build/intermediates/exploded-aar/com.google.android.gms/play-services-gass/10.0.1/jars/" />
-    <ignored path="$PROJECT_DIR$/build/intermediates/exploded-aar/com.google.android.gms/play-services-gcm/10.0.1/jars/" />
-    <ignored path="$PROJECT_DIR$/build/intermediates/exploded-aar/com.google.android.gms/play-services-identity/10.0.1/jars/" />
-    <ignored path="$PROJECT_DIR$/build/intermediates/exploded-aar/com.google.android.gms/play-services-iid/10.0.1/jars/" />
-    <ignored path="$PROJECT_DIR$/build/intermediates/exploded-aar/com.google.android.gms/play-services-instantapps/10.0.1/jars/" />
-    <ignored path="$PROJECT_DIR$/build/intermediates/exploded-aar/com.google.android.gms/play-services-location/10.0.1/jars/" />
-    <ignored path="$PROJECT_DIR$/build/intermediates/exploded-aar/com.google.android.gms/play-services-maps/10.0.1/jars/" />
-    <ignored path="$PROJECT_DIR$/build/intermediates/exploded-aar/com.google.android.gms/play-services-nearby/10.0.1/jars/" />
-    <ignored path="$PROJECT_DIR$/build/intermediates/exploded-aar/com.google.android.gms/play-services-panorama/10.0.1/jars/" />
-    <ignored path="$PROJECT_DIR$/build/intermediates/exploded-aar/com.google.android.gms/play-services-places/10.0.1/jars/" />
-    <ignored path="$PROJECT_DIR$/build/intermediates/exploded-aar/com.google.android.gms/play-services-plus/10.0.1/jars/" />
-    <ignored path="$PROJECT_DIR$/build/intermediates/exploded-aar/com.google.android.gms/play-services-safetynet/10.0.1/jars/" />
-    <ignored path="$PROJECT_DIR$/build/intermediates/exploded-aar/com.google.android.gms/play-services-tagmanager-api/10.0.1/jars/" />
-    <ignored path="$PROJECT_DIR$/build/intermediates/exploded-aar/com.google.android.gms/play-services-tagmanager-v4-impl/10.0.1/jars/" />
-    <ignored path="$PROJECT_DIR$/build/intermediates/exploded-aar/com.google.android.gms/play-services-tagmanager/10.0.1/jars/" />
-    <ignored path="$PROJECT_DIR$/build/intermediates/exploded-aar/com.google.android.gms/play-services-tasks/10.0.1/jars/" />
-    <ignored path="$PROJECT_DIR$/build/intermediates/exploded-aar/com.google.android.gms/play-services-vision/10.0.1/jars/" />
-    <ignored path="$PROJECT_DIR$/build/intermediates/exploded-aar/com.google.android.gms/play-services-wallet/10.0.1/jars/" />
-    <ignored path="$PROJECT_DIR$/build/intermediates/exploded-aar/com.google.android.gms/play-services-wearable/10.0.1/jars/" />
-    <ignored path="$PROJECT_DIR$/build/intermediates/exploded-aar/com.google.android.gms/play-services/10.0.1/jars/" />
-    <ignored path="$PROJECT_DIR$/build/intermediates/exploded-aar/com.google.firebase/firebase-analytics-impl/10.0.1/jars/" />
-    <ignored path="$PROJECT_DIR$/build/intermediates/exploded-aar/com.google.firebase/firebase-analytics/10.0.1/jars/" />
-    <ignored path="$PROJECT_DIR$/build/intermediates/exploded-aar/com.google.firebase/firebase-appindexing/10.0.1/jars/" />
-    <ignored path="$PROJECT_DIR$/build/intermediates/exploded-aar/com.google.firebase/firebase-auth/10.0.1/jars/" />
-    <ignored path="$PROJECT_DIR$/build/intermediates/exploded-aar/com.google.firebase/firebase-common/10.0.1/jars/" />
-    <ignored path="$PROJECT_DIR$/build/intermediates/exploded-aar/com.google.firebase/firebase-config/10.0.1/jars/" />
-    <ignored path="$PROJECT_DIR$/build/intermediates/exploded-aar/com.google.firebase/firebase-crash/10.0.1/jars/" />
-    <ignored path="$PROJECT_DIR$/build/intermediates/exploded-aar/com.google.firebase/firebase-database-connection/10.0.1/jars/" />
-    <ignored path="$PROJECT_DIR$/build/intermediates/exploded-aar/com.google.firebase/firebase-database/10.0.1/jars/" />
-    <ignored path="$PROJECT_DIR$/build/intermediates/exploded-aar/com.google.firebase/firebase-iid/10.0.1/jars/" />
-    <ignored path="$PROJECT_DIR$/build/intermediates/exploded-aar/com.google.firebase/firebase-messaging/10.0.1/jars/" />
-    <ignored path="$PROJECT_DIR$/build/intermediates/exploded-aar/com.google.firebase/firebase-storage-common/10.0.1/jars/" />
-    <ignored path="$PROJECT_DIR$/build/intermediates/exploded-aar/com.google.firebase/firebase-storage/10.0.1/jars/" />
-    <ignored path="$PROJECT_DIR$/build/intermediates/incremental/" />
-    <ignored path="$PROJECT_DIR$/build/intermediates/incremental-classes/" />
-    <ignored path="$PROJECT_DIR$/build/intermediates/incremental-runtime-classes/" />
-    <ignored path="$PROJECT_DIR$/build/intermediates/incremental-safeguard/" />
-    <ignored path="$PROJECT_DIR$/build/intermediates/incremental-verifier/" />
-    <ignored path="$PROJECT_DIR$/build/intermediates/instant-run-resources/" />
-    <ignored path="$PROJECT_DIR$/build/intermediates/instant-run-support/" />
-    <ignored path="$PROJECT_DIR$/build/intermediates/jniLibs/" />
-    <ignored path="$PROJECT_DIR$/build/intermediates/manifests/" />
-    <ignored path="$PROJECT_DIR$/build/intermediates/reload-dex/" />
-    <ignored path="$PROJECT_DIR$/build/intermediates/res/" />
-    <ignored path="$PROJECT_DIR$/build/intermediates/restart-dex/" />
-    <ignored path="$PROJECT_DIR$/build/intermediates/rs/" />
-    <ignored path="$PROJECT_DIR$/build/intermediates/shaders/" />
-    <ignored path="$PROJECT_DIR$/build/intermediates/symbols/" />
-    <ignored path="$PROJECT_DIR$/build/intermediates/transforms/" />
-    <ignored path="$PROJECT_DIR$/build/outputs/" />
-    <ignored path="$PROJECT_DIR$/build/tmp/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -122,7 +30,7 @@
         <entry>
           <key>
             <ExternalProjectPojo>
-              <option name="name" value="App.Native01" />
+              <option name="name" value="App.Android" />
               <option name="path" value="$PROJECT_DIR$" />
             </ExternalProjectPojo>
           </key>
@@ -133,7 +41,7 @@
                 <option name="path" value="$PROJECT_DIR$" />
               </ExternalProjectPojo>
               <ExternalProjectPojo>
-                <option name="name" value="App.Native01" />
+                <option name="name" value="App.Android" />
                 <option name="path" value="$PROJECT_DIR$/.." />
               </ExternalProjectPojo>
             </list>
@@ -147,7 +55,7 @@
           <value>
             <list>
               <ExternalTaskPojo>
-                <option name="description" value="Displays all buildscript dependencies declared in root project 'App.Native01'." />
+                <option name="description" value="Displays all buildscript dependencies declared in root project 'App.Android'." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value=":buildEnvironment" />
               </ExternalTaskPojo>
@@ -156,17 +64,17 @@
                 <option name="name" value=":clean" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Displays the components produced by root project 'App.Native01'. [incubating]" />
+                <option name="description" value="Displays the components produced by root project 'App.Android'. [incubating]" />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value=":components" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Displays all dependencies declared in root project 'App.Native01'." />
+                <option name="description" value="Displays all dependencies declared in root project 'App.Android'." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value=":dependencies" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Displays the insight into a specific dependency in root project 'App.Native01'." />
+                <option name="description" value="Displays the insight into a specific dependency in root project 'App.Android'." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value=":dependencyInsight" />
               </ExternalTaskPojo>
@@ -181,22 +89,22 @@
                 <option name="name" value=":init" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Displays the configuration model of root project 'App.Native01'. [incubating]" />
+                <option name="description" value="Displays the configuration model of root project 'App.Android'. [incubating]" />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value=":model" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Displays the sub-projects of root project 'App.Native01'." />
+                <option name="description" value="Displays the sub-projects of root project 'App.Android'." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value=":projects" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Displays the properties of root project 'App.Native01'." />
+                <option name="description" value="Displays the properties of root project 'App.Android'." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value=":properties" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Displays the tasks runnable from root project 'App.Native01' (some of the displayed tasks may belong to subprojects)." />
+                <option name="description" value="Displays the tasks runnable from root project 'App.Android' (some of the displayed tasks may belong to subprojects)." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value=":tasks" />
               </ExternalTaskPojo>
@@ -599,6 +507,11 @@
                 <option name="name" value="preReleaseUnitTestBuild" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
+                <option name="description" value="Prepare br.com.jansenfelipe:androidmask:1.0.1" />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="prepareBrComJansenfelipeAndroidmask101Library" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
                 <option name="description" value="Prepare com.android.support:animated-vector-drawable:25.0.1" />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="prepareComAndroidSupportAnimatedVectorDrawable2501Library" />
@@ -617,6 +530,16 @@
                 <option name="description" value="Prepare com.android.support:mediarouter-v7:24.0.0" />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="prepareComAndroidSupportMediarouterV72400Library" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Prepare com.android.support:multidex:1.0.1" />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="prepareComAndroidSupportMultidex101Library" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Prepare com.android.support:multidex-instrumentation:1.0.1" />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="prepareComAndroidSupportMultidexInstrumentation101Library" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="description" value="Prepare com.android.support:palette-v7:24.0.0" />
@@ -1046,6 +969,30 @@
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="transformClassesWithJarMergingForDebug" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="transformClassesWithJarMergingForDebugAndroidTest" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="transformClassesWithJarMergingForRelease" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="transformClassesWithMultidexlistForDebug" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="transformClassesWithMultidexlistForDebugAndroidTest" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="transformClassesWithMultidexlistForRelease" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="transformNative_libsWithMergeJniLibsForDebug" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
@@ -1177,6 +1124,10 @@
                 <option name="name" value="prepareComGoogleAndroidGmsPlayServicesTagmanager1001Library" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="transformClassesWithJarMergingForRelease" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
                 <option name="description" value="Runs all device checks using Device Providers and Test Servers." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="deviceCheck" />
@@ -1240,6 +1191,10 @@
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="transformClassesWithDexForDebug" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="transformClassesWithJarMergingForDebug" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
@@ -1467,6 +1422,11 @@
                 <option name="name" value="testDebugUnitTest" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
+                <option name="description" value="Prepare com.android.support:multidex:1.0.1" />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="prepareComAndroidSupportMultidex101Library" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="jarDebugClasses" />
               </ExternalTaskPojo>
@@ -1601,6 +1561,15 @@
                 <option name="name" value="assembleRelease" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
+                <option name="description" value="Prepare com.android.support:multidex-instrumentation:1.0.1" />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="prepareComAndroidSupportMultidexInstrumentation101Library" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="transformClassesWithJarMergingForDebugAndroidTest" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="generateReleaseResValues" />
               </ExternalTaskPojo>
@@ -1683,6 +1652,10 @@
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="packageDebug" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="transformClassesWithMultidexlistForDebug" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
@@ -1810,6 +1783,10 @@
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="transformClassesWithMultidexlistForRelease" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="incrementalDebugUnitTestJavaCompilationSafeguard" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
@@ -1895,6 +1872,11 @@
                 <option name="name" value="prepareComGoogleFirebaseFirebaseStorageCommon1001Library" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
+                <option name="description" value="Prepare br.com.jansenfelipe:androidmask:1.0.1" />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="prepareBrComJansenfelipeAndroidmask101Library" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
                 <option name="description" value="Prepare com.android.support:mediarouter-v7:24.0.0" />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="prepareComAndroidSupportMediarouterV72400Library" />
@@ -1928,6 +1910,10 @@
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="transformNative_libsWithMergeJniLibsForRelease" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="transformClassesWithMultidexlistForDebugAndroidTest" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="description" value="Installs and runs instrumentation tests for all flavors on connected devices." />
@@ -2066,7 +2052,7 @@
     </option>
     <option name="modificationStamps">
       <map>
-        <entry key="D:\Projects\Freelas\PassarinhoContou\App.Native01\app" value="4442695563401" />
+        <entry key="D:\Projects\Freelas\TockUP\App.Android\app" value="4442854305794" />
       </map>
     </option>
     <option name="projectBuildClasspath">
@@ -2281,7 +2267,7 @@
     <ConfirmationsSetting value="0" id="Remove" />
   </component>
   <component name="ProjectView">
-    <navigator proportions="" version="1">
+    <navigator currentView="AndroidView" proportions="" version="1">
       <flattenPackages />
       <showMembers />
       <showModules />
@@ -2294,10 +2280,86 @@
       <manualOrder />
       <foldersAlwaysOnTop value="true" />
     </navigator>
-    <panes />
+    <panes>
+      <pane id="AndroidView">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="App.Android" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="App.Android" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="App.Android" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="App.Android" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tockup" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="App.Android" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="manifests" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidManifestsGroupNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="Scratches" />
+      <pane id="ProjectPane" />
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
+    </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="android.sdk.path" value="C:/Android/sdk" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/.." />
   </component>
   <component name="RunManager" selected="Android App.app">
     <configuration default="true" type="AndroidRunConfigurationType" factoryName="Android App">
@@ -2486,11 +2548,11 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="6543d559-477d-4eb6-a2f8-229e08090d7d" name="Default" comment="" />
-      <created>1480983520439</created>
+      <changelist id="589fe33a-706f-4a7e-af6e-3288a8cc98dd" name="Default" comment="" />
+      <created>1481228416855</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1480983520439</updated>
+      <updated>1481228416855</updated>
     </task>
     <servers />
   </component>
@@ -2501,27 +2563,27 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24962178" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />

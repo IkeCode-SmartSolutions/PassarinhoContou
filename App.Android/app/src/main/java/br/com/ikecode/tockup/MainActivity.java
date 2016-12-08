@@ -201,20 +201,6 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    void showDialog() {
-
-        android.app.FragmentTransaction ft = getFragmentManager().beginTransaction();
-        android.app.Fragment prev = getFragmentManager().findFragmentByTag("dialog");
-        if (prev != null) {
-            ft.remove(prev);
-        }
-        ft.addToBackStack(null);
-
-        // Create and show the dialog.
-        DialogFragment newFragment = new SignUpFragment();
-        newFragment.show(ft, "dialog");
-    }
-
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -258,8 +244,7 @@ public class MainActivity extends AppCompatActivity
         Bundle args = new Bundle();
 
         if (id == R.id.nav_home) {
-            //fragment = new HomeFragment();
-            showDialog();
+            fragment = new HomeFragment();
         } else if (id == R.id.nav_about) {
             fragment = new AboutFragment();
         } else if (id == R.id.nav_received) {

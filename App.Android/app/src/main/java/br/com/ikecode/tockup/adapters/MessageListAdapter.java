@@ -2,6 +2,7 @@ package br.com.ikecode.tockup.adapters;
 
 import android.app.Activity;
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,7 +28,7 @@ public class MessageListAdapter extends ArrayAdapter<Message> {
     List<Message> data = new ArrayList<>();
     MessageListType messageListType;
 
-    public MessageListAdapter(Context context, List<Message> data, MessageListType messageListType) {
+    public MessageListAdapter(Context context, @NonNull List<Message> data, MessageListType messageListType) {
         super(context, R.layout.messagelist_item_row, data);
 
         this.data = data;

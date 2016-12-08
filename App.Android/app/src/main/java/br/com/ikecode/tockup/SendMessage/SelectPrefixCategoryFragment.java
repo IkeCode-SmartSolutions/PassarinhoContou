@@ -20,11 +20,14 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
+import org.apache.commons.lang3.StringUtils;
 import org.json.JSONArray;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import br.com.ikecode.tockup.MainActivity;
 import br.com.ikecode.tockup.R;
@@ -34,11 +37,7 @@ import br.com.ikecode.tockup.models.*;
 import cz.msebera.android.httpclient.Header;
 
 /**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * to handle interaction events.
- * Use the {@link SelectPrefixCategoryFragment#newInstance} factory method to
- * create an instance of this fragment.
+ * A simple {@link Fragment} subclass;
  */
 public class SelectPrefixCategoryFragment extends Fragment {
     public SelectPrefixCategoryFragment() {
@@ -109,9 +108,9 @@ public class SelectPrefixCategoryFragment extends Fragment {
             }
         });
 
-        EditText txtContactFilter = (EditText) header.findViewById(R.id.txtListViewSearchHeader);
-        txtContactFilter.setHint("pesquise por nome");
-        txtContactFilter.addTextChangedListener(new TextWatcher() {
+        final EditText txtFilter = (EditText) header.findViewById(R.id.txtListViewSearchHeader);
+        txtFilter.setHint("pesquise por palavras chave");
+        txtFilter.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
@@ -120,13 +119,24 @@ public class SelectPrefixCategoryFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                String text = editable.toString();
+                String text = editable.toString().toLowerCase().trim();
                 if (text.length() > 1) {
                     Filtered = new ArrayList<>();
 
+                    String[] words = text.split(" ");
+
+                    String patternString = ".*(" + StringUtils.join(words, "|") + ").*";
+                    Pattern pattern = Pattern.compile(patternString);
+
                     for (int i = 0; i < _original.toArray().length; i++) {
                         PrefixCategory obj = (PrefixCategory) _original.toArray()[i];
-                        if (obj.name.toLowerCase().contains(text.toLowerCase())) {
+
+                        if (words.length > 1) {
+                            Matcher matcher = pattern.matcher(obj.name.toLowerCase());
+                            if (matcher.matches()) {
+                                Filtered.add(obj);
+                            }
+                        } else if (obj.name.toLowerCase().contains(text.trim().toLowerCase())) {
                             Filtered.add(obj);
                         }
                     }
@@ -135,6 +145,7 @@ public class SelectPrefixCategoryFragment extends Fragment {
                 }
 
                 adapter.Update(Filtered);
+                txtFilter.requestFocus();
             }
         });
 

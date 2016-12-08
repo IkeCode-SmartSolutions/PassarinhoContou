@@ -19,6 +19,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
 
 import br.com.ikecode.tockup.MainActivity;
@@ -76,13 +77,13 @@ public class MessageListFragment extends Fragment {
                 break;
         }
 
-        getMessages(route, 0, 3, true);
+        getMessages(route, 0, 5, true);
 
         return view;
     }
 
     private void getMessages(final String route, final int offset, final int limit, final boolean firstRequest) {
-        User user = ((MainActivity)getActivity()).GetUserFromStorage();
+        User user = ((MainActivity) getActivity()).GetUserFromStorage();
 
         int id = user.id;
 
@@ -103,8 +104,6 @@ public class MessageListFragment extends Fragment {
             @Override
             public void onFinish() {
                 super.onFinish();
-
-                activity.ToggleProgressBar(false);
             }
 
             @Override
@@ -115,7 +114,9 @@ public class MessageListFragment extends Fragment {
                 Type listType = new TypeToken<ApiResponseList<Message>>() {
                 }.getType();
                 ApiResponseList<Message> objList = gson.fromJson(response.toString(), listType);
-                List<Message> messages = objList.list;
+                List<Message> messages = new ArrayList<>();
+                if (objList.list != null)
+                    messages = objList.list;
 
                 if (firstRequest) {
                     adapter = new MessageListAdapter(getContext(), messages, messageListType);
@@ -125,8 +126,10 @@ public class MessageListFragment extends Fragment {
                 }
 
                 boolean callNextPage = offset + objList.count < objList.totalCount;
-                if(callNextPage){
+                if (callNextPage) {
                     getMessages(route, objList.count + offset, limit, false);
+                } else {
+                    activity.ToggleProgressBar(false);
                 }
 
                 adapter.notifyDataSetChanged();

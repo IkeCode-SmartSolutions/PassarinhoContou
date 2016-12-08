@@ -20,11 +20,14 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
+import org.apache.commons.lang3.StringUtils;
 import org.json.JSONArray;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import br.com.ikecode.tockup.MainActivity;
 import br.com.ikecode.tockup.R;
@@ -57,20 +60,20 @@ public class SelectMessagePrefixFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_generic_list_select, container, false);
-        TextView title = (TextView)view.findViewById(R.id.txtGenericListHeader);
+        TextView title = (TextView) view.findViewById(R.id.txtGenericListHeader);
         title.setText("Selecione o prefixo da mensagem");
 
         this.Filtered = new ArrayList<>();
 
         final GenericAdapter<MessagePrefix> adapter = new GenericAdapter<>(getContext(), this.Filtered);
 
-        final MainActivity activity = (MainActivity)getActivity();
+        final MainActivity activity = (MainActivity) getActivity();
 
         listView = (ListView) view.findViewById(R.id.genericListView);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                MessagePrefix selected = (MessagePrefix)listView.getItemAtPosition(position);
+                MessagePrefix selected = (MessagePrefix) listView.getItemAtPosition(position);
                 activity.message.selectedPrefix = selected;
 
                 SelectSuffixCategoryFragment fragment = new SelectSuffixCategoryFragment();
@@ -87,7 +90,7 @@ public class SelectMessagePrefixFragment extends Fragment {
 
         listView.setAdapter(adapter);
 
-        if(this.prefixCategoryId > 0) {
+        if (this.prefixCategoryId > 0) {
             activity.ToggleProgressBar(true);
 
             TockUpApiClient.get("messageprefix/" + this.prefixCategoryId, null, new JsonHttpResponseHandler() {
@@ -107,28 +110,37 @@ public class SelectMessagePrefixFragment extends Fragment {
             });
         }
 
-        EditText txtContactFilter = (EditText) header.findViewById(R.id.txtListViewSearchHeader);
-        txtContactFilter.setHint("pesquise por nome");
-        txtContactFilter.addTextChangedListener(new TextWatcher() {
+        final EditText txtFilter = (EditText) header.findViewById(R.id.txtListViewSearchHeader);
+        txtFilter.setHint("pesquise por palavras chave");
+        txtFilter.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
 
             @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
 
             @Override
             public void afterTextChanged(Editable editable) {
-                String text = editable.toString();
+                String text = editable.toString().toLowerCase().trim();
                 if (text.length() > 1) {
-                    String[] words = text.split(" ");
-                    if(words.length > 0) {
-
-                    }
                     Filtered = new ArrayList<>();
+
+                    String[] words = text.split(" ");
+
+                    String patternString = ".*(" + StringUtils.join(words, "|") + ").*";
+                    Pattern pattern = Pattern.compile(patternString);
 
                     for (int i = 0; i < _original.toArray().length; i++) {
                         MessagePrefix obj = (MessagePrefix) _original.toArray()[i];
-                        if (obj.name.toLowerCase().contains(text.toLowerCase())) {
+
+                        if (words.length > 1) {
+                            Matcher matcher = pattern.matcher(obj.name.toLowerCase());
+                            if (matcher.matches()) {
+                                Filtered.add(obj);
+                            }
+                        } else if (obj.name.toLowerCase().contains(text.trim().toLowerCase())) {
                             Filtered.add(obj);
                         }
                     }
@@ -137,6 +149,7 @@ public class SelectMessagePrefixFragment extends Fragment {
                 }
 
                 adapter.Update(Filtered);
+                txtFilter.requestFocus();
             }
         });
 
