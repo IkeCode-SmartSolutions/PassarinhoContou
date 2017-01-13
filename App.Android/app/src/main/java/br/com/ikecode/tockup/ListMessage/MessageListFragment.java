@@ -107,6 +107,11 @@ public class MessageListFragment extends Fragment {
             }
 
             @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                activity.ToggleProgressBar(false);
+            }
+
+            @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 GsonBuilder builder = TockUpApiClient.GetGsonBuilder();
 

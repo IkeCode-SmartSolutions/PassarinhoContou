@@ -75,7 +75,6 @@ public class MessageListAdapter extends ArrayAdapter<Message> {
             Message messageObj = (Message) data.toArray()[position];
             String message = String.format("Olá %1s, %2s, %3s.", messageObj.toUser.fullName, messageObj.selectedPrefix.name, messageObj.selectedSuffix.name);
 
-            holder.txtMessageListMessage.setText(message);
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
             String date  = dateFormat.format(messageObj.creationDate);
             holder.txtMessageListDate.setText(date);
@@ -90,6 +89,8 @@ public class MessageListAdapter extends ArrayAdapter<Message> {
                     holder.txtMessageListFromTo.setText("anônimo");
                     break;
             }
+
+            holder.txtMessageListMessage.setText(message);
         }
 
         return row;

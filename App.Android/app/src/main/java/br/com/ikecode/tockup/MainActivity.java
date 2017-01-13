@@ -53,7 +53,11 @@ public class MainActivity extends AppCompatActivity
 
         Gson gson = builder.create();
 
-        message.fromUserId = message.fromUser != null && message.fromUser.id > 0 ? message.fromUser.id : 1;
+        User user = GetUserFromStorage();
+        if(user == null)
+            SignOut();
+
+        message.fromUserId = user.id;
         message.fromUser = null;
         message.toUserId = message.toUser.id;
         message.toUser = null;
@@ -256,11 +260,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_send) {
             fragment = new SelectContactFragment();
         } else if (id == R.id.nav_signout) {
-            PrefUtils.saveToPrefs(getBaseContext(), PrefUtils.PREFS_LOGGED_USER_KEY, null);
-            Intent i = new Intent(getApplicationContext(), LoginActivity.class);
-            startActivity(i);
-
-            finish();
+            SignOut();
         }
 
         if (fragment != null) {
@@ -271,6 +271,14 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void SignOut() {
+        PrefUtils.saveToPrefs(getBaseContext(), PrefUtils.PREFS_LOGGED_USER_KEY, null);
+        Intent i = new Intent(getApplicationContext(), LoginActivity.class);
+        startActivity(i);
+
+        finish();
     }
 
     public void ChangeFragment(Fragment fragment) {

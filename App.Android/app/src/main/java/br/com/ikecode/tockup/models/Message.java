@@ -8,10 +8,10 @@ package br.com.ikecode.tockup.models;
 public class Message extends BaseModel {
     public int fromUserId;
     public int toUserId;
-    public int status;
+    public MessageStatusEnum status;
     public int selectedPrefixId;
     public int selectedSuffixId;
-    public int messageType;
+    public MessageTypeEnum messageType;
     public int languageId;
     public User fromUser;
     public MessagePrefix selectedPrefix;

@@ -69,10 +69,10 @@ public class LoginActivity extends AppCompatActivity {
         String loggedUser = PrefUtils.getFromPrefs(getBaseContext(), PrefUtils.PREFS_LOGGED_USER_KEY, null);
         if (loggedUser != null) {
             goToMainActivity();
+        } else {
+            LoginFragment loginFragment = new LoginFragment();
+            ChangeFragment(loginFragment);
         }
-
-        LoginFragment loginFragment = new LoginFragment();
-        ChangeFragment(loginFragment);
     }
 
     public void ChangeFragment(Fragment fragment) {
