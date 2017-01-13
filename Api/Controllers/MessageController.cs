@@ -25,19 +25,21 @@ namespace PassarinhoContouApi.Controllers
 
             if (totalCount == 0)
             {
-                return NoContent();
+                return NotFound(new ApiResponseMessage("Nada encontrado com os termos utilizados"));
             }
 
             messages = messages
+                            .Include(i => i.ToUser)
                             .Include(i => i.FromUser)
                             .Include(i => i.SelectedSuffix)
                             .Include(i => i.SelectedPrefix)
                             .Skip(offset)
-                            .Take(limit);
+                            .Take(limit)
+                            .OrderByDescending(i => i.CreationDate);
 
             if (messages == null)
             {
-                return NotFound();
+                return NotFound(new ApiResponseMessage("Nada encontrado com os termos utilizados"));
             }
 
             var result = new ApiResponseList<Message>(messages, offset, limit, totalCount);
@@ -56,19 +58,21 @@ namespace PassarinhoContouApi.Controllers
 
             if (totalCount == 0)
             {
-                return NoContent();
+                return NotFound(new ApiResponseMessage("Nada encontrado com os termos utilizados"));
             }
 
             messages = messages
                             .Include(i => i.ToUser)
+                            .Include(i => i.FromUser)
                             .Include(i => i.SelectedSuffix)
                             .Include(i => i.SelectedPrefix)
                             .Skip(offset)
-                            .Take(limit);
+                            .Take(limit)
+                            .OrderByDescending(i => i.CreationDate);
 
             if (messages == null)
             {
-                return NotFound();
+                return NotFound(new ApiResponseMessage("Nada encontrado com os termos utilizados"));
             }
 
             var result = new ApiResponseList<Message>(messages, offset, limit, totalCount);
